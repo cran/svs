@@ -29,7 +29,8 @@ This function assumes that the rows of a frequency table come from a multinomial
   the latent classes are initialized with a Dirichlet distribution (by means of \code{rdirichlet} from the package \pkg{gtools}).
 }
 \examples{
-SndT_Fra <- read.csv2(system.file("extdata", "SndT_Fra.csv", package = "svs"))
+SndT_Fra <- read.table(system.file("extdata", "SndT_Fra.txt", package = "svs"),
+   header = TRUE, sep = "\\t", quote = "\\"", encoding = "UTF-8")
 E_M.SndT_Fra <- fast_E_M(SndT_Fra, k = 7)
 E_M.SndT_Fra
 }

@@ -13,13 +13,13 @@ This package offers various tools for semantic vector spaces. There are techniqu
 
 This package contains the following raw data files (in the folder \emph{extdata}):
 \itemize{
-   \item{\code{\link{SndT_Fra.csv}} }{Seventeen Dutch source words and their French translations.}
-   \item{\code{\link{SndT_Eng.csv}} }{Seventeen Dutch source words and their English translations.}
-   \item{\code{\link{InvT_Fra.csv}} }{Seventeen Dutch target words and their French source words.}
-   \item{\code{\link{InvT_Eng.csv}} }{Seventeen Dutch target words and their English source words.}
-   \item{\code{\link{Ctxt_Dut.csv}} }{Context words for seventeen Dutch words.}
-   \item{\code{\link{Ctxt_Fra.csv}} }{Context words for seventeen Dutch words translated from French.}
-   \item{\code{\link{Ctxt_Eng.csv}} }{Context words for seventeen Dutch words translated from English.}
+   \item{\code{\link{SndT_Fra.txt}} }{Seventeen Dutch source words and their French translations.}
+   \item{\code{\link{SndT_Eng.txt}} }{Seventeen Dutch source words and their English translations.}
+   \item{\code{\link{InvT_Fra.txt}} }{Seventeen Dutch target words and their French source words.}
+   \item{\code{\link{InvT_Eng.txt}} }{Seventeen Dutch target words and their English source words.}
+   \item{\code{\link{Ctxt_Dut.txt}} }{Context words for seventeen Dutch words.}
+   \item{\code{\link{Ctxt_Fra.txt}} }{Context words for seventeen Dutch words translated from French.}
+   \item{\code{\link{Ctxt_Eng.txt}} }{Context words for seventeen Dutch words translated from English.}
 }
 The (fast procedures for the) techniques in this package are:
 \itemize{
@@ -70,6 +70,7 @@ The remaining helper functions in this package are:
 \section{Further reference}{
 
 \itemize{
+  \item{Many packages contain correspondence analysis: \pkg{ca}, \pkg{FactoMineR}, \pkg{MASS} and others.}
   \item{There is also the package \pkg{lsa} for latent semantic analysis.}
   \item{The package \pkg{NMF} provides more flexibility for non-negative matrix factorization.}
   \item{For topic models there are the packages \pkg{lda} and \pkg{topicmodels}.}
@@ -83,6 +84,7 @@ Koen Plevoets, \email{koen.plevoets@ugent.be}
 
 \section{Acknowledgements}{
 
-This package has benefited greatly from the helpful comments of Lore Vandevoorde, Pauline De Baets and Gert De Sutter.
+This package has benefited greatly from the helpful comments of Lore Vandevoorde, Pauline De Baets and Gert De Sutter. Thanks to
+  Kurt Hornik, Uwe Ligges and Brian Ripley for their valuable recommendations when proofing this package.
 }
 

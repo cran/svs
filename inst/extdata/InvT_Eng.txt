@@ -1,0 +1,783 @@
+source_Eng	target_Dut
+beginning	begin
+beginning	begin
+beginning	begin
+beginning	begin
+beginning	begin
+beginning	begin
+beginning	begin
+beginning	begin
+beginning	begin
+beginning	begin
+beginning	begin
+beginning	beginnen
+beginning	begin
+beginning	ontstaan
+beginning	begin
+beginning	begin
+beginning	begin
+beginning	begin
+beginning	begin
+beginning	start
+beginning	begin
+beginning	begin
+beginning	begin
+beginning	begin
+beginning	eerst
+beginning	begin
+beginning	begin
+beginning	beginnen
+beginning	begin
+beginning	begin
+beginning	begin
+beginning	begin
+beginning	begin
+beginning	begin
+beginning	begin
+beginning	begin
+beginning	begin
+first of all	beginnen
+start	start
+start	begin
+start	start
+start	begin
+start	opstarten
+start	opstarten
+start	begin
+start	eerst
+start	start
+start	begin
+start	eerst
+start	begin
+start	begin
+start	start
+start	begin
+start	begin
+start	begin
+start	begin
+start	begin
+start	begin
+start	begin
+start	begin
+start	begin
+start	begin
+start	beginnen
+start	begin
+start	start
+start	start
+start	begin
+start	van start gaan
+start	begin
+start	aanvang
+start	aanvang
+start	aanvang
+start	start
+start	start
+start	start
+start	start
+start	begin
+start	begin
+start	begin
+start	begin
+start	start
+start	begin
+start	begin
+start	start
+start	start
+start	start
+start	start
+start	start
+start	start
+start	start
+start	start
+start	begin
+to begin	starten
+to begin	starten
+to begin	eerst
+to begin	beginnen
+to begin	starten
+to begin	eerst
+to begin	eerst
+to begin	beginnen
+to begin	vanaf
+to begin	opstarten
+to begin	begin
+to begin	beginnen
+to begin	beginnen
+to begin	vanaf
+to begin	eerst
+to begin	van start gaan
+to begin	beginnen
+to begin	begin
+to begin	begin
+to begin	starten
+to begin	beginnen
+to begin	beginnen
+to begin	beginnen
+to begin	beginnen
+to begin	beginnen
+to begin	beginnen
+to begin	beginnen
+to begin	beginnen
+to begin	beginnen
+to begin	beginnen
+to begin	beginnen
+to begin	beginnen
+to begin	gaan
+to begin	gaan
+to begin	beginnen
+to begin	gaan
+to begin	beginnen
+to begin	begin
+to begin	beginnen
+to begin	beginnen
+to begin	beginnen
+to begin	beginnen
+to begin	openen
+to begin	beginnen
+to begin	beginnen
+to begin	beginnen
+to begin	beginnen
+to begin	beginnen
+to begin	beginnen
+to begin	van start gaan
+to begin	beginnen
+to begin	beginnen
+to begin	beginnen
+to begin	beginnen
+to begin	beginnen
+to begin	beginnen
+to begin	beginnen
+to begin	beginnen
+to begin	beginnen
+to begin	beginnen
+to begin	van start gaan
+to begin	ontstaan
+to begin	starten
+to begin	beginnen
+to begin	beginnen
+to begin	beginnen
+to begin	beginnen
+to begin	beginnen
+to begin	beginnen
+to begin	beginnen
+to begin	krijgen
+to begin	beginnen
+to begin	gaan
+to begin	beginnen
+to begin	beginnen
+to begin	beginnen
+to begin	beginnen
+to begin	beginnen
+to begin	beginnen
+to begin	beginnen
+to begin	beginnen
+to begin	beginnen
+to begin	beginnen
+to begin	beginnen
+to begin	begin
+to begin	beginnen
+to begin	beginnen
+to begin	beginnen
+to begin	eerst
+to begin	beginnen
+to begin	beginnen
+to begin	beginnen
+to begin	beginnen
+to begin	beginnen
+to begin	beginnen
+to begin	beginnen
+to begin	beginnen
+to begin	beginnen
+to begin	van start gaan
+to begin	beginnen
+to begin	beginnen
+to begin	begin
+to begin	beginnen
+to begin	beginnen
+to begin	beginnen
+to begin	beginnen
+to begin	beginnen
+to begin	beginnen
+to begin	beginnen
+to begin	beginnen
+to begin	beginnen
+to begin	beginnen
+to begin	beginnen
+to begin	krijgen
+to begin	beginnen
+to begin	beginnen
+to begin	beginnen
+to begin	begin
+to begin	beginnen
+to begin	gaan
+to begin	beginnen
+to begin	beginnen
+to begin	beginnen
+to begin	beginnen
+to begin	beginnen
+to begin	beginnen
+to begin	beginnen
+to begin	beginnen
+to begin	beginnen
+to begin	beginnen
+to begin	beginnen
+to begin	beginnen
+to begin	gaan
+to begin	beginnen
+to begin	beginnen
+to begin	beginnen
+to begin	beginnen
+to begin	beginnen
+to begin	beginnen
+to begin	beginnen
+to begin	beginnen
+to begin	beginnen
+to begin	beginnen
+to begin	beginnen
+to begin	beginnen
+to begin	beginnen
+to begin	beginnen
+to begin	beginnen
+to begin	beginnen
+to begin	beginnen
+to begin	beginnen
+to begin	beginnen
+to begin	beginnen
+to begin	beginnen
+to begin	beginnen
+to begin	beginnen
+to begin	krijgen
+to begin	beginnen
+to begin	beginnen
+to begin	beginnen
+to begin	beginnen
+to begin	beginnen
+to begin	beginnen
+to begin	beginnen
+to begin	krijgen
+to begin	beginnen
+to begin	vanaf
+to begin	eerst
+to begin	beginnen
+to begin	beginnen
+to begin	beginnen
+to begin	beginnen
+to begin	beginnen
+to begin	beginnen
+to begin	beginnen
+to begin	eerst
+to begin	beginnen
+to begin	beginnen
+to begin	beginnen
+to begin	beginnen
+to begin	begin
+to begin	worden
+to open	openen
+to open	openen
+to open	openen
+to open	openen
+to open	openen
+to open	openen
+to open	openen
+to open	openen
+to open	openen
+to open	openen
+to open	openen
+to open	openen
+to open	openen
+to open	openen
+to open	openen
+to open	openen
+to open	openen
+to open	komen
+to open	openen
+to open	openen
+to open	openen
+to open	openen
+to open	openen
+to open	openen
+to open	openen
+to open	openen
+to open	openen
+to open	openen
+to open	beginnen
+to open	openen
+to open	openen
+to open	openen
+to open	openen
+to open	openen
+to open	openen
+to open	openen
+to open	opzetten
+to open	openen
+to open	openen
+to open	openen
+to open	ontstaan
+to open	ontstaan
+to open	openen
+to open	ontstaan
+to open	openen
+to open	ontstaan
+to open	openen
+to open	openen
+to open	openen
+to open	openen
+to open	openen
+to open	openen
+to open	openen
+to open	openen
+to open	openen
+to open	openen
+to open	openen
+to open	openen
+to open	openen
+to open	openen
+to open	openen
+to open	openen
+to open	openen
+to open	openen
+to open	openen
+to open	openen
+to open	openen
+to open	openen
+to open	openen
+to open	openen
+to open	komen
+to open	openen
+to open	openen
+to open	openen
+to open	opstarten
+to open	openen
+to open	openen
+to open	openen
+to open	openen
+to open	openen
+to open	openen
+to set up	oprichten
+to set up	opzetten
+to set up	opzetten
+to set up	opzetten
+to set up	oprichten
+to set up	oprichten
+to set up	oprichten
+to set up	oprichten
+to set up	oprichten
+to set up	opstarten
+to set up	opzetten
+to set up	beginnen
+to set up	opzetten
+to set up	oprichten
+to set up	oprichten
+to set up	opzetten
+to set up	oprichten
+to set up	oprichten
+to set up	oprichten
+to set up	opstarten
+to set up	oprichten
+to set up	oprichten
+to set up	beginnen
+to set up	oprichten
+to set up	opzetten
+to set up	beginnen
+to set up	openen
+to set up	oprichten
+to set up	opzetten
+to set up	eerst
+to set up	opzetten
+to set up	komen
+to set up	openen
+to set up	opzetten
+to set up	oprichten
+to set up	openen
+to set up	opzetten
+to set up	opzetten
+to set up	opzetten
+to set up	opzetten
+to set up	opzetten
+to set up	opzetten
+to start out	beginnen
+to start out	beginnen
+to start out	beginnen
+to start up	opstarten
+to start up	oprichten
+to start up	opstarten
+to start up	opstarten
+to start up	oprichten
+to start up	oprichten
+to start up	oprichten
+to start up	gaan
+to start up	beginnen
+to start up	beginnen
+to start up	beginnen
+to start	gaan
+to start	beginnen
+to start	beginnen
+to start	beginnen
+to start	beginnen
+to start	beginnen
+to start	starten
+to start	beginnen
+to start	vanaf
+to start	start
+to start	starten
+to start	vanaf
+to start	vanaf
+to start	beginnen
+to start	starten
+to start	van start gaan
+to start	eerst
+to start	starten
+to start	starten
+to start	starten
+to start	starten
+to start	beginnen
+to start	beginnen
+to start	beginnen
+to start	vanaf
+to start	starten
+to start	beginnen
+to start	starten
+to start	starten
+to start	beginnen
+to start	komen
+to start	beginnen
+to start	starten
+to start	start
+to start	starten
+to start	opstarten
+to start	vanaf
+to start	beginnen
+to start	vanaf
+to start	eerst
+to start	vanaf
+to start	beginnen
+to start	beginnen
+to start	beginnen
+to start	beginnen
+to start	beginnen
+to start	openen
+to start	beginnen
+to start	beginnen
+to start	beginnen
+to start	beginnen
+to start	beginnen
+to start	worden
+to start	beginnen
+to start	starten
+to start	van start gaan
+to start	beginnen
+to start	gaan
+to start	beginnen
+to start	beginnen
+to start	beginnen
+to start	beginnen
+to start	beginnen
+to start	komen
+to start	worden
+to start	start
+to start	beginnen
+to start	beginnen
+to start	beginnen
+to start	gaan
+to start	eerst
+to start	beginnen
+to start	beginnen
+to start	beginnen
+to start	beginnen
+to start	beginnen
+to start	beginnen
+to start	krijgen
+to start	beginnen
+to start	beginnen
+to start	starten
+to start	eerst
+to start	beginnen
+to start	beginnen
+to start	beginnen
+to start	beginnen
+to start	beginnen
+to start	beginnen
+to start	starten
+to start	beginnen
+to start	beginnen
+to start	beginnen
+to start	beginnen
+to start	start
+to start	beginnen
+to start	beginnen
+to start	beginnen
+to start	beginnen
+to start	starten
+to start	starten
+to start	starten
+to start	starten
+to start	starten
+to start	starten
+to start	starten
+to start	starten
+to start	starten
+to start	starten
+to start	beginnen
+to start	starten
+to start	starten
+to start	starten
+to start	starten
+to start	starten
+to start	starten
+to start	starten
+to start	ontstaan
+to start	beginnen
+to start	beginnen
+to start	beginnen
+to start	starten
+to start	beginnen
+to start	beginnen
+to start	beginnen
+to start	beginnen
+to start	beginnen
+to start	oprichten
+to start	beginnen
+to start	beginnen
+to start	beginnen
+to start	komen
+to start	beginnen
+to start	beginnen
+to start	beginnen
+to start	beginnen
+to start	beginnen
+to start	beginnen
+to start	beginnen
+to start	beginnen
+to start	beginnen
+to start	beginnen
+to start	beginnen
+to start	beginnen
+to start	beginnen
+to start	beginnen
+to start	beginnen
+to start	starten
+to start	starten
+to start	starten
+to start	starten
+to start	aanvang
+to start	starten
+to start	beginnen
+to start	beginnen
+to start	beginnen
+to start	beginnen
+to start	beginnen
+to start	beginnen
+to start	beginnen
+to start	beginnen
+to start	beginnen
+to start	beginnen
+to start	eerst
+to start	starten
+to start	beginnen
+to start	gaan
+to start	beginnen
+to start	beginnen
+to start	beginnen
+to start	beginnen
+to start	beginnen
+to start	eerst
+to start	beginnen
+to start	beginnen
+to start	starten
+to start	aanvang
+to start	starten
+to start	starten
+to start	starten
+to start	starten
+to start	starten
+to start	starten
+to start	beginnen
+to start	beginnen
+to start	beginnen
+to start	starten
+to start	starten
+to start	starten
+to start	starten
+to start	starten
+to start	starten
+to start	starten
+to start	beginnen
+to start	beginnen
+to start	beginnen
+to start	beginnen
+to start	beginnen
+to start	gaan
+to start	beginnen
+to start	komen
+to start	beginnen
+to start	beginnen
+to start	beginnen
+to start	beginnen
+to start	gaan
+to start	beginnen
+to start	beginnen
+to start	beginnen
+to start	beginnen
+to start	beginnen
+to start	beginnen
+to start	beginnen
+to start	starten
+to start	starten
+to start	starten
+to start	starten
+to start	beginnen
+to start	starten
+to start	beginnen
+to start	starten
+to start	beginnen
+to start	starten
+to start	beginnen
+to start	starten
+to start	beginnen
+to start	beginnen
+to start	starten
+to start	beginnen
+to start	krijgen
+to start	krijgen
+to start	beginnen
+to start	begin
+to start	starten
+to start	starten
+to start	starten
+to start	eerst
+to start	beginnen
+to start	gaan
+to start	beginnen
+to start	beginnen
+to start	beginnen
+to start	gaan
+to start	beginnen
+to start	gaan
+to start	beginnen
+to start	beginnen
+to start	beginnen
+to start	begin
+to start	beginnen
+to start	beginnen
+to start	beginnen
+to start	beginnen
+to start	gaan
+to start	krijgen
+to start	beginnen
+to start	beginnen
+to start	beginnen
+to start	worden
+to start	opstarten
+to start	beginnen
+to start	begin
+to start	gaan
+to start	starten
+to start	opstarten
+to start	beginnen
+to start	starten
+to start	starten
+to start	starten
+to start	beginnen
+to start	beginnen
+to start	beginnen
+to start	beginnen
+to start	beginnen
+to start	beginnen
+to start	begin
+to start	beginnen
+to start	starten
+to start	starten
+to start	starten
+to start	start
+to start	starten
+to start	van start gaan
+to start	starten
+to start	beginnen
+to start	starten
+to start	starten
+to start	starten
+to start	start
+to start	starten
+to start	starten
+to start	starten
+to start	starten
+to start	starten
+to start	begin
+to start	starten
+to start	starten
+to start	starten
+to start	starten
+to start	starten
+to start	starten
+to start	starten
+to start	starten
+to start	starten
+to start	starten
+to start	starten
+to start	starten
+to start	starten
+to start	starten
+to start	starten
+to start	begin
+to start	starten
+to start	starten
+to start	beginnen
+to start	van start gaan
+to start	starten
+to start	starten
+to start	starten
+to start	starten
+to start	starten
+to start	starten
+to start	beginnen
+to start	beginnen
+to start	beginnen
+to start	opstarten
+to start	opstarten
+to start	opstarten
+to start	starten
+to start	beginnen
+to start	beginnen
+to start	beginnen
+to start	beginnen
+to start	starten
+to start	starten
+to start	starten
+to start	starten
+to start	starten
+to start	starten
+to start	starten
+to start	starten
+to start	starten
+to start	starten
+to start	starten
+to start	starten
+to start	starten
+to start	starten
+to start	starten
+to start	starten
+to start	starten
+to start	starten
+to start	starten
+to start	starten
+to start	starten
+to start	starten
+to start	starten
+to start	starten
+to start	starten
+to start	starten
+to start	starten
+to start	starten
+to start	beginnen
+to start	beginnen
+to start	gaan
+to start	starten
+to start	beginnen
+to start	beginnen
+to start	beginnen
+to start	beginnen
+to start	beginnen
+to start	beginnen
+to start	beginnen
+to start	beginnen

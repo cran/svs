@@ -7,13 +7,13 @@
 #' @section Contents:
 #' This package contains the following raw data files (in the folder \emph{extdata}):
 #' \itemize{
-#'    \item{\code{\link{SndT_Fra.csv}} }{Seventeen Dutch source words and their French translations.}
-#'    \item{\code{\link{SndT_Eng.csv}} }{Seventeen Dutch source words and their English translations.}
-#'    \item{\code{\link{InvT_Fra.csv}} }{Seventeen Dutch target words and their French source words.}
-#'    \item{\code{\link{InvT_Eng.csv}} }{Seventeen Dutch target words and their English source words.}
-#'    \item{\code{\link{Ctxt_Dut.csv}} }{Context words for seventeen Dutch words.}
-#'    \item{\code{\link{Ctxt_Fra.csv}} }{Context words for seventeen Dutch words translated from French.}
-#'    \item{\code{\link{Ctxt_Eng.csv}} }{Context words for seventeen Dutch words translated from English.}
+#'    \item{\code{\link{SndT_Fra.txt}} }{Seventeen Dutch source words and their French translations.}
+#'    \item{\code{\link{SndT_Eng.txt}} }{Seventeen Dutch source words and their English translations.}
+#'    \item{\code{\link{InvT_Fra.txt}} }{Seventeen Dutch target words and their French source words.}
+#'    \item{\code{\link{InvT_Eng.txt}} }{Seventeen Dutch target words and their English source words.}
+#'    \item{\code{\link{Ctxt_Dut.txt}} }{Context words for seventeen Dutch words.}
+#'    \item{\code{\link{Ctxt_Fra.txt}} }{Context words for seventeen Dutch words translated from French.}
+#'    \item{\code{\link{Ctxt_Eng.txt}} }{Context words for seventeen Dutch words translated from English.}
 #' }
 #' The (fast procedures for the) techniques in this package are:
 #' \itemize{
@@ -61,6 +61,7 @@
 #' }
 #' @section Further reference:
 #' \itemize{
+#'   \item{Many packages contain correspondence analysis: \pkg{ca}, \pkg{FactoMineR}, \pkg{MASS} and others.}
 #'   \item{There is also the package \pkg{lsa} for latent semantic analysis.}
 #'   \item{The package \pkg{NMF} provides more flexibility for non-negative matrix factorization.}
 #'   \item{For topic models there are the packages \pkg{lda} and \pkg{topicmodels}.}
@@ -68,7 +69,8 @@
 #' @section Author:
 #' Koen Plevoets, \email{koen.plevoets@@ugent.be}  
 #' @section Acknowledgements:
-#' This package has benefited greatly from the helpful comments of Lore Vandevoorde, Pauline De Baets and Gert De Sutter.  
+#' This package has benefited greatly from the helpful comments of Lore Vandevoorde, Pauline De Baets and Gert De Sutter. Thanks to
+#'   Kurt Hornik, Uwe Ligges and Brian Ripley for their valuable recommendations when proofing this package.  
 #' @docType package
 #' @name svs-package
 NULL
@@ -91,13 +93,14 @@ NULL
 #'   \item{\code{target_Fra} }{The French target word.}
 #' }
 #' @examples
-#' SndT_Fra <- read.csv2(system.file("extdata", "SndT_Fra.csv", package = "svs"))
+#' SndT_Fra <- read.table(system.file("extdata", "SndT_Fra.txt", package = "svs"),
+#'    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8")
 #' sca.SndT_Fra <- fast_sca(SndT_Fra)
 #' sca.SndT_Fra
 #' lsa.SndT_Fra <- fast_lsa(SndT_Fra)
 #' lsa.SndT_Fra
 #' @docType data
-#' @name SndT_Fra.csv
+#' @name SndT_Fra.txt
 NULL
 
 #' Seventeen Dutch Source Words and their English Translations
@@ -109,13 +112,14 @@ NULL
 #'   \item{\code{target_Eng} }{The English target word.}
 #' }
 #' @examples
-#' SndT_Eng <- read.csv2(system.file("extdata", "SndT_Eng.csv", package = "svs"))
+#' SndT_Eng <- read.table(system.file("extdata", "SndT_Eng.txt", package = "svs"),
+#'    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8")
 #' sca.SndT_Eng <- fast_sca(SndT_Eng)
 #' sca.SndT_Eng
 #' lsa.SndT_Eng <- fast_lsa(SndT_Eng)
 #' lsa.SndT_Eng
 #' @docType data
-#' @name SndT_Eng.csv
+#' @name SndT_Eng.txt
 NULL
 
 #' Seventeen Dutch Target Words and their French Source Words
@@ -127,13 +131,14 @@ NULL
 #'   \item{\code{target_Dut} }{The Dutch target word.}
 #' }
 #' @examples
-#' InvT_Fra <- read.csv2(system.file("extdata", "InvT_Fra.csv", package = "svs"))
+#' InvT_Fra <- read.table(system.file("extdata", "InvT_Fra.txt", package = "svs"),
+#'    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8")
 #' sca.InvT_Fra <- fast_sca(InvT_Fra)
 #' sca.InvT_Fra
 #' lsa.InvT_Fra <- fast_lsa(InvT_Fra)
 #' lsa.InvT_Fra
 #' @docType data
-#' @name InvT_Fra.csv
+#' @name InvT_Fra.txt
 NULL
 
 #' Seventeen Dutch Target Words and their English Source Words
@@ -145,13 +150,14 @@ NULL
 #'   \item{\code{target_Dut} }{The Dutch target word.}
 #' }
 #' @examples
-#' InvT_Eng <- read.csv2(system.file("extdata", "InvT_Eng.csv", package = "svs"))
+#' InvT_Eng <- read.table(system.file("extdata", "InvT_Eng.txt", package = "svs"),
+#'    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8")
 #' sca.InvT_Eng <- fast_sca(InvT_Eng)
 #' sca.InvT_Eng
 #' lsa.InvT_Eng <- fast_lsa(InvT_Eng)
 #' lsa.InvT_Eng
 #' @docType data
-#' @name InvT_Eng.csv
+#' @name InvT_Eng.txt
 NULL
 
 #' Context Words for seventeen Dutch Words
@@ -159,13 +165,14 @@ NULL
 #' The frequency table of seventeen Dutch synonyms of \emph{beginnen} ("to begin") and their context words (from the Dutch Parallel Corpus).  
 #' @format A table with 17 rows and 1404 columns.
 #' @examples
-#' Ctxt_Dut <- read.csv2(system.file("extdata", "Ctxt_Dut.csv", package = "svs"), row.names = 1)
+#' Ctxt_Dut <- read.table(system.file("extdata", "Ctxt_Dut.txt", package = "svs"),
+#'    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8")
 #' sca.Ctxt_Dut <- fast_sca(data.matrix(Ctxt_Dut))
 #' sca.Ctxt_Dut
 #' lsa.Ctxt_Dut <- fast_lsa(data.matrix(Ctxt_Dut))
 #' lsa.Ctxt_Dut
 #' @docType data
-#' @name Ctxt_Dut.csv
+#' @name Ctxt_Dut.txt
 NULL
 
 #' Context Words for seventeen Dutch Words Translated from French
@@ -174,13 +181,14 @@ NULL
 #'   (from the Dutch Parallel Corpus).  
 #' @format A table with 17 rows and 612 columns.
 #' @examples
-#' Ctxt_Fra <- read.csv2(system.file("extdata", "Ctxt_Fra.csv", package = "svs"), row.names = 1)
+#' Ctxt_Fra <- read.table(system.file("extdata", "Ctxt_Fra.txt", package = "svs"),
+#'    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8")
 #' sca.Ctxt_Fra <- fast_sca(data.matrix(Ctxt_Fra))
 #' sca.Ctxt_Fra
 #' lsa.Ctxt_Fra <- fast_lsa(data.matrix(Ctxt_Fra))
 #' lsa.Ctxt_Fra
 #' @docType data
-#' @name Ctxt_Fra.csv
+#' @name Ctxt_Fra.txt
 NULL
 
 #' Context Words for seventeen Dutch Words Translated from French
@@ -189,13 +197,14 @@ NULL
 #'   (from the Dutch Parallel Corpus).  
 #' @format A table with 17 rows and 609 columns.
 #' @examples
-#' Ctxt_Eng <- read.csv2(system.file("extdata", "Ctxt_Eng.csv", package = "svs"), row.names = 1)
+#' Ctxt_Eng <- read.table(system.file("extdata", "Ctxt_Eng.txt", package = "svs"),
+#'    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8")
 #' sca.Ctxt_Eng <- fast_sca(data.matrix(Ctxt_Eng))
 #' sca.Ctxt_Eng
 #' lsa.Ctxt_Eng <- fast_lsa(data.matrix(Ctxt_Eng))
 #' lsa.Ctxt_Eng
 #' @docType data
-#' @name Ctxt_Eng.csv
+#' @name Ctxt_Eng.txt
 NULL
 
 #' Simple Correspondence Analysis
@@ -209,7 +218,8 @@ NULL
 #' @references
 #' Greenacre, M. (2007) \emph{Correspondence analysis in practice, Second edition}. Boca Raton: Chapman and Hall/CRC.
 #' @examples
-#' SndT_Fra <- read.csv2(system.file("extdata", "SndT_Fra.csv", package = "svs"))
+#' SndT_Fra <- read.table(system.file("extdata", "SndT_Fra.txt", package = "svs"),
+#'    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8")
 #' sca.SndT_Fra <- fast_sca(SndT_Fra)
 #' sca.SndT_Fra
 #' @export
@@ -239,7 +249,8 @@ fast_sca <- function(dat) {
 #' @references
 #' Greenacre, M. (2007) \emph{Correspondence analysis in practice, Second edition}. Boca Raton: Chapman and Hall/CRC.
 #' @examples
-#' SndT_Fra <- read.csv2(system.file("extdata", "SndT_Fra.csv", package = "svs"))
+#' SndT_Fra <- read.table(system.file("extdata", "SndT_Fra.txt", package = "svs"),
+#'    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8")
 #' mca.SndT_Fra <- fast_mca(SndT_Fra)
 #' mca.SndT_Fra
 #' @export
@@ -269,7 +280,8 @@ fast_mca <- function(dat,nfac=FALSE) {
 #' @references
 #' Abdi, H. (2007) Discriminant correspondence analysis. In: N. Salkind (ed.) \emph{Encyclopedia of measurement and statistics}. Thousand Oaks: SAGE.
 #' @examples
-#' SndT_Fra <- read.csv2(system.file("extdata", "SndT_Fra.csv", package = "svs"))
+#' SndT_Fra <- read.table(system.file("extdata", "SndT_Fra.txt", package = "svs"),
+#'    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8")
 #' sca.SndT_Fra <- fast_sca(SndT_Fra)
 #' kcl.SndT_Fra <- kmeans(sca.SndT_Fra$pos1, centers = 7)
 #' dca.SndT_Fra <- fast_dca(SndT_Fra, clusters1 = kcl.SndT_Fra)
@@ -347,7 +359,8 @@ fast_dca <- function(dat,clusters1=NULL,clusters2=NULL,members=FALSE) {
 #' Landauer, Th. K. and S. T. Dumais (1997) A solution to Plato's problem: the latent semantic analysis theory of the
 #'   acquisition, induction, and representation of knowledge. \emph{Psychological review} \strong{104}, 211--240.
 #' @examples
-#' SndT_Fra <- read.csv2(system.file("extdata", "SndT_Fra.csv", package = "svs"))
+#' SndT_Fra <- read.table(system.file("extdata", "SndT_Fra.txt", package = "svs"),
+#'    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8")
 #' lsa.SndT_Fra <- fast_lsa(SndT_Fra)
 #' lsa.SndT_Fra
 #' @export
@@ -389,7 +402,8 @@ fast_lsi <- function(dat,local_weights="log",global_weights="idf") {
 #' Lee, D. D. and H. S. Seung (2001) Algorithms for non-negative matrix factorization. \emph{Advances in neural information processing systems}
 #'   \strong{13}, 556--562.
 #' @examples
-#' SndT_Fra <- read.csv2(system.file("extdata", "SndT_Fra.csv", package = "svs"))
+#' SndT_Fra <- read.table(system.file("extdata", "SndT_Fra.txt", package = "svs"),
+#'    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8")
 #' nmf.SndT_Fra <- fast_nmf(SndT_Fra, k = 7)
 #' nmf.SndT_Fra
 #' @export
@@ -535,7 +549,8 @@ fast_nmf_Al <- function(dat,k,tol=1e-8) {
 #' Hofmann, Th. (1999). Probabilistic latent semantic indexing.
 #'   \emph{SIGIR'99: Proceedings of the 22nd annual international SIGIR conference on research and development in information retrieval}, 50--57.
 #' @examples
-#' SndT_Fra <- read.csv2(system.file("extdata", "SndT_Fra.csv", package = "svs"))
+#' SndT_Fra <- read.table(system.file("extdata", "SndT_Fra.txt", package = "svs"),
+#'    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8")
 #' psa.SndT_Fra <- fast_psa(SndT_Fra, k = 7)
 #' psa.SndT_Fra
 #' @export
@@ -588,7 +603,8 @@ fast_plsi <- function(dat,k,symmetric=FALSE,tol=1e-8) {
 #' Dempster, A. P., N. M. Laird and D. B. Rubin (1977) Maximum likelihood from incomplete data via the EM algorithm.
 #'   \emph{Journal of the royal statistical society, series B} \strong{39} (1), 1--38.
 #' @examples
-#' SndT_Fra <- read.csv2(system.file("extdata", "SndT_Fra.csv", package = "svs"))
+#' SndT_Fra <- read.table(system.file("extdata", "SndT_Fra.txt", package = "svs"),
+#'    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8")
 #' E_M.SndT_Fra <- fast_E_M(SndT_Fra, k = 7)
 #' E_M.SndT_Fra
 #' @export

@@ -20,7 +20,8 @@ A list with components:
 A fast procedure for computing multiple correspondence analysis.
 }
 \examples{
-SndT_Fra <- read.csv2(system.file("extdata", "SndT_Fra.csv", package = "svs"))
+SndT_Fra <- read.table(system.file("extdata", "SndT_Fra.txt", package = "svs"),
+   header = TRUE, sep = "\\t", quote = "\\"", encoding = "UTF-8")
 mca.SndT_Fra <- fast_mca(SndT_Fra)
 mca.SndT_Fra
 }
