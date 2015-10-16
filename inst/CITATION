@@ -1,0 +1,12 @@
+citHeader("To cite svs in publications use:")
+
+citEntry(entry = "Misc",
+	title = "svs: Tools for Semantic Vector Spaces.",
+	author = personList(as.person("Plevoets, Koen")),
+	year = "2015",
+	institution = "Ghent University",
+
+	textVersion = paste("Plevoets, Koen (2015).",
+		"svs: Tools for Semantic Vector Spaces.",
+		"Ghent University")
+)
