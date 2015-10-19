@@ -1,8 +1,20 @@
+#' @import graphics
+NULL
+
+#' @import stats
+NULL
+
+#' @import utils
+NULL
+
+#' @importFrom gtools rdirichlet
+NULL
+
 #' Tools for Semantic Vector Spaces
 #'
 #' This package offers various tools for semantic vector spaces. There are techniques for correspondence analysis (simple,
 #'   multiple and discriminant), latent semantic analysis, probabilistic latent semantic analysis, non-negative matrix
-#'   factorization and EM clustering. Furthermore, the package contains specialized distance measures and plotting
+#'   factorization and EM clustering. Furthermore, the package has specialized distance measures and plotting
 #'   functions as well as some helper functions.  
 #' @section Contents:
 #' This package contains the following raw data files (in the folder \emph{extdata}):
@@ -75,15 +87,6 @@
 #' @name svs-package
 NULL
 
-#' @import graphics
-NULL
-
-#' @import stats
-NULL
-
-#' @importFrom gtools rdirichlet
-NULL
-
 #' Seventeen Dutch Source Words and their French Translations
 #'
 #' The occurrences of seventeen Dutch synonyms of \emph{beginnen} ("to begin") and their French translations (from the Dutch Parallel Corpus).  
@@ -93,7 +96,7 @@ NULL
 #'   \item{\code{target_Fra} }{The French target word.}
 #' }
 #' @examples
-#' SndT_Fra <- read.table(system.file("extdata", "SndT_Fra.txt", package = "svs"),
+#' SndT_Fra <- read.table(system.file("extdata", "SndT_Fra.txt",package = "svs"),
 #'    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8")
 #' sca.SndT_Fra <- fast_sca(SndT_Fra)
 #' sca.SndT_Fra
@@ -112,7 +115,7 @@ NULL
 #'   \item{\code{target_Eng} }{The English target word.}
 #' }
 #' @examples
-#' SndT_Eng <- read.table(system.file("extdata", "SndT_Eng.txt", package = "svs"),
+#' SndT_Eng <- read.table(system.file("extdata", "SndT_Eng.txt",package = "svs"),
 #'    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8")
 #' sca.SndT_Eng <- fast_sca(SndT_Eng)
 #' sca.SndT_Eng
@@ -131,7 +134,7 @@ NULL
 #'   \item{\code{target_Dut} }{The Dutch target word.}
 #' }
 #' @examples
-#' InvT_Fra <- read.table(system.file("extdata", "InvT_Fra.txt", package = "svs"),
+#' InvT_Fra <- read.table(system.file("extdata", "InvT_Fra.txt",package = "svs"),
 #'    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8")
 #' sca.InvT_Fra <- fast_sca(InvT_Fra)
 #' sca.InvT_Fra
@@ -150,7 +153,7 @@ NULL
 #'   \item{\code{target_Dut} }{The Dutch target word.}
 #' }
 #' @examples
-#' InvT_Eng <- read.table(system.file("extdata", "InvT_Eng.txt", package = "svs"),
+#' InvT_Eng <- read.table(system.file("extdata", "InvT_Eng.txt",package = "svs"),
 #'    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8")
 #' sca.InvT_Eng <- fast_sca(InvT_Eng)
 #' sca.InvT_Eng

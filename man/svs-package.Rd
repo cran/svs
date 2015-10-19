@@ -6,7 +6,7 @@
 \description{
 This package offers various tools for semantic vector spaces. There are techniques for correspondence analysis (simple,
   multiple and discriminant), latent semantic analysis, probabilistic latent semantic analysis, non-negative matrix
-  factorization and EM clustering. Furthermore, the package contains specialized distance measures and plotting
+  factorization and EM clustering. Furthermore, the package has specialized distance measures and plotting
   functions as well as some helper functions.
 }
 \section{Contents}{

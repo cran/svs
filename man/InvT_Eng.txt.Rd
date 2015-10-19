@@ -12,7 +12,7 @@
 The occurrences of seventeen Dutch synonyms of \emph{beginnen} ("to begin") and their English source words (from the Dutch Parallel Corpus).
 }
 \examples{
-InvT_Eng <- read.table(system.file("extdata", "InvT_Eng.txt", package = "svs"),
+InvT_Eng <- read.table(system.file("extdata", "InvT_Eng.txt",package = "svs"),
    header = TRUE, sep = "\\t", quote = "\\"", encoding = "UTF-8")
 sca.InvT_Eng <- fast_sca(InvT_Eng)
 sca.InvT_Eng
