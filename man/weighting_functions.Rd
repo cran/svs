@@ -57,16 +57,24 @@ Local weighting functions (i.e. weighting every cell in the matrix):
   \item{\code{lw_bin} }{Binary: \emph{f(x) = 1} if \emph{x > 0} and \emph{0} otherwise.}
 }
 
-Global weighting functions (i.e. weighting the columns of the matrix):
+Global weighting functions, weighting the columns of the matrix (hence, these weighting functions work according to expectation for
+  a document-term matrix, i.e. with the documents as the rows and the terms as the columns):
 \itemize{
-  \item{\code{gw_idf} }{Inverse document frequency: \emph{f(x) = log( ncol(x) / n + 1)} where \emph{n =} the number of documents in which the term appears.}
-  \item{\code{gw_idf_alt} }{Alternative definition of the inverse document frequency: \emph{f(x) = log( ncol(x) / n) + 1} where \emph{n =} the number of documents in which the term appears.}
-  \item{\code{gw_gfidf} }{Global frequency multiplied by inverse document frequency: \emph{f(x) = rowSums(x) / n} where \emph{n =} the number of documents in which the term appears.}
-  \item{\code{gw_nor} }{Normal(ized) frequency: \emph{f(x) = x / sum(x)}.}
+  \item{\code{gw_idf} }{Inverse document frequency: \emph{f(x) = log( nrow(x) / n + 1)} where \emph{n =} the number of rows in which the column \emph{>0}.}
+  \item{\code{gw_idf_alt} }{Alternative definition of the inverse document frequency: \emph{f(x) = log( nrow(x) / n) + 1} where \emph{n =} the number of rows in which the column \emph{>0}.}
+  \item{\code{gw_gfidf} }{Global frequency multiplied by inverse document frequency: \emph{f(x) = colSums(x) / n} where \emph{n =} the number of rows in which the column \emph{>0}.}
+  \item{\code{gw_nor} }{Normal(ized) frequency: \emph{f(x) = x / colSums(x^2)}.}
   \item{\code{gw_ent} }{Entropy: \emph{f(x) = 1 +} the relative Shannon entropy.}
   \item{\code{gw_bin} }{Binary: \emph{f(x) = 1}.}
   \item{\code{gw_raw} }{Raw, which is the same as binary: \emph{f(x) = 1}.}
 }
+}
+\examples{
+SndT_Fra <- read.table(system.file("extdata", "SndT_Fra.txt", package = "svs"),
+   header = TRUE, sep = "\\t", quote = "\\"", encoding = "UTF-8")
+tab.SndT_Fra <- table(SndT_Fra)
+lw_log(tab.SndT_Fra)
+gw_idf(tab.SndT_Fra)
 }
 \seealso{
 \code{\link{fast_lsa}}.

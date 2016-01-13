@@ -14,8 +14,8 @@ NULL
 #'
 #' This package offers various tools for semantic vector spaces. There are techniques for correspondence analysis (simple,
 #'   multiple and discriminant), latent semantic analysis, probabilistic latent semantic analysis, non-negative matrix
-#'   factorization and EM clustering. Furthermore, the package has specialized distance measures and plotting
-#'   functions as well as some helper functions.  
+#'   factorization, latent class analysis and EM clustering. Furthermore, the package has specialized distance measures and
+#'   plotting functions as well as some helper functions.  
 #' @section Contents:
 #' This package contains the following raw data files (in the folder \emph{extdata}):
 #' \itemize{
@@ -35,6 +35,7 @@ NULL
 #'   \item{\code{\link{fast_lsa}} }{Latent semantic analysis.}
 #'   \item{\code{\link{fast_psa}} }{Probabilistic latent semantic analysis.}
 #'   \item{\code{\link{fast_nmf}} }{Non-negative matrix factorization.}
+#'   \item{\code{\link{fast_lca}} }{Latent class analysis.}
 #'   \item{\code{\link{fast_E_M}} }{EM clustering.}
 #' }
 #'
@@ -70,13 +71,17 @@ NULL
 #'   \item{\code{\link{vec2ind}} }{Transform a vector into an indicator matrix.}
 #'   \item{\code{\link{tab2dat}} }{Transform a table into a data frame.}
 #'   \item{\code{\link{tab2ind}} }{Transform a table into an indicator matrix.}
+#'   \item{\code{\link{outerec}} }{Recursive application of the outer product.}
+#'   \item{\code{\link{pmi}} }{Pointwise mutual information.}
+#'   \item{\code{\link{MI}} }{Mutual information.}
 #' }
 #' @section Further reference:
 #' \itemize{
 #'   \item{Many packages contain correspondence analysis: \pkg{ca}, \pkg{FactoMineR}, \pkg{MASS} and others.}
-#'   \item{There is also the package \pkg{lsa} for latent semantic analysis.}
+#'   \item{For latent semantic analysis there is also the package \pkg{lsa}.}
 #'   \item{The package \pkg{NMF} provides more flexibility for non-negative matrix factorization.}
 #'   \item{For topic models there are the packages \pkg{lda} and \pkg{topicmodels}.}
+#'   \item{Latent class analysis can also be run in the package \pkg{poLCA}.}
 #' }
 #' @section Author:
 #' Koen Plevoets, \email{koen.plevoets@@ugent.be}  
@@ -210,6 +215,70 @@ NULL
 #' @name Ctxt_Eng.txt
 NULL
 
+#' Transform a Vector into an Indicator Matrix
+#'
+#' A helper function for transforming a vector into an indicator matrix.  
+#' @param x A vector (which will be converted to a factor).
+#' @param add_names Logical specifying whether to add dimnames to the resulting indicator matrix.
+#' @details
+#' This is essentially the function \code{class.ind} from the package \pkg{MASS}.
+#' @return An indicator matrix.
+#' @export
+vec2ind <- function(x,add_names=TRUE) {
+	fac <- as.factor(x)
+	lev <- levels(fac)
+	len <- length(fac)
+	out <- matrix(0,nrow=len,ncol=length(lev))
+	out[(1:len)+len*(unclass(fac)-1)] <- 1
+	if (add_names) {
+		dimnames(out) <- list(names(fac),lev)
+		}
+	out
+	}
+
+#' Transform a Table into a Data Frame
+#'
+#' A helper function for transforming a table into a data frame.  
+#' @param tab A table (i.e. an object which can be converted to an array).
+#' @return A data frame.
+#' @export
+tab2dat <- function(tab) {
+	tab <- as.array(tab)
+	data.frame(lapply(expand.grid(dimnames(tab)),FUN=rep,times=as.vector(tab)))
+	}
+
+#' Transform a Table into an Indicator Matrix
+#'
+#' A helper function for transforming a table into an indicator matrix.  
+#' @param tab A table (i.e. an object which can be converted to an array).
+#' @param sep Character specifying the separator string for joining the levels.
+#' @param add_names Logical specifying whether to add dimnames to the resulting indicator matrix.
+#' @return An indicator matrix.
+#' @export
+tab2ind <- function(tab,sep="_",add_names=TRUE) {
+	vec2ind(interaction(tab2dat(tab),drop=FALSE,sep=sep,lex.order=FALSE),add_names=add_names)
+	}
+
+#' Recursive Application of the Outer Product
+#'
+#' A helper function for computing the outer product of two or more arrays.  
+#' @param ... The specification of two or more arrays (separated by comma's or contained in a list).
+#' @return An array with the outer product of all the arrays specified in \code{...}.
+#' @export
+outerec <- function(...) {
+	arg <- list(...)
+	if (length(arg)==1 && is.list(arg[[1]])) {
+		arg <- arg[[1]]
+		}
+	out <- outer(X=arg[[1]],Y=arg[[2]],FUN="*")
+	if (length(arg)>2) {
+		for (j in 3:length(arg)) {
+			out <- outer(X=out,Y=arg[[j]],FUN="*")
+			}
+		}
+	out
+	}
+
 #' Simple Correspondence Analysis
 #'
 #' A fast procedure for computing simple correspondence analysis.  
@@ -248,7 +317,7 @@ fast_sca <- function(dat) {
 #'   the eigenvalues (principal inertias) and the coordinates.
 #' @return A list with components:
 #' \item{\code{val} }{The eigenvalues or principal inertias, indicating how much each latent axis explains.}
-#' \item{\code{pos2} }{The coordinates of all levels.}
+#' \item{\code{pos} }{The coordinates of all levels.}
 #' @references
 #' Greenacre, M. (2007) \emph{Correspondence analysis in practice, Second edition}. Boca Raton: Chapman and Hall/CRC.
 #' @examples
@@ -259,7 +328,7 @@ fast_sca <- function(dat) {
 #' @export
 fast_mca <- function(dat,nfac=FALSE) {
 	stopifnot(is.data.frame(dat))
-	ind <- do.call(what=cbind,args=lapply(dat,FUN=vec2ind,add_names=FALSE))
+	ind <- do.call(what=cbind,args=lapply(dat,FUN=vec2ind,add_names=TRUE))
 	exf <- outer(apply(ind,2,sum),apply(ind,2,sum))/nrow(ind)
 	dec <- eigen(((t(ind)%*%ind)-exf)/sqrt(exf))
 	pos <- sweep(dec$vectors%*%diag(dec$values),1,sqrt(apply(ind,2,sum)*ifelse(nfac,ncol(dat),1)),"/")
@@ -435,7 +504,7 @@ fast_nmf_KL <- function(dat,k,tol=1e-8) {
 	hmt <- sqrt(sum(dat)/k)*t(rmultinom(n=k,size=10^(ceiling(log10(ncol(dat)+1))+3),prob=apply(dat,2,sum)/sum(dat))/(10^(ceiling(log10(ncol(dat)+1))+3)))
 	exf <- wmt%*%hmt
 	tmp <- dat*log(dat/exf)-dat+exf
-	tmp[is.nan(tmp)] <- 0
+	tmp[!is.finite(tmp)] <- 0
 	cst <- sum(tmp)
 	div <- tol*10
 	itr <- FALSE
@@ -446,7 +515,7 @@ fast_nmf_KL <- function(dat,k,tol=1e-8) {
 		hmt <- hup
 		exf <- wmt%*%hmt
 		tmp <- dat*log(dat/exf)-dat+exf
-		tmp[is.nan(tmp)] <- 0
+		tmp[!is.finite(tmp)] <- 0
 		csn <- sum(tmp)
 		div <- cst-ifelse(itr,csn,cst-tol*(10^ceiling(log10(prod(dim(dat))+1))))
 		if (div>0) {
@@ -537,6 +606,73 @@ fast_nmf_Al <- function(dat,k,tol=1e-8) {
 	list(pos1=wop,pos2=hop)
 	}
 
+#' Latent Class Analysis
+#'
+#' A fast procedure for computing latent class analysis.  
+#' @param dat Input data: can be a table or a data frame.
+#' @param k Numeric specification of the number of latent classes to compute.
+#' @param tol Numeric specification of the convergence criterion.
+#' @param posterior Logical indicating whether the posterior probabilities of the individual observations should also be returned.
+#' @param sep Character specifying the separator string for joining the levels (if \code{posterior = TRUE}).
+#' @details
+#' The prior probabilities of the latent classes are initialized with a Dirichlet distribution (by means of \code{rdirichlet} from
+#'   the package \pkg{gtools}) with \code{alpha =} the total frequency counts of every level.  
+#' @return A list with components:
+#' \item{\code{prob0} }{The probabilities of the latent classes.}
+#' \item{\code{prob1}-\code{prob...} }{The probabilities for each set of levels. The columns of each \code{prob...} sum to 1.}
+#' \item{\code{posterior} }{If \code{posterior = TRUE}: An indicator matrix with the posterior probabilities of each observation.}
+#' @references
+#' Agresti, A. (2013) \emph{Categorical data analysis}. Hoboken: John Wiley and Sons, 535--542.
+#' @examples
+#' SndT_Fra <- read.table(system.file("extdata", "SndT_Fra.txt", package = "svs"),
+#'    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8")
+#' lca.SndT_Fra <- fast_lca(SndT_Fra, k = 7)
+#' lca.SndT_Fra
+#' @export
+fast_lca <- function(dat,k,tol=1e-8,posterior=FALSE,sep="_") {
+	if (is.data.frame(dat)) {
+		dat <- table(dat)
+		}
+	stopifnot(is.array(dat))
+	way <- length(dim(dat))
+	pri <- rep(1/k,k)
+	tht <- lapply(1:way,function(j){gtools::rdirichlet(n=k,alpha=apply(dat,j,sum))})
+	llk <- sum(as.vector(dat)*log(apply(sapply(1:k,function(z){outerec(lapply(1:way,function(j){tht[[j]][z,]}))*pri[z]}),1,sum)))
+	div <- tol*10
+	while (div>tol) {
+		pst <- prop.table(sapply(1:k,function(z){outerec(lapply(1:way,function(j){tht[[j]][z,]}))*pri[z]}),1)
+		tmp <- array(as.vector(dat)*pst,dim=c(dim(dat),k))
+		tht <- lapply(1:way,function(j){matrix(prop.table(apply(tmp,c(way+1,j),sum),1),nrow=k)})
+		pri <- prop.table(apply(tmp,way+1,sum))
+		tmp <- 1
+		lln <- sum(as.vector(dat)*log(apply(sapply(1:k,function(z){outerec(lapply(1:way,function(j){tht[[j]][z,]}))*pri[z]}),1,sum)))
+		div <- lln-llk
+		if (is.na(div)) {
+			break
+			}
+		if (div>0) {
+			pso <- pst
+			tho <- tht
+			pro <- pri
+			}
+		llk <- lln
+		}
+	tho <- lapply(1:way,function(j){t(matrix(tho[[j]][order(pro,decreasing=TRUE),],nrow=k))})
+	names(tho) <- paste("prob",1:way,sep="",collapse=NULL)
+	for (j in 1:way) {
+		dimnames(tho[[j]]) <- list(dimnames(dat)[[j]],1:k)
+		}
+	out <- c(list(prob0=sort(pro,decreasing=TRUE)),tho)
+	if (posterior) {
+		pso <- pso[,order(pro,decreasing=TRUE)]
+		ind <- tab2ind(dat,sep=sep,add_names=TRUE)
+		tmp <- ind%*%pso
+		colnames(tmp) <- 1:k
+		out <- c(out,list(posterior=cbind(ind,tmp)))
+		}
+	out
+	}
+
 #' Probabilistic Latent Semantic Analysis
 #'
 #' A fast procedure for computing probabilistic latent semantic analysis.  
@@ -544,10 +680,12 @@ fast_nmf_Al <- function(dat,k,tol=1e-8) {
 #' @param k Numeric specification of the number of latent classes to compute.
 #' @param symmetric Logical indicating whether to compute the symmetric or the asymmetric solution.
 #' @param tol Numeric specification of the convergence criterion.
+#' @details
+#' From version 1.1.0 of the \pkg{svs} package on, probabilistic latent semantic analysis is a special case of latent class analysis.  
 #' @return A list with components:
 #' \item{\code{prob0} }{The probabilities of the latent classes.}
 #' \item{\code{prob1} }{The probabilities for the first set of levels (\emph{viz.} the row levels of a frequency table). The rows of \code{prob1} sum to 1 if \code{symmetric = FALSE}, the columns sum to 1 if \code{symmetric = TRUE}.}
-#' \item{\code{prob2} }{The probabilities for the second set of levels (\emph{viz.} the column levels of a frequency table). The rows of \code{prob2} sum to 1.}
+#' \item{\code{prob2} }{The probabilities for the second set of levels (\emph{viz.} the column levels of a frequency table). The columns of \code{prob2} sum to 1.}
 #' @references
 #' Hofmann, Th. (1999). Probabilistic latent semantic indexing.
 #'   \emph{SIGIR'99: Proceedings of the 22nd annual international SIGIR conference on research and development in information retrieval}, 50--57.
@@ -562,13 +700,11 @@ fast_psa <- function(dat,k,symmetric=FALSE,tol=1e-8) {
 		dat <- table(dat)
 		}
 	stopifnot(is.matrix(dat))
-	dec <- fast_nmf_KL(dat=(dat/sum(dat)),k=k,tol=tol)
-	pri <- apply(dec$pos2,1,sum)
-	dec$pos2 <- sweep(dec$pos2,1,pri,"/")
+	out <- fast_lca(dat=dat,k=k,tol=tol,posterior=FALSE)
 	if (!symmetric) {
-		dec$pos1 <- prop.table(sweep(dec$pos1,2,pri,"*"),1)
+		out$prob1 <- prop.table(sweep(out$prob1,2,out$prob0,"*"),1)
 		}
-	list(prob0=pri,prob1=dec$pos1,prob2=dec$pos2)
+	out
 	}
 
 #' @rdname fast_psa
@@ -597,7 +733,8 @@ fast_plsi <- function(dat,k,symmetric=FALSE,tol=1e-8) {
 #' @param tol Numeric specification of the convergence criterion.
 #' @details
 #' This function assumes that the rows of a frequency table come from a multinomial distribution. The prior probabilities of
-#'   the latent classes are initialized with a Dirichlet distribution (by means of \code{rdirichlet} from the package \pkg{gtools}).  
+#'   the latent classes are initialized with a Dirichlet distribution (by means of \code{rdirichlet} from the package \pkg{gtools}) with
+#'   \code{alpha =} the total frequency counts of every level.  
 #' @return A list with components:
 #' \item{\code{prob0} }{The probabilities of the latent classes.}
 #' \item{\code{prob1} }{The probabilities for the first set of levels (\emph{viz.} the row levels of a frequency table). The rows of \code{prob1} sum to 1.}
@@ -619,21 +756,29 @@ fast_E_M <- function(dat,k,tol=1e-8) {
 	len <- nrow(dat)
 	pri <- rep(1/k,k)
 	tht <- gtools::rdirichlet(n=k,alpha=apply(dat,2,sum))
-	llk <- sum(log(sapply(1:len,function(i){sum(sapply(1:k,function(z){dmultinom(x=dat[i,],size=sum(dat[i,]),prob=tht[z,])*pri[z]}))})))
+	llk <- sum(log(sapply(1:len,function(i){sum(sapply(1:k,function(z){max(dmultinom(x=dat[i,],size=sum(dat[i,]),prob=tht[z,]),1e-300)*pri[z]}))})))
 	div <- tol*10
 	while (div>tol) {
-		pst <- prop.table(sapply(1:len,function(i){sapply(1:k,function(z){dmultinom(x=dat[i,],size=sum(dat[i,]),prob=tht[z,])*pri[z]})}),2)
+		pst <- prop.table(sapply(1:len,function(i){sapply(1:k,function(z){max(dmultinom(x=dat[i,],size=sum(dat[i,]),prob=tht[z,]),1e-300)*pri[z]})}),2)
 		tht <- prop.table(pst%*%dat,1)
 		pri <- apply(pst,1,sum)/len
-		lln <- sum(log(sapply(1:len,function(i){sum(sapply(1:k,function(z){dmultinom(x=dat[i,],size=sum(dat[i,]),prob=tht[z,])*pri[z]}))})))
+		lln <- sum(log(sapply(1:len,function(i){sum(sapply(1:k,function(z){max(dmultinom(x=dat[i,],size=sum(dat[i,]),prob=tht[z,]),1e-300)*pri[z]}))})))
 		div <- lln-llk
+		if (is.na(div)) {
+			break
+			}
+		if (div>0) {
+			pso <- pst
+			tho <- tht
+			pro <- pri
+			}
 		llk <- lln
 		}
-	pst <- pst[order(pri,decreasing=TRUE),]
-	tht <- tht[order(pri,decreasing=TRUE),]
-	dimnames(pst) <- list(1:k,rownames(dat))
-	dimnames(tht) <- list(1:k,colnames(dat))
-	list(prob0=sort(pri,decreasing=TRUE),prob1=t(pst),prob2=tht)
+	pso <- pso[order(pro,decreasing=TRUE),]
+	tho <- tho[order(pro,decreasing=TRUE),]
+	dimnames(pso) <- list(1:k,rownames(dat))
+	dimnames(tho) <- list(1:k,colnames(dat))
+	list(prob0=sort(pro,decreasing=TRUE),prob1=t(pso),prob2=tho)
 	}
 
 #' @rdname fast_E_M
@@ -658,18 +803,25 @@ fast_EM <- function(dat,k,tol=1e-8) {
 #'   \item{\code{lw_bin} }{Binary: \emph{f(x) = 1} if \emph{x > 0} and \emph{0} otherwise.}
 #' }
 #' 
-#' Global weighting functions (i.e. weighting the columns of the matrix):
+#' Global weighting functions, weighting the columns of the matrix (hence, these weighting functions work according to expectation for
+#'   a document-term matrix, i.e. with the documents as the rows and the terms as the columns):
 #' \itemize{
-#'   \item{\code{gw_idf} }{Inverse document frequency: \emph{f(x) = log( ncol(x) / n + 1)} where \emph{n =} the number of documents in which the term appears.}
-#'   \item{\code{gw_idf_alt} }{Alternative definition of the inverse document frequency: \emph{f(x) = log( ncol(x) / n) + 1} where \emph{n =} the number of documents in which the term appears.}
-#'   \item{\code{gw_gfidf} }{Global frequency multiplied by inverse document frequency: \emph{f(x) = rowSums(x) / n} where \emph{n =} the number of documents in which the term appears.}
-#'   \item{\code{gw_nor} }{Normal(ized) frequency: \emph{f(x) = x / sum(x)}.}
+#'   \item{\code{gw_idf} }{Inverse document frequency: \emph{f(x) = log( nrow(x) / n + 1)} where \emph{n =} the number of rows in which the column \emph{>0}.}
+#'   \item{\code{gw_idf_alt} }{Alternative definition of the inverse document frequency: \emph{f(x) = log( nrow(x) / n) + 1} where \emph{n =} the number of rows in which the column \emph{>0}.}
+#'   \item{\code{gw_gfidf} }{Global frequency multiplied by inverse document frequency: \emph{f(x) = colSums(x) / n} where \emph{n =} the number of rows in which the column \emph{>0}.}
+#'   \item{\code{gw_nor} }{Normal(ized) frequency: \emph{f(x) = x / colSums(x^2)}.}
 #'   \item{\code{gw_ent} }{Entropy: \emph{f(x) = 1 +} the relative Shannon entropy.}
 #'   \item{\code{gw_bin} }{Binary: \emph{f(x) = 1}.}
 #'   \item{\code{gw_raw} }{Raw, which is the same as binary: \emph{f(x) = 1}.}
 #' }
 #' @return A numeric matrix.
 #' @seealso \code{\link{fast_lsa}}.
+#' @examples
+#' SndT_Fra <- read.table(system.file("extdata", "SndT_Fra.txt", package = "svs"),
+#'    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8")
+#' tab.SndT_Fra <- table(SndT_Fra)
+#' lw_log(tab.SndT_Fra)
+#' gw_idf(tab.SndT_Fra)
 #' @name weighting_functions
 NULL
 
@@ -700,90 +852,106 @@ lw_bin <- function(x) {
 #' @rdname weighting_functions
 #' @export
 gw_idf <- function(x) {
-	log2(ncol(x)/(apply(x>0,1,sum)+1))
+	log2(nrow(x)/(apply(x>0,2,sum)+1))
 	}
 
 #' @rdname weighting_functions
 #' @export
 gw_idf_alt <- function(x) {
-	log2(ncol(x)/apply(x>0,1,sum))+1
+	log2(nrow(x)/apply(x>0,2,sum))+1
 	}
 
 #' @rdname weighting_functions
 #' @export
 gw_gfidf <- function(x) {
-	apply(x,1,sum)/apply(x>0,1,sum)
+	apply(x,2,sum)/apply(x>0,2,sum)
 	}
 
 #' @rdname weighting_functions
 #' @export
 gw_nor <- function(x) {
-	1/sqrt(apply(x^2,1,sum))
+	1/sqrt(apply(x^2,2,sum))
 	}
 
 #' @rdname weighting_functions
 #' @export
 gw_ent <- function(x) {
-	tmp <- prop.table(x,1)
+	tmp <- prop.table(x,2)
 	tmp <- tmp*log(tmp)
-	tmp[is.nan(tmp)] <- 0
-	1-apply(tmp/log(ncol(x)),1,sum)
+	tmp[!is.finite(tmp)] <- 0
+	1-apply(tmp/log(nrow(x)),2,sum)
 	}
 
 #' @rdname weighting_functions
 #' @export
 gw_bin <- function(x) {
-	rep(1,nrow(x))
+	rep(1,ncol(x))
 	}
 
 #' @rdname weighting_functions
 #' @export
 gw_raw <- function(x) {
-	rep(1,nrow(x))
+	rep(1,ncol(x))
 	}
 
-#' Transform a Vector into an Indicator Matrix
+#' Pointwise Mutual Information
 #'
-#' A helper function for transforming a vector into an indicator matrix.  
-#' @param x A vector (which will be converted to a factor).
-#' @param add_names Logical specifying whether to add dimnames to the resulting indicator matrix.
-#' @details
-#' This is essentially the function \code{class.ind} from the package \pkg{MASS}.
-#' @return An indicator matrix.
+#' A function for computing the pointwise mutual information of every entry in a table.  
+#' @param x A table (i.e. an object which can be converted to an array).
+#' @param normalize Logical indicating whether to normalize the pointwise mutual information.
+#' @param base Numeric specification of the base with respect to which logarithms are computed.
+#' @return An array with the pointwise mutual information of every entry.
+#' @seealso \code{\link{MI}}.
+#' @examples
+#' SndT_Fra <- read.table(system.file("extdata", "SndT_Fra.txt", package = "svs"),
+#'    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8")
+#' tab.SndT_Fra <- table(SndT_Fra)
+#' pmi(tab.SndT_Fra)
 #' @export
-vec2ind <- function(x,add_names=TRUE) {
-	fac <- as.factor(x)
-	lev <- levels(fac)
-	len <- length(fac)
-	out <- matrix(0,nrow=len,ncol=length(lev))
-	out[(1:len)+len*(unclass(fac)-1)] <- 1
-	if (add_names) {
-		dimnames(out) <- list(names(fac),lev)
+pmi <- function(x,normalize=FALSE,base=2) {
+	stopifnot(is.array(x))
+	stopifnot(all(x>=0))
+	x <- x/sum(x)
+	out <- log(x/outerec(lapply(1:length(dim(x)),function(j){apply(x,j,sum)})),base=base)
+	if (normalize) {
+		out <- -out/log(x,base=base)
 		}
+	out[!is.finite(out)] <- 0
 	out
 	}
 
-#' Transform a Table into a Data Frame
-#'
-#' A helper function for transforming a table into a data frame.  
-#' @param tab A table (i.e. an object which can be converted to an array).
-#' @return A data frame.
+#' @rdname pmi
 #' @export
-tab2dat <- function(tab) {
-	tab <- as.array(tab)
-	data.frame(lapply(expand.grid(dimnames(tab)),FUN=rep,times=as.vector(tab)))
+PMI <- function(x,normalize=FALSE,base=2) {
+	pmi(x=x,normalize=normalize,base=base)
 	}
 
-#' Transform a Table into an Indicator Matrix
+#' Mutual Information
 #'
-#' A helper function for transforming a table into an indicator matrix.  
-#' @param tab A table (i.e. an object which can be converted to an array).
-#' @param sep Character specifying the separator string for joining the levels.
-#' @param add_names Logical specifying whether to add dimnames to the resulting indicator matrix.
-#' @return An indicator matrix.
+#' A function for computing the mutual information.  
+#' @param x A table (i.e. an object which can be converted to an array).
+#' @param base Numeric specification of the base with respect to which logarithms are computed.
+#' @return A numeric value containing the mutual information.
+#' @seealso \code{\link{pmi}}.
+#' @examples
+#' SndT_Fra <- read.table(system.file("extdata", "SndT_Fra.txt", package = "svs"),
+#'    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8")
+#' tab.SndT_Fra <- table(SndT_Fra)
+#' MI(tab.SndT_Fra)
 #' @export
-tab2ind <- function(tab,sep="_",add_names=TRUE) {
-	vec2ind(interaction(tab2dat(tab),drop=FALSE,sep=sep,lex.order=FALSE),add_names=add_names)
+MI <- function(x,base=2) {
+	stopifnot(is.array(x))
+	stopifnot(all(x>=0))
+	x <- x/sum(x)
+	cel <- x*pmi(x,normalize=FALSE,base=base)
+	cel[!is.finite(cel)] <- 0
+	sum(cel)
+	}
+
+#' @rdname MI
+#' @export
+mi <- function(x,base=2) {
+	MI(x=x,base=base)
 	}
 
 #' Compute Level Frequencies (for a Factor)
@@ -793,6 +961,10 @@ tab2ind <- function(tab,sep="_",add_names=TRUE) {
 #' @param nfac Logical indicating whether the number of factors (i.e. the number of columns in \code{dat}) is a divisor for
 #'   the level frequencies.
 #' @return A vector containing the frequency counts of every level.
+#' @examples
+#' SndT_Fra <- read.table(system.file("extdata", "SndT_Fra.txt", package = "svs"),
+#'    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8")
+#' freq_ca(SndT_Fra)
 #' @export
 freq_ca <- function(dat,nfac=FALSE) {
 	if (is.factor(dat)) {
@@ -811,6 +983,13 @@ freq_ca <- function(dat,nfac=FALSE) {
 #' @param clusters A clustering of the row levels of \code{x}: either a list or the output of \code{kmeans}.
 #' @param freq An optional vector of frequency counts for the row levels of \code{x}.
 #' @return A matrix containing the coordinates of the cluster centers.
+#' @seealso \code{\link{freq_ca}}.
+#' @examples
+#' SndT_Fra <- read.table(system.file("extdata", "SndT_Fra.txt", package = "svs"),
+#'    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8")
+#' sca.SndT_Fra <- fast_sca(SndT_Fra)
+#' kcl.SndT_Fra <- kmeans(sca.SndT_Fra$pos1, centers = 7)
+#' centers_ca(sca.SndT_Fra$pos1, clusters = kcl.SndT_Fra, freq = freq_ca(SndT_Fra[, 1]))
 #' @export
 centers_ca <- function(x,clusters,freq) {
 	stopifnot(is.matrix(x))
@@ -834,9 +1013,15 @@ centers_ca <- function(x,clusters,freq) {
 #' @param diag Logical specifying whether the diagonal of the resulting distance matrix should be printed.
 #' @param upper Logical specifying whether the upper triangle of the resulting distance matrix should be printed.
 #' @return A distance matrix.
+#' @examples
+#' SndT_Fra <- read.table(system.file("extdata", "SndT_Fra.txt", package = "svs"),
+#'    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8")
+#' tab.SndT_Fra <- table(SndT_Fra)
+#' dist_chisquare(tab.SndT_Fra)
 #' @export
 dist_chisquare <- function(x,diag=FALSE,upper=FALSE) {
 	stopifnot(is.matrix(x))
+	stopifnot(all(x>=0))
 	dist(sweep(sweep(x,1,apply(x,1,sum),"/"),2,sqrt(apply(x,2,sum)/sum(x)),"/"),method="euclidean",diag=diag,upper=upper)
 	}
 
@@ -855,6 +1040,11 @@ dist_chisq <- function(x,diag=FALSE,upper=FALSE) {
 #' @details
 #' The cosine distance equals 1 - the cosine similarity.  
 #' @return A distance matrix.
+#' @examples
+#' SndT_Fra <- read.table(system.file("extdata", "SndT_Fra.txt", package = "svs"),
+#'    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8")
+#' lsa.SndT_Fra <- fast_lsa(SndT_Fra)
+#' dist_cosine(lsa.SndT_Fra$pos1[, 1:7])
 #' @export
 dist_cosine <- function(x,diag=FALSE,upper=FALSE) {
 	stopifnot(is.matrix(x))
@@ -875,6 +1065,11 @@ dist_cos <- function(x,diag=FALSE,upper=FALSE) {
 #'   the character label of one of the row levels in \code{x}. If \code{NULL} or \code{NA}, then the origin (i.e.
 #'   the point \code{c(0 , 0, 0,... )}) is taken as the value.
 #' @return A matrix (containing distances between the rows of \code{x} and \code{wrt}).
+#' @examples
+#' SndT_Fra <- read.table(system.file("extdata", "SndT_Fra.txt", package = "svs"),
+#'    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8")
+#' sca.SndT_Fra <- fast_sca(SndT_Fra)
+#' dist_wrt(sca.SndT_Fra$pos1, wrt = "beginnen")
 #' @export
 dist_wrt <- function(x,wrt=NULL) {
 	stopifnot(is.matrix(x))
@@ -898,6 +1093,13 @@ dist_wrt <- function(x,wrt=NULL) {
 #' @param members_only Logical specifying whether the distances from the cluster centers should only be computed for
 #'   the cluster members.
 #' @return A list with a matrix of distances for every cluster.
+#' @seealso \code{\link{centers_ca}}, \code{\link{freq_ca}}.
+#' @examples
+#' SndT_Fra <- read.table(system.file("extdata", "SndT_Fra.txt", package = "svs"),
+#'    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8")
+#' sca.SndT_Fra <- fast_sca(SndT_Fra)
+#' kcl.SndT_Fra <- kmeans(sca.SndT_Fra$pos1, centers = 7)
+#' dist_wrt_centers(sca.SndT_Fra$pos1, clusters = kcl.SndT_Fra, freq = freq_ca(SndT_Fra[, 1]))
 #' @export
 dist_wrt_centers <- function(x,clusters,freq=NULL,members_only=TRUE) {
 	stopifnot(is.matrix(x))
@@ -948,9 +1150,15 @@ dist_wrt_centers <- function(x,clusters,freq=NULL,members_only=TRUE) {
 #' @param main A character string for the main title of the plot.
 #' @param sub A character string for the subtitle of the plot.
 #' @return A cumulative distribution plot.
+#' @examples
+#' SndT_Fra <- read.table(system.file("extdata", "SndT_Fra.txt", package = "svs"),
+#'    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8")
+#' sca.SndT_Fra <- fast_sca(SndT_Fra)
+#' dis.SndT_Fra <- dist_wrt(sca.SndT_Fra$pos1)
+#' cd_plot(dis.SndT_Fra)
 #' @export
 cd_plot <- function(x,inc=0.01,col="darkgrey",cex=1,font=1,family="",srt=-45,pch=20,pcol="black",pbg="white",pcex=cex,lcol=col,lwd=1,lty=1,xlim=NULL,ylim=NULL,xlab=NULL,ylab=NULL,main=NULL,sub=NULL) {
-	stopifnot(is.vector(x,mode="numeric"))
+	stopifnot(is.numeric(x))
 	s <- sort(x)
 	r <- seq(0,ceiling(max(s)),by=inc)
 	if (is.null(ylim) || is.na(ylim)) {
@@ -989,6 +1197,11 @@ cd_plot <- function(x,inc=0.01,col="darkgrey",cex=1,font=1,family="",srt=-45,pch
 #' @param main A character string for the main title of the plot.
 #' @param sub A character string for the subtitle of the plot.
 #' @return A parallel coordinate plot.
+#' @examples
+#' SndT_Fra <- read.table(system.file("extdata", "SndT_Fra.txt", package = "svs"),
+#'    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8")
+#' sca.SndT_Fra <- fast_sca(SndT_Fra)
+#' pc_plot(sca.SndT_Fra$pos1, las = "vertical")
 #' @export
 pc_plot <- function(x,col="darkgrey",cex=1,font=1,family="",pch=20,pcol=col,pcex=cex,lcol=col,lwd=1,lty=1,acol="black",alwd=1,alty=1,las=1,add_scale=FALSE,main=NULL,sub=NULL) {
 	stopifnot(is.matrix(x))

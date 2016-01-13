@@ -14,7 +14,7 @@ the eigenvalues (principal inertias) and the coordinates.}
 \value{
 A list with components:
 \item{\code{val} }{The eigenvalues or principal inertias, indicating how much each latent axis explains.}
-\item{\code{pos2} }{The coordinates of all levels.}
+\item{\code{pos} }{The coordinates of all levels.}
 }
 \description{
 A fast procedure for computing multiple correspondence analysis.

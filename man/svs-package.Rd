@@ -6,8 +6,8 @@
 \description{
 This package offers various tools for semantic vector spaces. There are techniques for correspondence analysis (simple,
   multiple and discriminant), latent semantic analysis, probabilistic latent semantic analysis, non-negative matrix
-  factorization and EM clustering. Furthermore, the package has specialized distance measures and plotting
-  functions as well as some helper functions.
+  factorization, latent class analysis and EM clustering. Furthermore, the package has specialized distance measures and
+  plotting functions as well as some helper functions.
 }
 \section{Contents}{
 
@@ -29,6 +29,7 @@ The (fast procedures for the) techniques in this package are:
   \item{\code{\link{fast_lsa}} }{Latent semantic analysis.}
   \item{\code{\link{fast_psa}} }{Probabilistic latent semantic analysis.}
   \item{\code{\link{fast_nmf}} }{Non-negative matrix factorization.}
+  \item{\code{\link{fast_lca}} }{Latent class analysis.}
   \item{\code{\link{fast_E_M}} }{EM clustering.}
 }
 
@@ -64,6 +65,9 @@ The remaining helper functions in this package are:
   \item{\code{\link{vec2ind}} }{Transform a vector into an indicator matrix.}
   \item{\code{\link{tab2dat}} }{Transform a table into a data frame.}
   \item{\code{\link{tab2ind}} }{Transform a table into an indicator matrix.}
+  \item{\code{\link{outerec}} }{Recursive application of the outer product.}
+  \item{\code{\link{pmi}} }{Pointwise mutual information.}
+  \item{\code{\link{MI}} }{Mutual information.}
 }
 }
 
@@ -71,9 +75,10 @@ The remaining helper functions in this package are:
 
 \itemize{
   \item{Many packages contain correspondence analysis: \pkg{ca}, \pkg{FactoMineR}, \pkg{MASS} and others.}
-  \item{There is also the package \pkg{lsa} for latent semantic analysis.}
+  \item{For latent semantic analysis there is also the package \pkg{lsa}.}
   \item{The package \pkg{NMF} provides more flexibility for non-negative matrix factorization.}
   \item{For topic models there are the packages \pkg{lda} and \pkg{topicmodels}.}
+  \item{Latent class analysis can also be run in the package \pkg{poLCA}.}
 }
 }
 

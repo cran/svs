@@ -21,4 +21,14 @@ A list with a matrix of distances for every cluster.
 \description{
 A function for computing (euclidean) distances with respect to specified cluster centers.
 }
+\examples{
+SndT_Fra <- read.table(system.file("extdata", "SndT_Fra.txt", package = "svs"),
+   header = TRUE, sep = "\\t", quote = "\\"", encoding = "UTF-8")
+sca.SndT_Fra <- fast_sca(SndT_Fra)
+kcl.SndT_Fra <- kmeans(sca.SndT_Fra$pos1, centers = 7)
+dist_wrt_centers(sca.SndT_Fra$pos1, clusters = kcl.SndT_Fra, freq = freq_ca(SndT_Fra[, 1]))
+}
+\seealso{
+\code{\link{centers_ca}}, \code{\link{freq_ca}}.
+}
 

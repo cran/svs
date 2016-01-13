@@ -27,10 +27,13 @@ fast_plsi(dat, k, symmetric = FALSE, tol = 1e-08)
 A list with components:
 \item{\code{prob0} }{The probabilities of the latent classes.}
 \item{\code{prob1} }{The probabilities for the first set of levels (\emph{viz.} the row levels of a frequency table). The rows of \code{prob1} sum to 1 if \code{symmetric = FALSE}, the columns sum to 1 if \code{symmetric = TRUE}.}
-\item{\code{prob2} }{The probabilities for the second set of levels (\emph{viz.} the column levels of a frequency table). The rows of \code{prob2} sum to 1.}
+\item{\code{prob2} }{The probabilities for the second set of levels (\emph{viz.} the column levels of a frequency table). The columns of \code{prob2} sum to 1.}
 }
 \description{
 A fast procedure for computing probabilistic latent semantic analysis.
+}
+\details{
+From version 1.1.0 of the \pkg{svs} package on, probabilistic latent semantic analysis is a special case of latent class analysis.
 }
 \examples{
 SndT_Fra <- read.table(system.file("extdata", "SndT_Fra.txt", package = "svs"),

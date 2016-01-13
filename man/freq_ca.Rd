@@ -17,4 +17,9 @@ A vector containing the frequency counts of every level.
 \description{
 A helper function for computing the frequency of each factor level (typically used in correspondence analysis).
 }
+\examples{
+SndT_Fra <- read.table(system.file("extdata", "SndT_Fra.txt", package = "svs"),
+   header = TRUE, sep = "\\t", quote = "\\"", encoding = "UTF-8")
+freq_ca(SndT_Fra)
+}
 

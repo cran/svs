@@ -26,7 +26,8 @@ A fast procedure for Expectation-Maximization clustering.
 }
 \details{
 This function assumes that the rows of a frequency table come from a multinomial distribution. The prior probabilities of
-  the latent classes are initialized with a Dirichlet distribution (by means of \code{rdirichlet} from the package \pkg{gtools}).
+  the latent classes are initialized with a Dirichlet distribution (by means of \code{rdirichlet} from the package \pkg{gtools}) with
+  \code{alpha =} the total frequency counts of every level.
 }
 \examples{
 SndT_Fra <- read.table(system.file("extdata", "SndT_Fra.txt", package = "svs"),

@@ -18,4 +18,10 @@ A matrix (containing distances between the rows of \code{x} and \code{wrt}).
 \description{
 A function for computing (euclidean) distances with respect to a certain specified point.
 }
+\examples{
+SndT_Fra <- read.table(system.file("extdata", "SndT_Fra.txt", package = "svs"),
+   header = TRUE, sep = "\\t", quote = "\\"", encoding = "UTF-8")
+sca.SndT_Fra <- fast_sca(SndT_Fra)
+dist_wrt(sca.SndT_Fra$pos1, wrt = "beginnen")
+}
 

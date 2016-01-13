@@ -24,4 +24,10 @@ A function for computing cosine distances.
 \details{
 The cosine distance equals 1 - the cosine similarity.
 }
+\examples{
+SndT_Fra <- read.table(system.file("extdata", "SndT_Fra.txt", package = "svs"),
+   header = TRUE, sep = "\\t", quote = "\\"", encoding = "UTF-8")
+lsa.SndT_Fra <- fast_lsa(SndT_Fra)
+dist_cosine(lsa.SndT_Fra$pos1[, 1:7])
+}
 
