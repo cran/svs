@@ -1,6 +1,9 @@
 #' @import graphics
 NULL
 
+#' @import methods
+NULL
+
 #' @import stats
 NULL
 
@@ -8,6 +11,18 @@ NULL
 NULL
 
 #' @importFrom gtools rdirichlet
+NULL
+
+#' @importFrom Matrix sparseMatrix
+NULL
+
+#' @importFrom Matrix crossprod
+NULL
+
+#' @importFrom Matrix fac2sparse
+NULL
+
+#' @importFrom Matrix t
 NULL
 
 #' Tools for Semantic Vector Spaces
@@ -102,7 +117,8 @@ NULL
 #' }
 #' @examples
 #' SndT_Fra <- read.table(system.file("extdata", "SndT_Fra.txt",package = "svs"),
-#'    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8")
+#'    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8",
+#'    stringsAsFactors = FALSE)
 #' sca.SndT_Fra <- fast_sca(SndT_Fra)
 #' sca.SndT_Fra
 #' lsa.SndT_Fra <- fast_lsa(SndT_Fra)
@@ -121,7 +137,8 @@ NULL
 #' }
 #' @examples
 #' SndT_Eng <- read.table(system.file("extdata", "SndT_Eng.txt",package = "svs"),
-#'    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8")
+#'    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8",
+#'    stringsAsFactors = FALSE)
 #' sca.SndT_Eng <- fast_sca(SndT_Eng)
 #' sca.SndT_Eng
 #' lsa.SndT_Eng <- fast_lsa(SndT_Eng)
@@ -140,7 +157,8 @@ NULL
 #' }
 #' @examples
 #' InvT_Fra <- read.table(system.file("extdata", "InvT_Fra.txt",package = "svs"),
-#'    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8")
+#'    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8",
+#'    stringsAsFactors = FALSE)
 #' sca.InvT_Fra <- fast_sca(InvT_Fra)
 #' sca.InvT_Fra
 #' lsa.InvT_Fra <- fast_lsa(InvT_Fra)
@@ -159,7 +177,8 @@ NULL
 #' }
 #' @examples
 #' InvT_Eng <- read.table(system.file("extdata", "InvT_Eng.txt",package = "svs"),
-#'    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8")
+#'    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8",
+#'    stringsAsFactors = FALSE)
 #' sca.InvT_Eng <- fast_sca(InvT_Eng)
 #' sca.InvT_Eng
 #' lsa.InvT_Eng <- fast_lsa(InvT_Eng)
@@ -218,20 +237,17 @@ NULL
 #' Transform a Vector into an Indicator Matrix
 #'
 #' A helper function for transforming a vector into an indicator matrix.  
-#' @param x A vector (which will be converted to a factor).
+#' @param x A vector (which will internally be converted to a factor).
 #' @param add_names Logical specifying whether to add dimnames to the resulting indicator matrix.
 #' @details
-#' This is essentially the function \code{class.ind} from the package \pkg{MASS}.
+#' As of version 2.0.x of the \code{svs} package, this is essentially a wrapper for 
+#' \code{t(fac2sparse())} from the \pkg{Matrix} package.
 #' @return An indicator matrix.
 #' @export
 vec2ind <- function(x,add_names=TRUE) {
-	fac <- as.factor(x)
-	lev <- levels(fac)
-	len <- length(fac)
-	out <- matrix(0,nrow=len,ncol=length(lev))
-	out[(1:len)+len*(unclass(fac)-1)] <- 1
+	out <- Matrix::t(Matrix::fac2sparse(x))
 	if (add_names) {
-		dimnames(out) <- list(names(fac),lev)
+		rownames(out) <- 1:length(x)
 		}
 	out
 	}
@@ -239,24 +255,23 @@ vec2ind <- function(x,add_names=TRUE) {
 #' Transform a Table into a Data Frame
 #'
 #' A helper function for transforming a table into a data frame.  
-#' @param tab A table (i.e. an object which can be converted to an array).
+#' @param tab A table or (sparse) matrix.
 #' @return A data frame.
 #' @export
 tab2dat <- function(tab) {
-	tab <- as.array(tab)
 	data.frame(lapply(expand.grid(dimnames(tab)),FUN=rep,times=as.vector(tab)))
 	}
 
 #' Transform a Table into an Indicator Matrix
 #'
 #' A helper function for transforming a table into an indicator matrix.  
-#' @param tab A table (i.e. an object which can be converted to an array).
+#' @param tab A table or (sparse) matrix.
 #' @param sep Character specifying the separator string for joining the levels.
 #' @param add_names Logical specifying whether to add dimnames to the resulting indicator matrix.
 #' @return An indicator matrix.
 #' @export
 tab2ind <- function(tab,sep="_",add_names=TRUE) {
-	vec2ind(interaction(tab2dat(tab),drop=FALSE,sep=sep,lex.order=FALSE),add_names=add_names)
+	Matrix::t(Matrix::fac2sparse(interaction(tab2dat(tab),drop=FALSE,sep=sep,lex.order=FALSE),add_names=add_names))
 	}
 
 #' Recursive Application of the Outer Product
@@ -291,15 +306,16 @@ outerec <- function(...) {
 #' Greenacre, M. (2007) \emph{Correspondence analysis in practice, Second edition}. Boca Raton: Chapman and Hall/CRC.
 #' @examples
 #' SndT_Fra <- read.table(system.file("extdata", "SndT_Fra.txt", package = "svs"),
-#'    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8")
+#'    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8",
+#'    stringsAsFactors = FALSE)
 #' sca.SndT_Fra <- fast_sca(SndT_Fra)
 #' sca.SndT_Fra
 #' @export
 fast_sca <- function(dat) {
 	if (is.data.frame(dat)) {
-		dat <- table(dat)
+		dat <- xtabs(data=dat,sparse=TRUE)
 		}
-	stopifnot(is.matrix(dat))
+	stopifnot(is.matrix(dat) || methods::is(dat,"sparseMatrix"))
 	exf <- outer(apply(dat,1,sum),apply(dat,2,sum))/sum(dat)
 	dec <- svd((dat-exf)/sqrt(exf))
 	rwc <- sweep(dec$u%*%diag(dec$d),1,sqrt(apply(dat,1,sum)),"/")
@@ -322,7 +338,8 @@ fast_sca <- function(dat) {
 #' Greenacre, M. (2007) \emph{Correspondence analysis in practice, Second edition}. Boca Raton: Chapman and Hall/CRC.
 #' @examples
 #' SndT_Fra <- read.table(system.file("extdata", "SndT_Fra.txt", package = "svs"),
-#'    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8")
+#'    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8",
+#'    stringsAsFactors = FALSE)
 #' mca.SndT_Fra <- fast_mca(SndT_Fra)
 #' mca.SndT_Fra
 #' @export
@@ -330,7 +347,7 @@ fast_mca <- function(dat,nfac=FALSE) {
 	stopifnot(is.data.frame(dat))
 	ind <- do.call(what=cbind,args=lapply(dat,FUN=vec2ind,add_names=TRUE))
 	exf <- outer(apply(ind,2,sum),apply(ind,2,sum))/nrow(ind)
-	dec <- eigen(((t(ind)%*%ind)-exf)/sqrt(exf))
+	dec <- eigen((Matrix::crossprod(ind)-exf)/sqrt(exf))
 	pos <- sweep(dec$vectors%*%diag(dec$values),1,sqrt(apply(ind,2,sum)*ifelse(nfac,ncol(dat),1)),"/")
 	dimnames(pos) <- list(colnames(ind),paste("Dim",1:length(dec$values),sep=""))
 	list(val=(dec$values^2)/(nrow(ind)*ifelse(nfac,ncol(dat)^2,1)),pos=pos)
@@ -353,7 +370,8 @@ fast_mca <- function(dat,nfac=FALSE) {
 #' Abdi, H. (2007) Discriminant correspondence analysis. In: N. Salkind (ed.) \emph{Encyclopedia of measurement and statistics}. Thousand Oaks: SAGE.
 #' @examples
 #' SndT_Fra <- read.table(system.file("extdata", "SndT_Fra.txt", package = "svs"),
-#'    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8")
+#'    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8",
+#'    stringsAsFactors = FALSE)
 #' sca.SndT_Fra <- fast_sca(SndT_Fra)
 #' kcl.SndT_Fra <- kmeans(sca.SndT_Fra$pos1, centers = 7)
 #' dca.SndT_Fra <- fast_dca(SndT_Fra, clusters1 = kcl.SndT_Fra)
@@ -361,9 +379,9 @@ fast_mca <- function(dat,nfac=FALSE) {
 #' @export
 fast_dca <- function(dat,clusters1=NULL,clusters2=NULL,members=FALSE) {
 	if (is.data.frame(dat)) {
-		dat <- table(dat)
+		dat <- xtabs(data=dat,sparse=TRUE)
 		}
-	stopifnot(is.matrix(dat))
+	stopifnot(is.matrix(dat) || methods::is(dat,"sparseMatrix"))
 	if (class(clusters1)=="kmeans") {
 		clusters1 <- lapply(sort(unique(clusters1$cluster)),function(x1){names(clusters1$cluster[clusters1$cluster==x1])})
 		}
@@ -432,18 +450,19 @@ fast_dca <- function(dat,clusters1=NULL,clusters2=NULL,members=FALSE) {
 #'   acquisition, induction, and representation of knowledge. \emph{Psychological review} \strong{104}, 211--240.
 #' @examples
 #' SndT_Fra <- read.table(system.file("extdata", "SndT_Fra.txt", package = "svs"),
-#'    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8")
+#'    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8",
+#'    stringsAsFactors = FALSE)
 #' lsa.SndT_Fra <- fast_lsa(SndT_Fra)
 #' lsa.SndT_Fra
 #' @export
 fast_lsa <- function(dat,local_weights="log",global_weights="idf") {
 	if (is.data.frame(dat)) {
-		dat <- table(dat)
+		dat <- xtabs(data=dat,sparse=TRUE)
 		}
-	stopifnot(is.matrix(dat))
+	stopifnot(is.matrix(dat) || methods::is(dat,"sparseMatrix"))
 	lwf <- match.fun(paste("lw",tolower(local_weights),sep="_",collapse=NULL))
 	gwf <- match.fun(paste("gw",tolower(global_weights),sep="_",collapse=NULL))
-	out <- svd(sweep(lwf(dat),1,gwf(dat),"*"))
+	out <- svd(sweep(lwf(dat),2,gwf(dat),"*"))
 	dimnames(out$u) <- list(rownames(dat),paste("Dim",1:length(out$d),sep="",collapse=NULL))
 	dimnames(out$v) <- list(colnames(dat),paste("Dim",1:length(out$d),sep="",collapse=NULL))
 	names(out) <- c("val","pos1","pos2")
@@ -475,7 +494,8 @@ fast_lsi <- function(dat,local_weights="log",global_weights="idf") {
 #'   \strong{13}, 556--562.
 #' @examples
 #' SndT_Fra <- read.table(system.file("extdata", "SndT_Fra.txt", package = "svs"),
-#'    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8")
+#'    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8",
+#'    stringsAsFactors = FALSE)
 #' nmf.SndT_Fra <- fast_nmf(SndT_Fra, k = 7)
 #' nmf.SndT_Fra
 #' @export
@@ -497,9 +517,9 @@ fast_nmf <- function(dat,k,type="KL",tol=1e-8) {
 #' @export
 fast_nmf_KL <- function(dat,k,tol=1e-8) {
 	if (is.data.frame(dat)) {
-		dat <- table(dat)
+		dat <- xtabs(data=dat,sparse=TRUE)
 		}
-	stopifnot(is.matrix(dat))
+	stopifnot(is.matrix(dat) || methods::is(dat,"sparseMatrix"))
 	wmt <- sqrt(sum(dat)/k)*rmultinom(n=k,size=10^(ceiling(log10(nrow(dat)+1))+3),prob=apply(dat,1,sum)/sum(dat))/(10^(ceiling(log10(nrow(dat)+1))+3))
 	hmt <- sqrt(sum(dat)/k)*t(rmultinom(n=k,size=10^(ceiling(log10(ncol(dat)+1))+3),prob=apply(dat,2,sum)/sum(dat))/(10^(ceiling(log10(ncol(dat)+1))+3)))
 	exf <- wmt%*%hmt
@@ -509,7 +529,8 @@ fast_nmf_KL <- function(dat,k,tol=1e-8) {
 	div <- tol*10
 	itr <- FALSE
 	while (div>tol) {
-		wup <- prop.table(t(t(wmt)*(diag(1/apply(hmt,1,sum))%*%hmt%*%t(dat/exf))),2)
+		wup <- t(t(wmt)*(diag(1/apply(hmt,1,sum))%*%hmt%*%t(dat/exf)))
+		wup <- sweep(wup,2,apply(wup,2,sum),"/")
 		hup <- hmt*(diag(1/apply(wmt,2,sum))%*%t(wmt)%*%(dat/exf))
 		wmt <- wup
 		hmt <- hup
@@ -518,6 +539,9 @@ fast_nmf_KL <- function(dat,k,tol=1e-8) {
 		tmp[!is.finite(tmp)] <- 0
 		csn <- sum(tmp)
 		div <- cst-ifelse(itr,csn,cst-tol*(10^ceiling(log10(prod(dim(dat))+1))))
+		if (is.na(div)) {
+			break
+			}
 		if (div>0) {
 			wop <- wmt
 			hop <- hmt
@@ -536,9 +560,9 @@ fast_nmf_KL <- function(dat,k,tol=1e-8) {
 #' @export
 fast_nmf_Fr <- function(dat,k,tol=1e-8) {
 	if (is.data.frame(dat)) {
-		dat <- table(dat)
+		dat <- xtabs(data=dat,sparse=TRUE)
 		}
-	stopifnot(is.matrix(dat))
+	stopifnot(is.matrix(dat) || methods::is(dat,"sparseMatrix"))
 	wmt <- sqrt(sum(dat)/k)*rmultinom(n=k,size=10^(ceiling(log10(nrow(dat)+1))+3),prob=apply(dat,1,sum)/sum(dat))/(10^(ceiling(log10(nrow(dat)+1))+3))
 	hmt <- sqrt(sum(dat)/k)*t(rmultinom(n=k,size=10^(ceiling(log10(ncol(dat)+1))+3),prob=apply(dat,2,sum)/sum(dat))/(10^(ceiling(log10(ncol(dat)+1))+3)))
 	exf <- wmt%*%hmt
@@ -546,13 +570,17 @@ fast_nmf_Fr <- function(dat,k,tol=1e-8) {
 	div <- tol*10
 	itr <- FALSE
 	while (div>tol) {
-		wup <- prop.table(wmt*(dat%*%t(hmt))/(wmt%*%hmt%*%t(hmt)),2)
+		wup <- wmt*(dat%*%t(hmt))/(wmt%*%hmt%*%t(hmt))
+		wup <- sweep(wup,2,apply(wup,2,sum),"/")
 		hup <- hmt*(t(wmt)%*%dat)/(t(wmt)%*%wmt%*%hmt)
 		wmt <- wup
 		hmt <- hup
 		exf <- wmt%*%hmt
 		csn <- sum((dat-exf)^2)/2
 		div <- cst-ifelse(itr,csn,cst-tol*(10^ceiling(log10(prod(dim(dat))+1))))
+		if (is.na(div)) {
+			break
+			}
 		if (div>0) {
 			wop <- wmt
 			hop <- hmt
@@ -571,9 +599,9 @@ fast_nmf_Fr <- function(dat,k,tol=1e-8) {
 #' @export
 fast_nmf_Al <- function(dat,k,tol=1e-8) {
 	if (is.data.frame(dat)) {
-		dat <- table(dat)
+		dat <- xtabs(data=dat,sparse=TRUE)
 		}
-	stopifnot(is.matrix(dat))
+	stopifnot(is.matrix(dat) || methods::is(dat,"sparseMatrix"))
 	wmt <- sqrt(sum(dat)/k)*rmultinom(n=k,size=10^(ceiling(log10(nrow(dat)+1))+3),prob=apply(dat,1,sum)/sum(dat))/(10^(ceiling(log10(nrow(dat)+1))+3))
 	hmt <- solve(t(wmt)%*%wmt,t(wmt)%*%dat)
 	hmt[hmt<0] <- 0
@@ -584,7 +612,7 @@ fast_nmf_Al <- function(dat,k,tol=1e-8) {
 	while (div>tol) {
 		wup <- t(solve(hmt%*%t(hmt),hmt%*%t(dat)))
 		wup[wup<0] <- 0
-		wup <- prop.table(wup,2)
+		wup <- sweep(wup,2,apply(wup,2,sum),"/")
 		hup <- solve(t(wmt)%*%wmt,t(wmt)%*%dat)
 		hup[hup<0] <- 0
 		wmt <- wup
@@ -592,6 +620,9 @@ fast_nmf_Al <- function(dat,k,tol=1e-8) {
 		exf <- wmt%*%hmt
 		csn <- sum((dat-exf)^2)/2
 		div <- cst-ifelse(itr,csn,cst-tol*(10^ceiling(log10(prod(dim(dat))+1))))
+		if (is.na(div)) {
+			break
+			}
 		if (div>0) {
 			wop <- wmt
 			hop <- hmt
@@ -625,15 +656,21 @@ fast_nmf_Al <- function(dat,k,tol=1e-8) {
 #' Agresti, A. (2013) \emph{Categorical data analysis}. Hoboken: John Wiley and Sons, 535--542.
 #' @examples
 #' SndT_Fra <- read.table(system.file("extdata", "SndT_Fra.txt", package = "svs"),
-#'    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8")
+#'    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8",
+#'    stringsAsFactors = FALSE)
 #' lca.SndT_Fra <- fast_lca(SndT_Fra, k = 7)
 #' lca.SndT_Fra
 #' @export
 fast_lca <- function(dat,k,tol=1e-8,posterior=FALSE,sep="_") {
 	if (is.data.frame(dat)) {
-		dat <- table(dat)
+		if (ncol(dat)==2) {
+			dat <- xtabs(data=dat,sparse=TRUE)
+			}
+		else {
+			dat <- xtabs(data=dat,sparse=FALSE)
+			}
 		}
-	stopifnot(is.array(dat))
+	stopifnot(is.array(dat) || methods::is(dat,"sparseMatrix"))
 	way <- length(dim(dat))
 	pri <- rep(1/k,k)
 	tht <- lapply(1:way,function(j){gtools::rdirichlet(n=k,alpha=apply(dat,j,sum))})
@@ -691,15 +728,16 @@ fast_lca <- function(dat,k,tol=1e-8,posterior=FALSE,sep="_") {
 #'   \emph{SIGIR'99: Proceedings of the 22nd annual international SIGIR conference on research and development in information retrieval}, 50--57.
 #' @examples
 #' SndT_Fra <- read.table(system.file("extdata", "SndT_Fra.txt", package = "svs"),
-#'    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8")
+#'    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8",
+#'    stringsAsFactors = FALSE)
 #' psa.SndT_Fra <- fast_psa(SndT_Fra, k = 7)
 #' psa.SndT_Fra
 #' @export
 fast_psa <- function(dat,k,symmetric=FALSE,tol=1e-8) {
 	if (is.data.frame(dat)) {
-		dat <- table(dat)
+		dat <- xtabs(data=dat,sparse=TRUE)
 		}
-	stopifnot(is.matrix(dat))
+	stopifnot(is.matrix(dat) || methods::is(dat,"sparseMatrix"))
 	out <- fast_lca(dat=dat,k=k,tol=tol,posterior=FALSE)
 	if (!symmetric) {
 		out$prob1 <- prop.table(sweep(out$prob1,2,out$prob0,"*"),1)
@@ -744,15 +782,16 @@ fast_plsi <- function(dat,k,symmetric=FALSE,tol=1e-8) {
 #'   \emph{Journal of the royal statistical society, series B} \strong{39} (1), 1--38.
 #' @examples
 #' SndT_Fra <- read.table(system.file("extdata", "SndT_Fra.txt", package = "svs"),
-#'    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8")
+#'    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8",
+#'    stringsAsFactors = FALSE)
 #' E_M.SndT_Fra <- fast_E_M(SndT_Fra, k = 7)
 #' E_M.SndT_Fra
 #' @export
 fast_E_M <- function(dat,k,tol=1e-8) {
 	if (is.data.frame(dat)) {
-		dat <- table(dat)
+		dat <- xtabs(data=dat,sparse=TRUE)
 		}
-	stopifnot(is.matrix(dat))
+	stopifnot(is.matrix(dat) || methods::is(dat,"sparseMatrix"))
 	len <- nrow(dat)
 	pri <- rep(1/k,k)
 	tht <- gtools::rdirichlet(n=k,alpha=apply(dat,2,sum))
@@ -760,7 +799,8 @@ fast_E_M <- function(dat,k,tol=1e-8) {
 	div <- tol*10
 	while (div>tol) {
 		pst <- prop.table(sapply(1:len,function(i){sapply(1:k,function(z){max(dmultinom(x=dat[i,],size=sum(dat[i,]),prob=tht[z,]),1e-300)*pri[z]})}),2)
-		tht <- prop.table(pst%*%dat,1)
+		tht <- pst%*%dat
+		tht <- sweep(tht,1,apply(tht,1,sum),"/")
 		pri <- apply(pst,1,sum)/len
 		lln <- sum(log(sapply(1:len,function(i){sum(sapply(1:k,function(z){max(dmultinom(x=dat[i,],size=sum(dat[i,]),prob=tht[z,]),1e-300)*pri[z]}))})))
 		div <- lln-llk
@@ -818,7 +858,8 @@ fast_EM <- function(dat,k,tol=1e-8) {
 #' @seealso \code{\link{fast_lsa}}.
 #' @examples
 #' SndT_Fra <- read.table(system.file("extdata", "SndT_Fra.txt", package = "svs"),
-#'    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8")
+#'    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8",
+#'    stringsAsFactors = FALSE)
 #' tab.SndT_Fra <- table(SndT_Fra)
 #' lw_log(tab.SndT_Fra)
 #' gw_idf(tab.SndT_Fra)
@@ -876,7 +917,7 @@ gw_nor <- function(x) {
 #' @rdname weighting_functions
 #' @export
 gw_ent <- function(x) {
-	tmp <- prop.table(x,2)
+	tmp <- sweep(x,2,apply(x,2,sum),"/")
 	tmp <- tmp*log(tmp)
 	tmp[!is.finite(tmp)] <- 0
 	1-apply(tmp/log(nrow(x)),2,sum)
@@ -897,19 +938,20 @@ gw_raw <- function(x) {
 #' Pointwise Mutual Information
 #'
 #' A function for computing the pointwise mutual information of every entry in a table.  
-#' @param x A table (i.e. an object which can be converted to an array).
+#' @param x A table or a (sparse) matrix.
 #' @param normalize Logical indicating whether to normalize the pointwise mutual information.
 #' @param base Numeric specification of the base with respect to which logarithms are computed.
 #' @return An array with the pointwise mutual information of every entry.
 #' @seealso \code{\link{MI}}.
 #' @examples
 #' SndT_Fra <- read.table(system.file("extdata", "SndT_Fra.txt", package = "svs"),
-#'    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8")
+#'    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8",
+#'    stringsAsFactors = FALSE)
 #' tab.SndT_Fra <- table(SndT_Fra)
 #' pmi(tab.SndT_Fra)
 #' @export
 pmi <- function(x,normalize=FALSE,base=2) {
-	stopifnot(is.array(x))
+	stopifnot(is.array(x) || methods::is(x,"sparseMatrix"))
 	stopifnot(all(x>=0))
 	x <- x/sum(x)
 	out <- log(x/outerec(lapply(1:length(dim(x)),function(j){apply(x,j,sum)})),base=base)
@@ -929,18 +971,19 @@ PMI <- function(x,normalize=FALSE,base=2) {
 #' Mutual Information
 #'
 #' A function for computing the mutual information.  
-#' @param x A table (i.e. an object which can be converted to an array).
+#' @param x A table or a (sparse) matrix.
 #' @param base Numeric specification of the base with respect to which logarithms are computed.
 #' @return A numeric value containing the mutual information.
 #' @seealso \code{\link{pmi}}.
 #' @examples
 #' SndT_Fra <- read.table(system.file("extdata", "SndT_Fra.txt", package = "svs"),
-#'    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8")
+#'    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8",
+#'    stringsAsFactors = FALSE)
 #' tab.SndT_Fra <- table(SndT_Fra)
 #' MI(tab.SndT_Fra)
 #' @export
 MI <- function(x,base=2) {
-	stopifnot(is.array(x))
+	stopifnot(is.array(x) || methods::is(x,"sparseMatrix"))
 	stopifnot(all(x>=0))
 	x <- x/sum(x)
 	cel <- x*pmi(x,normalize=FALSE,base=base)
@@ -954,24 +997,25 @@ mi <- function(x,base=2) {
 	MI(x=x,base=base)
 	}
 
-#' Compute Level Frequencies (for a Factor)
+#' Compute Level Frequencies (for a Factor or Vector)
 #'
 #' A helper function for computing the frequency of each factor level (typically used in correspondence analysis).  
-#' @param dat A factor or a data frame.
+#' @param dat A factor, (character) vector or a data frame.
 #' @param nfac Logical indicating whether the number of factors (i.e. the number of columns in \code{dat}) is a divisor for
 #'   the level frequencies.
 #' @return A vector containing the frequency counts of every level.
 #' @examples
 #' SndT_Fra <- read.table(system.file("extdata", "SndT_Fra.txt", package = "svs"),
-#'    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8")
+#'    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8",
+#'    stringsAsFactors = FALSE)
 #' freq_ca(SndT_Fra)
 #' @export
 freq_ca <- function(dat,nfac=FALSE) {
-	if (is.factor(dat)) {
+	if (is.factor(dat) || is.vector(dat)) {
 		dat <- as.data.frame(dat)
 		}
 	stopifnot(is.data.frame(dat))
-	out <- lapply(dat,function(fac){summary(fac,maxsum=nlevels(fac))})
+	out <- lapply(dat,table)
 	names(out) <- NULL
 	unlist(out)*ifelse(nfac,ncol(dat),1)
 	}
@@ -986,13 +1030,14 @@ freq_ca <- function(dat,nfac=FALSE) {
 #' @seealso \code{\link{freq_ca}}.
 #' @examples
 #' SndT_Fra <- read.table(system.file("extdata", "SndT_Fra.txt", package = "svs"),
-#'    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8")
+#'    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8",
+#'    stringsAsFactors = FALSE)
 #' sca.SndT_Fra <- fast_sca(SndT_Fra)
 #' kcl.SndT_Fra <- kmeans(sca.SndT_Fra$pos1, centers = 7)
 #' centers_ca(sca.SndT_Fra$pos1, clusters = kcl.SndT_Fra, freq = freq_ca(SndT_Fra[, 1]))
 #' @export
 centers_ca <- function(x,clusters,freq) {
-	stopifnot(is.matrix(x))
+	stopifnot(is.matrix(x) || methods::is(x,"sparseMatrix"))
 	stopifnot(class(clusters) %in% c("list","kmeans"))
 	if (class(clusters)=="kmeans") {
 		clusters <- lapply(sort(unique(clusters$cluster)),function(y){names(clusters$cluster[clusters$cluster==y])})
@@ -1015,12 +1060,13 @@ centers_ca <- function(x,clusters,freq) {
 #' @return A distance matrix.
 #' @examples
 #' SndT_Fra <- read.table(system.file("extdata", "SndT_Fra.txt", package = "svs"),
-#'    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8")
+#'    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8",
+#'    stringsAsFactors = FALSE)
 #' tab.SndT_Fra <- table(SndT_Fra)
 #' dist_chisquare(tab.SndT_Fra)
 #' @export
 dist_chisquare <- function(x,diag=FALSE,upper=FALSE) {
-	stopifnot(is.matrix(x))
+	stopifnot(is.matrix(x) || methods::is(x,"sparseMatrix"))
 	stopifnot(all(x>=0))
 	dist(sweep(sweep(x,1,apply(x,1,sum),"/"),2,sqrt(apply(x,2,sum)/sum(x)),"/"),method="euclidean",diag=diag,upper=upper)
 	}
@@ -1042,12 +1088,13 @@ dist_chisq <- function(x,diag=FALSE,upper=FALSE) {
 #' @return A distance matrix.
 #' @examples
 #' SndT_Fra <- read.table(system.file("extdata", "SndT_Fra.txt", package = "svs"),
-#'    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8")
+#'    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8",
+#'    stringsAsFactors = FALSE)
 #' lsa.SndT_Fra <- fast_lsa(SndT_Fra)
 #' dist_cosine(lsa.SndT_Fra$pos1[, 1:7])
 #' @export
 dist_cosine <- function(x,diag=FALSE,upper=FALSE) {
-	stopifnot(is.matrix(x))
+	stopifnot(is.matrix(x) || methods::is(x,"sparseMatrix"))
 	as.dist(1-x%*%t(x)/sqrt(apply(x^2,1,sum)%o%apply(x^2,1,sum)),diag=diag,upper=upper)
 	}
 
@@ -1067,13 +1114,14 @@ dist_cos <- function(x,diag=FALSE,upper=FALSE) {
 #' @return A matrix (containing distances between the rows of \code{x} and \code{wrt}).
 #' @examples
 #' SndT_Fra <- read.table(system.file("extdata", "SndT_Fra.txt", package = "svs"),
-#'    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8")
+#'    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8",
+#'    stringsAsFactors = FALSE)
 #' sca.SndT_Fra <- fast_sca(SndT_Fra)
 #' dist_wrt(sca.SndT_Fra$pos1, wrt = "beginnen")
 #' @export
 dist_wrt <- function(x,wrt=NULL) {
-	stopifnot(is.matrix(x))
-	if (is.null(wrt) || is.na(wrt)) {
+	stopifnot(is.matrix(x) || methods::is(x,"sparseMatrix"))
+	if (is.null(wrt) || any(is.na(wrt))) {
 		wrt <- rep(0,times=ncol(x))
 		}
 	if (is.character(wrt)) {
@@ -1096,13 +1144,14 @@ dist_wrt <- function(x,wrt=NULL) {
 #' @seealso \code{\link{centers_ca}}, \code{\link{freq_ca}}.
 #' @examples
 #' SndT_Fra <- read.table(system.file("extdata", "SndT_Fra.txt", package = "svs"),
-#'    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8")
+#'    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8",
+#'    stringsAsFactors = FALSE)
 #' sca.SndT_Fra <- fast_sca(SndT_Fra)
 #' kcl.SndT_Fra <- kmeans(sca.SndT_Fra$pos1, centers = 7)
 #' dist_wrt_centers(sca.SndT_Fra$pos1, clusters = kcl.SndT_Fra, freq = freq_ca(SndT_Fra[, 1]))
 #' @export
 dist_wrt_centers <- function(x,clusters,freq=NULL,members_only=TRUE) {
-	stopifnot(is.matrix(x))
+	stopifnot(is.matrix(x) || methods::is(x,"sparseMatrix"))
 	stopifnot(class(clusters) %in% c("list","kmeans"))
 	if (class(clusters)=="kmeans") {
 		clusters <- lapply(sort(unique(clusters$cluster)),function(y){names(clusters$cluster[clusters$cluster==y])})
@@ -1152,7 +1201,8 @@ dist_wrt_centers <- function(x,clusters,freq=NULL,members_only=TRUE) {
 #' @return A cumulative distribution plot.
 #' @examples
 #' SndT_Fra <- read.table(system.file("extdata", "SndT_Fra.txt", package = "svs"),
-#'    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8")
+#'    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8",
+#'    stringsAsFactors = FALSE)
 #' sca.SndT_Fra <- fast_sca(SndT_Fra)
 #' dis.SndT_Fra <- dist_wrt(sca.SndT_Fra$pos1)
 #' cd_plot(dis.SndT_Fra)
@@ -1199,12 +1249,13 @@ cd_plot <- function(x,inc=0.01,col="darkgrey",cex=1,font=1,family="",srt=-45,pch
 #' @return A parallel coordinate plot.
 #' @examples
 #' SndT_Fra <- read.table(system.file("extdata", "SndT_Fra.txt", package = "svs"),
-#'    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8")
+#'    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8",
+#'    stringsAsFactors = FALSE)
 #' sca.SndT_Fra <- fast_sca(SndT_Fra)
 #' pc_plot(sca.SndT_Fra$pos1, las = "vertical")
 #' @export
 pc_plot <- function(x,col="darkgrey",cex=1,font=1,family="",pch=20,pcol=col,pcex=cex,lcol=col,lwd=1,lty=1,acol="black",alwd=1,alty=1,las=1,add_scale=FALSE,main=NULL,sub=NULL) {
-	stopifnot(is.matrix(x))
+	stopifnot(is.matrix(x) || methods::is(x,"sparseMatrix"))
 	if (is.character(las)) {
 		las <- pmatch(tolower(las),table=c("horizontal","vertical"))
 		}
