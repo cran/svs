@@ -4,11 +4,13 @@
 \name{InvT_Fra.txt}
 \alias{InvT_Fra.txt}
 \title{Seventeen Dutch Target Words and their French Source Words}
-\format{A data frame with 856 rows and 2 variables.
+\format{
+A data frame with 856 rows and 2 variables.
 \itemize{
   \item{\code{source_Fra} }{The French source word.}
   \item{\code{target_Dut} }{The Dutch target word.}
-}}
+}
+}
 \description{
 The occurrences of seventeen Dutch synonyms of \emph{beginnen} ("to begin") and their French source words (from the Dutch Parallel Corpus).
 }

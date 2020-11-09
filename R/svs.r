@@ -13,7 +13,7 @@ NULL
 #' @importFrom gtools rdirichlet
 NULL
 
-#' @importFrom Matrix sparseMatrix
+#' @importFrom Matrix Matrix
 NULL
 
 #' @importFrom Matrix crossprod
@@ -25,12 +25,16 @@ NULL
 #' @importFrom Matrix t
 NULL
 
+#' @importMethodsFrom Matrix diag
+NULL
+
 #' Tools for Semantic Vector Spaces
 #'
 #' This package offers various tools for semantic vector spaces. There are techniques for correspondence analysis (simple,
 #'   multiple and discriminant), latent semantic analysis, probabilistic latent semantic analysis, non-negative matrix
-#'   factorization, latent class analysis and EM clustering. Furthermore, the package has specialized distance measures and
-#'   plotting functions as well as some helper functions.  
+#'   factorization, latent class analysis, EM clustering, logratio analysis and log-multiplicative (association)
+#'   analysis. Furthermore, the package has specialized distance measures and plotting functions as well as
+#'   some helper functions.  
 #' @section Contents:
 #' This package contains the following raw data files (in the folder \emph{extdata}):
 #' \itemize{
@@ -52,6 +56,8 @@ NULL
 #'   \item{\code{\link{fast_nmf}} }{Non-negative matrix factorization.}
 #'   \item{\code{\link{fast_lca}} }{Latent class analysis.}
 #'   \item{\code{\link{fast_E_M}} }{EM clustering.}
+#'   \item{\code{\link{fast_lra}} }{Logratio analysis.}
+#'   \item{\code{\link{fast_lma}} }{Log-multiplicative (association) analysis.}
 #' }
 #'
 #' The complete overview of local and global weighting functions in this package can be found on \code{\link{weighting_functions}}.
@@ -89,6 +95,7 @@ NULL
 #'   \item{\code{\link{outerec}} }{Recursive application of the outer product.}
 #'   \item{\code{\link{pmi}} }{Pointwise mutual information.}
 #'   \item{\code{\link{MI}} }{Mutual information.}
+#'   \item{\code{\link{log_or_0}} }{Logarithmic transform.}
 #' }
 #' @section Further reference:
 #' \itemize{
@@ -234,6 +241,26 @@ NULL
 #' @name Ctxt_Eng.txt
 NULL
 
+#' Logarithmic transform
+#'
+#' A function for computing the logarithm of every entry in a table with 0 for zero entries.  
+#' @param x A table or a (sparse) matrix.
+#' @param base Numeric specification of the base with respect to which logarithms are computed.
+#' @return An array with the logarithm of every entry and 0 for all zero entries.
+#' @examples
+#' SndT_Fra <- read.table(system.file("extdata", "SndT_Fra.txt", package = "svs"),
+#'    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8",
+#'    stringsAsFactors = FALSE)
+#' tab.SndT_Fra <- table(SndT_Fra)
+#' log_or_0(tab.SndT_Fra)
+#' @export
+log_or_0 <- function(x,base=exp(1)) {
+	stopifnot(is.array(x) || methods::is(x,"Matrix"))
+	out <- log(x,base=base)
+	out[!is.finite(out)] <- 0
+	out
+	}
+
 #' Transform a Vector into an Indicator Matrix
 #'
 #' A helper function for transforming a vector into an indicator matrix.  
@@ -298,12 +325,13 @@ outerec <- function(...) {
 #'
 #' A fast procedure for computing simple correspondence analysis.  
 #' @param dat Input data: can be a table or a data frame (but the data frame must have only two columns).
+#' @param transform Numeric specification of the power transformation to be applied on the data.
 #' @return A list with components:
 #' \item{\code{val} }{The eigenvalues or principal inertias, indicating how much each latent axis explains.}
 #' \item{\code{pos1} }{The coordinates of the first set of levels (\emph{viz.} the row levels of a frequency table).}
 #' \item{\code{pos2} }{The coordinates of the second set of levels (\emph{viz.} the column levels of a frequency table).}
 #' @references
-#' Greenacre, M. (2007) \emph{Correspondence analysis in practice, Second edition}. Boca Raton: Chapman and Hall/CRC.
+#' Greenacre, M. (2017) \emph{Correspondence analysis in practice, Third edition}. Boca Raton: Chapman and Hall/CRC.
 #' @examples
 #' SndT_Fra <- read.table(system.file("extdata", "SndT_Fra.txt", package = "svs"),
 #'    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8",
@@ -311,18 +339,22 @@ outerec <- function(...) {
 #' sca.SndT_Fra <- fast_sca(SndT_Fra)
 #' sca.SndT_Fra
 #' @export
-fast_sca <- function(dat) {
+fast_sca <- function(dat,transform=1) {
 	if (is.data.frame(dat)) {
 		dat <- xtabs(data=dat,sparse=TRUE)
 		}
-	stopifnot(is.matrix(dat) || methods::is(dat,"sparseMatrix"))
-	exf <- outer(apply(dat,1,sum),apply(dat,2,sum))/sum(dat)
-	dec <- svd((dat-exf)/sqrt(exf))
-	rwc <- sweep(dec$u%*%diag(dec$d),1,sqrt(apply(dat,1,sum)),"/")
+	stopifnot(is.matrix(dat) || methods::is(dat,"Matrix"))
+	dat <- dat/sum(dat)
+	nrw <- nrow(dat)
+	ncl <- ncol(dat)
+	rwp <- apply(dat,1,sum)
+	clp <- apply(dat,2,sum)
+	dec <- svd(sweep(diag(nrw)-outer(rep(1,nrw),rwp),1,sqrt(rwp),"*")%*%(((dat/outer(rwp,clp))^transform)/transform)%*%sweep(diag(ncl)-outer(clp,rep(1,ncl)),2,sqrt(clp),"*"))
+	rwc <- sweep(dec$u%*%diag(dec$d),1,sqrt(rwp),"/")
 	dimnames(rwc) <- list(rownames(dat),paste("Dim",1:length(dec$d),sep=""))
-	clc <- sweep(dec$v%*%diag(dec$d),1,sqrt(apply(dat,2,sum)),"/")
+	clc <- sweep(dec$v%*%diag(dec$d),1,sqrt(clp),"/")
 	dimnames(clc) <- list(colnames(dat),paste("Dim",1:length(dec$d),sep=""))
-	list(val=(dec$d^2)/sum(dat),pos1=rwc,pos2=clc)
+	list(val=(dec$d^2),pos1=rwc,pos2=clc)
 	}
 
 #' Multiple Correspondence Analysis
@@ -335,7 +367,7 @@ fast_sca <- function(dat) {
 #' \item{\code{val} }{The eigenvalues or principal inertias, indicating how much each latent axis explains.}
 #' \item{\code{pos} }{The coordinates of all levels.}
 #' @references
-#' Greenacre, M. (2007) \emph{Correspondence analysis in practice, Second edition}. Boca Raton: Chapman and Hall/CRC.
+#' Greenacre, M. (2017) \emph{Correspondence analysis in practice, Third edition}. Boca Raton: Chapman and Hall/CRC.
 #' @examples
 #' SndT_Fra <- read.table(system.file("extdata", "SndT_Fra.txt", package = "svs"),
 #'    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8",
@@ -381,7 +413,7 @@ fast_dca <- function(dat,clusters1=NULL,clusters2=NULL,members=FALSE) {
 	if (is.data.frame(dat)) {
 		dat <- xtabs(data=dat,sparse=TRUE)
 		}
-	stopifnot(is.matrix(dat) || methods::is(dat,"sparseMatrix"))
+	stopifnot(is.matrix(dat) || methods::is(dat,"Matrix"))
 	if (class(clusters1)=="kmeans") {
 		clusters1 <- lapply(sort(unique(clusters1$cluster)),function(x1){names(clusters1$cluster[clusters1$cluster==x1])})
 		}
@@ -459,7 +491,7 @@ fast_lsa <- function(dat,local_weights="log",global_weights="idf") {
 	if (is.data.frame(dat)) {
 		dat <- xtabs(data=dat,sparse=TRUE)
 		}
-	stopifnot(is.matrix(dat) || methods::is(dat,"sparseMatrix"))
+	stopifnot(is.matrix(dat) || methods::is(dat,"Matrix"))
 	lwf <- match.fun(paste("lw",tolower(local_weights),sep="_",collapse=NULL))
 	gwf <- match.fun(paste("gw",tolower(global_weights),sep="_",collapse=NULL))
 	out <- svd(sweep(lwf(dat),2,gwf(dat),"*"))
@@ -519,7 +551,7 @@ fast_nmf_KL <- function(dat,k,tol=1e-8) {
 	if (is.data.frame(dat)) {
 		dat <- xtabs(data=dat,sparse=TRUE)
 		}
-	stopifnot(is.matrix(dat) || methods::is(dat,"sparseMatrix"))
+	stopifnot(is.matrix(dat) || methods::is(dat,"Matrix"))
 	wmt <- sqrt(sum(dat)/k)*rmultinom(n=k,size=10^(ceiling(log10(nrow(dat)+1))+3),prob=apply(dat,1,sum)/sum(dat))/(10^(ceiling(log10(nrow(dat)+1))+3))
 	hmt <- sqrt(sum(dat)/k)*t(rmultinom(n=k,size=10^(ceiling(log10(ncol(dat)+1))+3),prob=apply(dat,2,sum)/sum(dat))/(10^(ceiling(log10(ncol(dat)+1))+3)))
 	exf <- wmt%*%hmt
@@ -562,7 +594,7 @@ fast_nmf_Fr <- function(dat,k,tol=1e-8) {
 	if (is.data.frame(dat)) {
 		dat <- xtabs(data=dat,sparse=TRUE)
 		}
-	stopifnot(is.matrix(dat) || methods::is(dat,"sparseMatrix"))
+	stopifnot(is.matrix(dat) || methods::is(dat,"Matrix"))
 	wmt <- sqrt(sum(dat)/k)*rmultinom(n=k,size=10^(ceiling(log10(nrow(dat)+1))+3),prob=apply(dat,1,sum)/sum(dat))/(10^(ceiling(log10(nrow(dat)+1))+3))
 	hmt <- sqrt(sum(dat)/k)*t(rmultinom(n=k,size=10^(ceiling(log10(ncol(dat)+1))+3),prob=apply(dat,2,sum)/sum(dat))/(10^(ceiling(log10(ncol(dat)+1))+3)))
 	exf <- wmt%*%hmt
@@ -601,7 +633,7 @@ fast_nmf_Al <- function(dat,k,tol=1e-8) {
 	if (is.data.frame(dat)) {
 		dat <- xtabs(data=dat,sparse=TRUE)
 		}
-	stopifnot(is.matrix(dat) || methods::is(dat,"sparseMatrix"))
+	stopifnot(is.matrix(dat) || methods::is(dat,"Matrix"))
 	wmt <- sqrt(sum(dat)/k)*rmultinom(n=k,size=10^(ceiling(log10(nrow(dat)+1))+3),prob=apply(dat,1,sum)/sum(dat))/(10^(ceiling(log10(nrow(dat)+1))+3))
 	hmt <- solve(t(wmt)%*%wmt,t(wmt)%*%dat)
 	hmt[hmt<0] <- 0
@@ -644,6 +676,7 @@ fast_nmf_Al <- function(dat,k,tol=1e-8) {
 #' @param k Numeric specification of the number of latent classes to compute.
 #' @param tol Numeric specification of the convergence criterion.
 #' @param posterior Logical indicating whether the posterior probabilities of the individual observations should also be returned.
+#' @param transform Numeric specification of the power transformation to be applied on the posterior distribution; see \code{\link{fast_psa}}.
 #' @param sep Character specifying the separator string for joining the levels (if \code{posterior = TRUE}).
 #' @details
 #' The prior probabilities of the latent classes are initialized with a Dirichlet distribution (by means of \code{rdirichlet} from
@@ -661,7 +694,7 @@ fast_nmf_Al <- function(dat,k,tol=1e-8) {
 #' lca.SndT_Fra <- fast_lca(SndT_Fra, k = 7)
 #' lca.SndT_Fra
 #' @export
-fast_lca <- function(dat,k,tol=1e-8,posterior=FALSE,sep="_") {
+fast_lca <- function(dat,k,tol=1e-8,posterior=FALSE,transform=1,sep="_") {
 	if (is.data.frame(dat)) {
 		if (ncol(dat)==2) {
 			dat <- xtabs(data=dat,sparse=TRUE)
@@ -670,14 +703,14 @@ fast_lca <- function(dat,k,tol=1e-8,posterior=FALSE,sep="_") {
 			dat <- xtabs(data=dat,sparse=FALSE)
 			}
 		}
-	stopifnot(is.array(dat) || methods::is(dat,"sparseMatrix"))
+	stopifnot(is.array(dat) || methods::is(dat,"Matrix"))
 	way <- length(dim(dat))
 	pri <- rep(1/k,k)
 	tht <- lapply(1:way,function(j){gtools::rdirichlet(n=k,alpha=apply(dat,j,sum))})
 	llk <- sum(as.vector(dat)*log(apply(sapply(1:k,function(z){outerec(lapply(1:way,function(j){tht[[j]][z,]}))*pri[z]}),1,sum)))
 	div <- tol*10
 	while (div>tol) {
-		pst <- prop.table(sapply(1:k,function(z){outerec(lapply(1:way,function(j){tht[[j]][z,]}))*pri[z]}),1)
+		pst <- prop.table(sapply(1:k,function(z){(outerec(lapply(1:way,function(j){tht[[j]][z,]}))^transform)*pri[z]}),1)
 		tmp <- array(as.vector(dat)*pst,dim=c(dim(dat),k))
 		tht <- lapply(1:way,function(j){matrix(prop.table(apply(tmp,c(way+1,j),sum),1),nrow=k)})
 		pri <- prop.table(apply(tmp,way+1,sum))
@@ -716,6 +749,7 @@ fast_lca <- function(dat,k,tol=1e-8,posterior=FALSE,sep="_") {
 #' @param dat Input data: can be a table or a data frame (but the data frame must have only two columns).
 #' @param k Numeric specification of the number of latent classes to compute.
 #' @param symmetric Logical indicating whether to compute the symmetric or the asymmetric solution.
+#' @param transform Numeric specification of the "tempering" transformation as explained in Hofmann (1999: 51-52).
 #' @param tol Numeric specification of the convergence criterion.
 #' @details
 #' From version 1.1.0 of the \pkg{svs} package on, probabilistic latent semantic analysis is a special case of latent class analysis.  
@@ -733,12 +767,12 @@ fast_lca <- function(dat,k,tol=1e-8,posterior=FALSE,sep="_") {
 #' psa.SndT_Fra <- fast_psa(SndT_Fra, k = 7)
 #' psa.SndT_Fra
 #' @export
-fast_psa <- function(dat,k,symmetric=FALSE,tol=1e-8) {
+fast_psa <- function(dat,k,symmetric=FALSE,transform=1,tol=1e-8) {
 	if (is.data.frame(dat)) {
 		dat <- xtabs(data=dat,sparse=TRUE)
 		}
-	stopifnot(is.matrix(dat) || methods::is(dat,"sparseMatrix"))
-	out <- fast_lca(dat=dat,k=k,tol=tol,posterior=FALSE)
+	stopifnot(is.matrix(dat) || methods::is(dat,"Matrix"))
+	out <- fast_lca(dat=dat,k=k,tol=tol,posterior=FALSE,transform=transform)
 	if (!symmetric) {
 		out$prob1 <- prop.table(sweep(out$prob1,2,out$prob0,"*"),1)
 		}
@@ -747,20 +781,20 @@ fast_psa <- function(dat,k,symmetric=FALSE,tol=1e-8) {
 
 #' @rdname fast_psa
 #' @export
-fast_psi <- function(dat,k,symmetric=FALSE,tol=1e-8) {
-	fast_psa(dat=dat,k=k,symmetric=symmetric,tol=tol)
+fast_psi <- function(dat,k,symmetric=FALSE,transform=1,tol=1e-8) {
+	fast_psa(dat=dat,k=k,symmetric=symmetric,transform=transform,tol=tol)
 	}
 
 #' @rdname fast_psa
 #' @export
-fast_plsa <- function(dat,k,symmetric=FALSE,tol=1e-8) {
-	fast_psa(dat=dat,k=k,symmetric=symmetric,tol=tol)
+fast_plsa <- function(dat,k,symmetric=FALSE,transform=1,tol=1e-8) {
+	fast_psa(dat=dat,k=k,symmetric=symmetric,transform=transform,tol=tol)
 	}
 
 #' @rdname fast_psa
 #' @export
-fast_plsi <- function(dat,k,symmetric=FALSE,tol=1e-8) {
-	fast_psa(dat=dat,k=k,symmetric=symmetric,tol=tol)
+fast_plsi <- function(dat,k,symmetric=FALSE,transform=1,tol=1e-8) {
+	fast_psa(dat=dat,k=k,symmetric=symmetric,transform=transform,tol=tol)
 	}
 
 #' EM clustering
@@ -791,7 +825,7 @@ fast_E_M <- function(dat,k,tol=1e-8) {
 	if (is.data.frame(dat)) {
 		dat <- xtabs(data=dat,sparse=TRUE)
 		}
-	stopifnot(is.matrix(dat) || methods::is(dat,"sparseMatrix"))
+	stopifnot(is.matrix(dat) || methods::is(dat,"Matrix"))
 	len <- nrow(dat)
 	pri <- rep(1/k,k)
 	tht <- gtools::rdirichlet(n=k,alpha=apply(dat,2,sum))
@@ -825,6 +859,156 @@ fast_E_M <- function(dat,k,tol=1e-8) {
 #' @export
 fast_EM <- function(dat,k,tol=1e-8) {
 	fast_E_M(dat=dat,k=k,tol=tol)
+	}
+
+#' Logratio Analysis
+#'
+#' A fast procedure for computing logratio analysis.  
+#' @param dat Input data: can be a table or a data frame (but the data frame must have only two columns).
+#' @param base Numeric specification of the base with respect to which logarithms are computed.
+#' @return A list with components:
+#' \item{\code{val} }{The eigenvalues (i.e. squared singular values), indicating how much each latent axis explains.}
+#' \item{\code{pos1} }{The coordinates of the first set of levels (\emph{viz.} the row levels of a frequency table).}
+#' \item{\code{pos2} }{The coordinates of the second set of levels (\emph{viz.} the column levels of a frequency table).}
+#' @references
+#' Greenacre, M. (2019) \emph{Compositional data analysis in practice}. Boca Raton: Chapman and Hall/CRC.
+#'
+#' Van den Boogaart, K. G. and R. Tolosana-Delgado (2013) \emph{Analyzing compositional data with R}. Berlin: Springer.
+#' @examples
+#' SndT_Fra <- read.table(system.file("extdata", "SndT_Fra.txt", package = "svs"),
+#'    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8",
+#'    stringsAsFactors = FALSE)
+#' lra.SndT_Fra <- fast_lra(SndT_Fra)
+#' lra.SndT_Fra
+#' @export
+fast_lra <- function(dat,base=exp(1)) {
+	if (is.data.frame(dat)) {
+		dat <- xtabs(data=dat,sparse=TRUE)
+		}
+	stopifnot(is.matrix(dat) || methods::is(dat,"Matrix"))
+	rwp <- apply(dat,1,sum)/sum(dat)
+	clp <- apply(dat,2,sum)/sum(dat)
+	ldt <- log_or_0(dat,base=base)
+	dec <- svd(sweep(sweep(ldt-outer(apply(ldt,1,weighted.mean,w=clp),apply(ldt,2,weighted.mean,w=rwp),FUN="+")+sum(ldt*outer(rwp,clp)),1,sqrt(rwp),"*"),2,sqrt(clp),"*"))
+	rwc <- sweep(dec$u%*%diag(dec$d),1,sqrt(rwp),"/")
+	dimnames(rwc) <- list(rownames(dat),paste("Dim",1:length(dec$d),sep=""))
+	clc <- sweep(dec$v%*%diag(dec$d),1,sqrt(clp),"/")
+	dimnames(clc) <- list(colnames(dat),paste("Dim",1:length(dec$d),sep=""))
+	list(val=dec$d^2,pos1=rwc,pos2=clc)
+	}
+
+#' Log-Multiplicative Association Analysis
+#'
+#' A fast procedure for computing log-multiplicative analysis, i.e. Goodman's _RC(M)_ association model.  
+#' @param dat Input data: can be a table or a data frame.
+#' @param k Numeric specification of the number of latent axes to compute (i.e. k = M).
+#' @param weights Character specification of the weights applied to standardize the coordinates: can be one of
+#'   \code{"marginal"}, \code{"uniform"}, \code{"unit"} or \code{"none"}.
+#' @param tol Numeric specification of the convergence criterion.
+#' @param base Numeric specification of the base with respect to which logarithms are computed.
+#' @param init Character specification of the initialization scheme for the marginal parameters: can be either
+#'   \code{"kateri"} or \code{"marginal"}. This argument may change in future versions of the \pkg{svs} package.
+#' @details
+#' For now (i.e. version 3.0.0 of the \pkg{svs} package), the data frame must have only two columns.  
+#' @return A list with components:
+#' \item{\code{mar} }{A list with marginal parameters in components \code{mar1} and \code{mar2}; not so important for the analysis.}
+#' \item{\code{val} }{The association parameters, indicating how much association each latent axis explains.}
+#' \item{\code{pos1} }{The coordinates of the first set of levels (\emph{viz.} the row levels of a frequency table).}
+#' \item{\code{pos2} }{The coordinates of the second set of levels (\emph{viz.} the column levels of a frequency table).}
+#' @references
+#' Goodman, L. A. (1979) Simple models for the analysis of association in cross-classifications having ordered categories.
+#'   \emph{Journal of the American statistical association} \strong{74} (367), 537--552.
+#'
+#' Kateri, M. (2014) \emph{Contingency table analysis. Methods and implementation using R}. New York: Springer-Birkhauser.
+#'
+#' Wong, R. S.-K. (2010) \emph{Association models}. Thousand Oaks: SAGE.
+#' @examples
+#' SndT_Fra <- read.table(system.file("extdata", "SndT_Fra.txt", package = "svs"),
+#'    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8",
+#'    stringsAsFactors = FALSE)
+#' lma.SndT_Fra <- fast_lma(SndT_Fra, k = 7)
+#' lma.SndT_Fra
+#' @export
+fast_lma <- function(dat,k,weights="marginal",tol=1e-8,base=exp(1),init="marginal") {
+	if (is.data.frame(dat)) {
+		dat <- xtabs(data=dat,sparse=TRUE)
+		}
+	stopifnot(is.matrix(dat) || methods::is(dat,"Matrix"))
+	ldt <- log_or_0(dat,base=base)
+	ini <- pmatch(x=tolower(init),table=c("kateri","marginal"))
+	if (ini==1) {
+		rma <- base^(apply(ldt,1,sum)/ncol(dat)-sum(ldt)/(2*nrow(dat)*ncol(dat)))
+		cma <- base^(apply(ldt,2,sum)/nrow(dat)-sum(ldt)/(2*nrow(dat)*ncol(dat)))
+		}
+	if (ini==2) {
+		rma <- apply(dat,1,sum)/sqrt(sum(dat))
+		cma <- apply(dat,2,sum)/sqrt(sum(dat))
+		}
+	dec <- svd(sweep(sweep(dat,1,rma,"/"),2,cma,"/"))
+	phi <- dec$d[1:k]
+	rwi <- dec$u[,1:k,drop=FALSE]
+	cli <- dec$v[,1:k,drop=FALSE]
+	pre <- outer(rma,cma)*base^(rwi%*%diag(phi,nrow=k)%*%t(cli))
+	llk <- sum(dat*log_or_0(pre,base=base)-pre)
+	div <- tol*10
+	while (TRUE) {
+		rmu <- rma*apply(dat,1,sum)/apply(pre,1,sum)
+		pru <- outer(rmu,cma)*base^(rwi%*%diag(phi,nrow=k)%*%t(cli))
+		cmu <- cma*apply(dat,2,sum)/apply(pru,2,sum)
+		pru <- outer(rmu,cmu)*base^(rwi%*%diag(phi,nrow=k)%*%t(cli))
+		rwu <- rwi+((dat-pru)%*%cli/sweep(pru%*%cli^2,2,phi,"*"))
+		pru <- outer(rmu,cmu)*base^(rwu%*%diag(phi,nrow=k)%*%t(cli))
+		clu <- cli+(t(dat-pru)%*%rwi/sweep(t(pru)%*%rwi^2,2,phi,"*"))
+		pru <- outer(rmu,cmu)*base^(rwu%*%diag(phi,nrow=k)%*%t(clu))
+		phu <- phi+diag(t(rwi)%*%(dat-pru)%*%cli)/(diag(t(rwi^2)%*%pru%*%cli^2)*phi)
+		pru <- outer(rmu,cmu)*base^(rwu%*%diag(phu,nrow=k)%*%t(clu))
+		lln <- sum(dat*log_or_0(pru,base=base)-pru)
+		div <- lln-llk
+		if (!is.finite(div)) {
+			break
+			}
+		rma <- rmu
+		cma <- cmu
+		phi <- phu
+		rwi <- rwu
+		cli <- clu
+		pre <- pru
+		llk <- lln
+		if (div<tol) {
+			break
+			}
+		}
+	wgt <- pmatch(x=tolower(weights),table=c("marginal","uniform","unit","none"))
+	if (wgt==1) {
+		rwi <- sweep(rwi,2,apply(sweep(rwi,1,apply(dat,1,sum)/sum(dat),"*"),2,sum),"-")
+		rwi <- sweep(rwi,2,sqrt(apply(sweep(rwi^2,1,apply(dat,1,sum)/sum(dat),"*"),2,sum)),"/")
+		cli <- sweep(cli,2,apply(sweep(cli,1,apply(dat,2,sum)/sum(dat),"*"),2,sum),"-")
+		cli <- sweep(cli,2,sqrt(apply(sweep(cli^2,1,apply(dat,2,sum)/sum(dat),"*"),2,sum)),"/")
+		}
+	if (wgt==2) {
+		rwi <- sweep(rwi,2,apply(sweep(rwi,1,rep(1/nrow(dat),nrow(dat)),"*"),2,sum),"-")
+		rwi <- sweep(rwi,2,sqrt(apply(sweep(rwi^2,1,rep(1/nrow(dat),nrow(dat)),"*"),2,sum)),"/")
+		cli <- sweep(cli,2,apply(sweep(cli,1,rep(1/ncol(dat),ncol(dat)),"*"),2,sum),"-")
+		cli <- sweep(cli,2,sqrt(apply(sweep(cli^2,1,rep(1/ncol(dat),ncol(dat)),"*"),2,sum)),"/")
+		}
+	if (wgt==3) {
+		rwi <- sweep(rwi,2,apply(rwi,2,mean),"-")
+		rwi <- sweep(rwi,2,sqrt(apply(rwi^2,2,sum)),"/")
+		cli <- sweep(cli,2,apply(cli,2,mean),"-")
+		cli <- sweep(cli,2,sqrt(apply(cli^2,2,sum)),"/")
+		}
+	names(rma) <- rownames(dat)
+	names(cma) <- colnames(dat)
+	names(phi) <- 1:k
+	dimnames(rwi) <- list(rownames(dat),1:k)
+	dimnames(cli) <- list(colnames(dat),1:k)
+	list(mar=list(mar1=rma,mar2=cma),val=phi,pos1=rwi,pos2=cli,PRD=pre) #####
+	}
+
+#' @rdname fast_lma
+#' @export
+fast_rca <- function(dat,k,weights="marginal",tol=1e-8,base=exp(1),init="marginal") {
+	fast_lma(dat=dat,k=k,weights=weights,tol=tol,base=base,init=init)
 	}
 
 #' Weighting Functions
@@ -951,7 +1135,7 @@ gw_raw <- function(x) {
 #' pmi(tab.SndT_Fra)
 #' @export
 pmi <- function(x,normalize=FALSE,base=2) {
-	stopifnot(is.array(x) || methods::is(x,"sparseMatrix"))
+	stopifnot(is.array(x) || methods::is(x,"Matrix"))
 	stopifnot(all(x>=0))
 	x <- x/sum(x)
 	out <- log(x/outerec(lapply(1:length(dim(x)),function(j){apply(x,j,sum)})),base=base)
@@ -983,7 +1167,7 @@ PMI <- function(x,normalize=FALSE,base=2) {
 #' MI(tab.SndT_Fra)
 #' @export
 MI <- function(x,base=2) {
-	stopifnot(is.array(x) || methods::is(x,"sparseMatrix"))
+	stopifnot(is.array(x) || methods::is(x,"Matrix"))
 	stopifnot(all(x>=0))
 	x <- x/sum(x)
 	cel <- x*pmi(x,normalize=FALSE,base=base)
@@ -1037,7 +1221,7 @@ freq_ca <- function(dat,nfac=FALSE) {
 #' centers_ca(sca.SndT_Fra$pos1, clusters = kcl.SndT_Fra, freq = freq_ca(SndT_Fra[, 1]))
 #' @export
 centers_ca <- function(x,clusters,freq) {
-	stopifnot(is.matrix(x) || methods::is(x,"sparseMatrix"))
+	stopifnot(is.matrix(x) || methods::is(x,"Matrix"))
 	stopifnot(class(clusters) %in% c("list","kmeans"))
 	if (class(clusters)=="kmeans") {
 		clusters <- lapply(sort(unique(clusters$cluster)),function(y){names(clusters$cluster[clusters$cluster==y])})
@@ -1066,7 +1250,7 @@ centers_ca <- function(x,clusters,freq) {
 #' dist_chisquare(tab.SndT_Fra)
 #' @export
 dist_chisquare <- function(x,diag=FALSE,upper=FALSE) {
-	stopifnot(is.matrix(x) || methods::is(x,"sparseMatrix"))
+	stopifnot(is.matrix(x) || methods::is(x,"Matrix"))
 	stopifnot(all(x>=0))
 	dist(sweep(sweep(x,1,apply(x,1,sum),"/"),2,sqrt(apply(x,2,sum)/sum(x)),"/"),method="euclidean",diag=diag,upper=upper)
 	}
@@ -1094,7 +1278,7 @@ dist_chisq <- function(x,diag=FALSE,upper=FALSE) {
 #' dist_cosine(lsa.SndT_Fra$pos1[, 1:7])
 #' @export
 dist_cosine <- function(x,diag=FALSE,upper=FALSE) {
-	stopifnot(is.matrix(x) || methods::is(x,"sparseMatrix"))
+	stopifnot(is.matrix(x) || methods::is(x,"Matrix"))
 	as.dist(1-x%*%t(x)/sqrt(apply(x^2,1,sum)%o%apply(x^2,1,sum)),diag=diag,upper=upper)
 	}
 
@@ -1120,7 +1304,7 @@ dist_cos <- function(x,diag=FALSE,upper=FALSE) {
 #' dist_wrt(sca.SndT_Fra$pos1, wrt = "beginnen")
 #' @export
 dist_wrt <- function(x,wrt=NULL) {
-	stopifnot(is.matrix(x) || methods::is(x,"sparseMatrix"))
+	stopifnot(is.matrix(x) || methods::is(x,"Matrix"))
 	if (is.null(wrt) || any(is.na(wrt))) {
 		wrt <- rep(0,times=ncol(x))
 		}
@@ -1151,7 +1335,7 @@ dist_wrt <- function(x,wrt=NULL) {
 #' dist_wrt_centers(sca.SndT_Fra$pos1, clusters = kcl.SndT_Fra, freq = freq_ca(SndT_Fra[, 1]))
 #' @export
 dist_wrt_centers <- function(x,clusters,freq=NULL,members_only=TRUE) {
-	stopifnot(is.matrix(x) || methods::is(x,"sparseMatrix"))
+	stopifnot(is.matrix(x) || methods::is(x,"Matrix"))
 	stopifnot(class(clusters) %in% c("list","kmeans"))
 	if (class(clusters)=="kmeans") {
 		clusters <- lapply(sort(unique(clusters$cluster)),function(y){names(clusters$cluster[clusters$cluster==y])})
@@ -1255,7 +1439,7 @@ cd_plot <- function(x,inc=0.01,col="darkgrey",cex=1,font=1,family="",srt=-45,pch
 #' pc_plot(sca.SndT_Fra$pos1, las = "vertical")
 #' @export
 pc_plot <- function(x,col="darkgrey",cex=1,font=1,family="",pch=20,pcol=col,pcex=cex,lcol=col,lwd=1,lty=1,acol="black",alwd=1,alty=1,las=1,add_scale=FALSE,main=NULL,sub=NULL) {
-	stopifnot(is.matrix(x) || methods::is(x,"sparseMatrix"))
+	stopifnot(is.matrix(x) || methods::is(x,"Matrix"))
 	if (is.character(las)) {
 		las <- pmatch(tolower(las),table=c("horizontal","vertical"))
 		}

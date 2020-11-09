@@ -7,13 +7,13 @@
 \alias{fast_plsi}
 \title{Probabilistic Latent Semantic Analysis}
 \usage{
-fast_psa(dat, k, symmetric = FALSE, tol = 1e-08)
+fast_psa(dat, k, symmetric = FALSE, transform = 1, tol = 1e-08)
 
-fast_psi(dat, k, symmetric = FALSE, tol = 1e-08)
+fast_psi(dat, k, symmetric = FALSE, transform = 1, tol = 1e-08)
 
-fast_plsa(dat, k, symmetric = FALSE, tol = 1e-08)
+fast_plsa(dat, k, symmetric = FALSE, transform = 1, tol = 1e-08)
 
-fast_plsi(dat, k, symmetric = FALSE, tol = 1e-08)
+fast_plsi(dat, k, symmetric = FALSE, transform = 1, tol = 1e-08)
 }
 \arguments{
 \item{dat}{Input data: can be a table or a data frame (but the data frame must have only two columns).}
@@ -21,6 +21,8 @@ fast_plsi(dat, k, symmetric = FALSE, tol = 1e-08)
 \item{k}{Numeric specification of the number of latent classes to compute.}
 
 \item{symmetric}{Logical indicating whether to compute the symmetric or the asymmetric solution.}
+
+\item{transform}{Numeric specification of the "tempering" transformation as explained in Hofmann (1999: 51-52).}
 
 \item{tol}{Numeric specification of the convergence criterion.}
 }

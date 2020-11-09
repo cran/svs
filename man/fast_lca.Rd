@@ -4,7 +4,7 @@
 \alias{fast_lca}
 \title{Latent Class Analysis}
 \usage{
-fast_lca(dat, k, tol = 1e-08, posterior = FALSE, sep = "_")
+fast_lca(dat, k, tol = 1e-08, posterior = FALSE, transform = 1, sep = "_")
 }
 \arguments{
 \item{dat}{Input data: can be a table or a data frame.}
@@ -14,6 +14,8 @@ fast_lca(dat, k, tol = 1e-08, posterior = FALSE, sep = "_")
 \item{tol}{Numeric specification of the convergence criterion.}
 
 \item{posterior}{Logical indicating whether the posterior probabilities of the individual observations should also be returned.}
+
+\item{transform}{Numeric specification of the power transformation to be applied on the posterior distribution; see \code{\link{fast_psa}}.}
 
 \item{sep}{Character specifying the separator string for joining the levels (if \code{posterior = TRUE}).}
 }

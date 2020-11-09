@@ -4,11 +4,13 @@
 \name{SndT_Fra.txt}
 \alias{SndT_Fra.txt}
 \title{Seventeen Dutch Source Words and their French Translations}
-\format{A data frame with 1487 rows and 2 variables.
+\format{
+A data frame with 1487 rows and 2 variables.
 \itemize{
   \item{\code{source_Dut} }{The Dutch source word.}
   \item{\code{target_Fra} }{The French target word.}
-}}
+}
+}
 \description{
 The occurrences of seventeen Dutch synonyms of \emph{beginnen} ("to begin") and their French translations (from the Dutch Parallel Corpus).
 }

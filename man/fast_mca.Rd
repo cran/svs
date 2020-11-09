@@ -28,5 +28,5 @@ mca.SndT_Fra <- fast_mca(SndT_Fra)
 mca.SndT_Fra
 }
 \references{
-Greenacre, M. (2007) \emph{Correspondence analysis in practice, Second edition}. Boca Raton: Chapman and Hall/CRC.
+Greenacre, M. (2017) \emph{Correspondence analysis in practice, Third edition}. Boca Raton: Chapman and Hall/CRC.
 }

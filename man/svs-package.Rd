@@ -7,8 +7,9 @@
 \description{
 This package offers various tools for semantic vector spaces. There are techniques for correspondence analysis (simple,
   multiple and discriminant), latent semantic analysis, probabilistic latent semantic analysis, non-negative matrix
-  factorization, latent class analysis and EM clustering. Furthermore, the package has specialized distance measures and
-  plotting functions as well as some helper functions.
+  factorization, latent class analysis, EM clustering, logratio analysis and log-multiplicative (association)
+  analysis. Furthermore, the package has specialized distance measures and plotting functions as well as
+  some helper functions.
 }
 \section{Contents}{
 
@@ -32,6 +33,8 @@ The (fast procedures for the) techniques in this package are:
   \item{\code{\link{fast_nmf}} }{Non-negative matrix factorization.}
   \item{\code{\link{fast_lca}} }{Latent class analysis.}
   \item{\code{\link{fast_E_M}} }{EM clustering.}
+  \item{\code{\link{fast_lra}} }{Logratio analysis.}
+  \item{\code{\link{fast_lma}} }{Log-multiplicative (association) analysis.}
 }
 
 The complete overview of local and global weighting functions in this package can be found on \code{\link{weighting_functions}}.
@@ -69,6 +72,7 @@ The remaining helper functions in this package are:
   \item{\code{\link{outerec}} }{Recursive application of the outer product.}
   \item{\code{\link{pmi}} }{Pointwise mutual information.}
   \item{\code{\link{MI}} }{Mutual information.}
+  \item{\code{\link{log_or_0}} }{Logarithmic transform.}
 }
 }
 

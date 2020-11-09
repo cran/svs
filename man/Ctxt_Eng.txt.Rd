@@ -4,7 +4,9 @@
 \name{Ctxt_Eng.txt}
 \alias{Ctxt_Eng.txt}
 \title{Context Words for seventeen Dutch Words Translated from French}
-\format{A table with 17 rows and 609 columns.}
+\format{
+A table with 17 rows and 609 columns.
+}
 \description{
 The frequency table of seventeen Dutch synonyms of \emph{beginnen} ("to begin") and their context words in texts translated from English
   (from the Dutch Parallel Corpus).
