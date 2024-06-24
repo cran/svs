@@ -24,8 +24,8 @@ A function for computing the mutual information.
 SndT_Fra <- read.table(system.file("extdata", "SndT_Fra.txt", package = "svs"),
    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8",
    stringsAsFactors = FALSE)
-tab.SndT_Fra <- table(SndT_Fra)
-MI(tab.SndT_Fra)
+tab_SndT_Fra <- table(SndT_Fra)
+MI(tab_SndT_Fra)
 }
 \seealso{
 \code{\link{pmi}}.

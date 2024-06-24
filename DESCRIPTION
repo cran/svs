@@ -1,8 +1,8 @@
 Package: svs
 Title: Tools for Semantic Vector Spaces
-Version: 3.0.0
-Authors@R: person("Koen", "Plevoets", email="koen.plevoets@ugent.be",
-    role=c("aut", "cre"))
+Version: 3.1.1
+Authors@R: person("Koen", "Plevoets", email = "koen.plevoets@ugent.be",
+    role = c("aut", "cre"), comment = c(ORCID = "0000-0003-3889-1809"))
 Description: Various tools for semantic vector spaces, such as
     correspondence analysis (simple, multiple and discriminant), latent
     semantic analysis, probabilistic latent semantic analysis, non-negative
@@ -10,17 +10,16 @@ Description: Various tools for semantic vector spaces, such as
 	analysis and log-multiplicative (association) analysis. Furthermore,
     there are specialized distance measures, plotting functions and some helper
     functions.
-Depends: R (>= 3.1.0),
+Depends: R (>= 4.0.0),
 Imports: gtools, graphics, stats, methods, Matrix, utils
-Suggests: MASS, pvclust
+Suggests: igraph, MASS, pvclust
 License: GPL-3
-LazyData: true
 Encoding: UTF-8
-Date: 2020-11-09
-RoxygenNote: 7.1.1
+Date: 2024-06-24
+RoxygenNote: 7.3.1
 NeedsCompilation: no
-Packaged: 2020-11-09 19:36:26 UTC; kplevoet
-Author: Koen Plevoets [aut, cre]
+Packaged: 2024-06-24 12:53:25 UTC; kplevoet
+Author: Koen Plevoets [aut, cre] (<https://orcid.org/0000-0003-3889-1809>)
 Maintainer: Koen Plevoets <koen.plevoets@ugent.be>
 Repository: CRAN
-Date/Publication: 2020-11-09 21:40:02 UTC
+Date/Publication: 2024-06-24 13:10:01 UTC

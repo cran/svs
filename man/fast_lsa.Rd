@@ -31,8 +31,8 @@ A fast procedure for computing latent semantic analysis.
 SndT_Fra <- read.table(system.file("extdata", "SndT_Fra.txt", package = "svs"),
    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8",
    stringsAsFactors = FALSE)
-lsa.SndT_Fra <- fast_lsa(SndT_Fra)
-lsa.SndT_Fra
+lsa_SndT_Fra <- fast_lsa(SndT_Fra)
+lsa_SndT_Fra
 }
 \references{
 Deerwester, S., S. T. Dumais, G. W. Furnas, Th. K. Landauer and R. Harshman (1990) Indexing by latent semantic analysis.

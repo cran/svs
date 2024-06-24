@@ -55,8 +55,8 @@ For now (i.e. version 3.0.0 of the \pkg{svs} package), the data frame must have 
 SndT_Fra <- read.table(system.file("extdata", "SndT_Fra.txt", package = "svs"),
    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8",
    stringsAsFactors = FALSE)
-lma.SndT_Fra <- fast_lma(SndT_Fra, k = 7)
-lma.SndT_Fra
+lma_SndT_Fra <- fast_lma(SndT_Fra, k = 7)
+lma_SndT_Fra
 }
 \references{
 Goodman, L. A. (1979) Simple models for the analysis of association in cross-classifications having ordered categories.

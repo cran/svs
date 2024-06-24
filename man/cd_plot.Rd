@@ -79,7 +79,7 @@ A function for plotting a cumulative distribution.
 SndT_Fra <- read.table(system.file("extdata", "SndT_Fra.txt", package = "svs"),
    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8",
    stringsAsFactors = FALSE)
-sca.SndT_Fra <- fast_sca(SndT_Fra)
-dis.SndT_Fra <- dist_wrt(sca.SndT_Fra$pos1)
-cd_plot(dis.SndT_Fra)
+sca_SndT_Fra <- fast_sca(SndT_Fra)
+dis_SndT_Fra <- dist_wrt(sca_SndT_Fra$pos1)
+cd_plot(dis_SndT_Fra)
 }

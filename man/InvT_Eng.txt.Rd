@@ -6,20 +6,20 @@
 \title{Seventeen Dutch Target Words and their English Source Words}
 \format{
 A data frame with 782 rows and 2 variables.
-\itemize{
-  \item{\code{source_Eng} }{The English source word.}
-  \item{\code{target_Dut} }{The Dutch target word.}
+\describe{
+  \item{\code{source_Eng}}{The English source word.}
+  \item{\code{target_Dut}}{The Dutch target word.}
 }
 }
 \description{
 The occurrences of seventeen Dutch synonyms of \emph{beginnen} ("to begin") and their English source words (from the Dutch Parallel Corpus).
 }
 \examples{
-InvT_Eng <- read.table(system.file("extdata", "InvT_Eng.txt",package = "svs"),
+InvT_Eng <- read.table(system.file("extdata", "InvT_Eng.txt", package = "svs"),
    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8",
    stringsAsFactors = FALSE)
-sca.InvT_Eng <- fast_sca(InvT_Eng)
-sca.InvT_Eng
-lsa.InvT_Eng <- fast_lsa(InvT_Eng)
-lsa.InvT_Eng
+sca_InvT_Eng <- fast_sca(InvT_Eng)
+sca_InvT_Eng
+lsa_InvT_Eng <- fast_lsa(InvT_Eng)
+lsa_InvT_Eng
 }

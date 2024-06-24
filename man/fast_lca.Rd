@@ -36,8 +36,8 @@ The prior probabilities of the latent classes are initialized with a Dirichlet d
 SndT_Fra <- read.table(system.file("extdata", "SndT_Fra.txt", package = "svs"),
    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8",
    stringsAsFactors = FALSE)
-lca.SndT_Fra <- fast_lca(SndT_Fra, k = 7)
-lca.SndT_Fra
+lca_SndT_Fra <- fast_lca(SndT_Fra, k = 7)
+lca_SndT_Fra
 }
 \references{
 Agresti, A. (2013) \emph{Categorical data analysis}. Hoboken: John Wiley and Sons, 535--542.

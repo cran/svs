@@ -21,6 +21,6 @@ A function for computing the logarithm of every entry in a table with 0 for zero
 SndT_Fra <- read.table(system.file("extdata", "SndT_Fra.txt", package = "svs"),
    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8",
    stringsAsFactors = FALSE)
-tab.SndT_Fra <- table(SndT_Fra)
-log_or_0(tab.SndT_Fra)
+tab_SndT_Fra <- table(SndT_Fra)
+log_or_0(tab_SndT_Fra)
 }

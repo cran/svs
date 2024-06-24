@@ -23,9 +23,9 @@ A helper function for computing the coordinates of cluster centers (typically us
 SndT_Fra <- read.table(system.file("extdata", "SndT_Fra.txt", package = "svs"),
    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8",
    stringsAsFactors = FALSE)
-sca.SndT_Fra <- fast_sca(SndT_Fra)
-kcl.SndT_Fra <- kmeans(sca.SndT_Fra$pos1, centers = 7)
-centers_ca(sca.SndT_Fra$pos1, clusters = kcl.SndT_Fra, freq = freq_ca(SndT_Fra[, 1]))
+sca_SndT_Fra <- fast_sca(SndT_Fra)
+kcl_SndT_Fra <- kmeans(sca_SndT_Fra$pos1, centers = 7)
+centers_ca(sca_SndT_Fra$pos1, clusters = kcl_SndT_Fra, freq = freq_ca(SndT_Fra[, 1]))
 }
 \seealso{
 \code{\link{freq_ca}}.

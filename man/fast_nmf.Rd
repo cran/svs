@@ -38,8 +38,8 @@ A fast procedure for non-negative matrix factorization.
 SndT_Fra <- read.table(system.file("extdata", "SndT_Fra.txt", package = "svs"),
    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8",
    stringsAsFactors = FALSE)
-nmf.SndT_Fra <- fast_nmf(SndT_Fra, k = 7)
-nmf.SndT_Fra
+nmf_SndT_Fra <- fast_nmf(SndT_Fra, k = 7)
+nmf_SndT_Fra
 }
 \references{
 Lee, D. D. and H. S. Seung (1999) Learning the parts of objects by non-negative matrix factorization. \emph{Nature} \strong{401}, 788--791.

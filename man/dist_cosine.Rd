@@ -29,6 +29,6 @@ The cosine distance equals 1 - the cosine similarity.
 SndT_Fra <- read.table(system.file("extdata", "SndT_Fra.txt", package = "svs"),
    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8",
    stringsAsFactors = FALSE)
-lsa.SndT_Fra <- fast_lsa(SndT_Fra)
-dist_cosine(lsa.SndT_Fra$pos1[, 1:7])
+lsa_SndT_Fra <- fast_lsa(SndT_Fra)
+dist_cosine(lsa_SndT_Fra$pos1[, 1:7])
 }

@@ -21,3 +21,6 @@ A helper function for transforming a vector into an indicator matrix.
 As of version 2.0.x of the \code{svs} package, this is essentially a wrapper for 
 \code{t(fac2sparse())} from the \pkg{Matrix} package.
 }
+\seealso{
+\code{\link{dat2ind}}.
+}

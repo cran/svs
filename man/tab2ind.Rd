@@ -4,14 +4,12 @@
 \alias{tab2ind}
 \title{Transform a Table into an Indicator Matrix}
 \usage{
-tab2ind(tab, sep = "_", add_names = TRUE)
+tab2ind(tab, add_names = TRUE)
 }
 \arguments{
 \item{tab}{A table or (sparse) matrix.}
 
-\item{sep}{Character specifying the separator string for joining the levels.}
-
-\item{add_names}{Logical specifying whether to add dimnames to the resulting indicator matrix.}
+\item{add_names}{Logical specifying whether to add rownames to the resulting indicator matrix.}
 }
 \value{
 An indicator matrix.

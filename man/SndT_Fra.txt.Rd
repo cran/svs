@@ -6,20 +6,20 @@
 \title{Seventeen Dutch Source Words and their French Translations}
 \format{
 A data frame with 1487 rows and 2 variables.
-\itemize{
-  \item{\code{source_Dut} }{The Dutch source word.}
-  \item{\code{target_Fra} }{The French target word.}
+\describe{
+  \item{\code{source_Dut}}{The Dutch source word.}
+  \item{\code{target_Fra}}{The French target word.}
 }
 }
 \description{
 The occurrences of seventeen Dutch synonyms of \emph{beginnen} ("to begin") and their French translations (from the Dutch Parallel Corpus).
 }
 \examples{
-SndT_Fra <- read.table(system.file("extdata", "SndT_Fra.txt",package = "svs"),
+SndT_Fra <- read.table(system.file("extdata", "SndT_Fra.txt", package = "svs"),
    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8",
    stringsAsFactors = FALSE)
-sca.SndT_Fra <- fast_sca(SndT_Fra)
-sca.SndT_Fra
-lsa.SndT_Fra <- fast_lsa(SndT_Fra)
-lsa.SndT_Fra
+sca_SndT_Fra <- fast_sca(SndT_Fra)
+sca_SndT_Fra
+lsa_SndT_Fra <- fast_lsa(SndT_Fra)
+lsa_SndT_Fra
 }

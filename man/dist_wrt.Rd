@@ -23,6 +23,6 @@ A function for computing (euclidean) distances with respect to a certain specifi
 SndT_Fra <- read.table(system.file("extdata", "SndT_Fra.txt", package = "svs"),
    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8",
    stringsAsFactors = FALSE)
-sca.SndT_Fra <- fast_sca(SndT_Fra)
-dist_wrt(sca.SndT_Fra$pos1, wrt = "beginnen")
+sca_SndT_Fra <- fast_sca(SndT_Fra)
+dist_wrt(sca_SndT_Fra$pos1, wrt = "beginnen")
 }

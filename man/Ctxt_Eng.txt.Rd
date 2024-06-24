@@ -14,8 +14,8 @@ The frequency table of seventeen Dutch synonyms of \emph{beginnen} ("to begin") 
 \examples{
 Ctxt_Eng <- read.table(system.file("extdata", "Ctxt_Eng.txt", package = "svs"),
    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8")
-sca.Ctxt_Eng <- fast_sca(data.matrix(Ctxt_Eng))
-sca.Ctxt_Eng
-lsa.Ctxt_Eng <- fast_lsa(data.matrix(Ctxt_Eng))
-lsa.Ctxt_Eng
+sca_Ctxt_Eng <- fast_sca(data.matrix(Ctxt_Eng))
+sca_Ctxt_Eng
+lsa_Ctxt_Eng <- fast_lsa(data.matrix(Ctxt_Eng))
+lsa_Ctxt_Eng
 }

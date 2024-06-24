@@ -24,8 +24,8 @@ A fast procedure for computing simple correspondence analysis.
 SndT_Fra <- read.table(system.file("extdata", "SndT_Fra.txt", package = "svs"),
    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8",
    stringsAsFactors = FALSE)
-sca.SndT_Fra <- fast_sca(SndT_Fra)
-sca.SndT_Fra
+sca_SndT_Fra <- fast_sca(SndT_Fra)
+sca_SndT_Fra
 }
 \references{
 Greenacre, M. (2017) \emph{Correspondence analysis in practice, Third edition}. Boca Raton: Chapman and Hall/CRC.

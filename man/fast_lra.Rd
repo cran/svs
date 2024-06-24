@@ -24,8 +24,8 @@ A fast procedure for computing logratio analysis.
 SndT_Fra <- read.table(system.file("extdata", "SndT_Fra.txt", package = "svs"),
    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8",
    stringsAsFactors = FALSE)
-lra.SndT_Fra <- fast_lra(SndT_Fra)
-lra.SndT_Fra
+lra_SndT_Fra <- fast_lra(SndT_Fra)
+lra_SndT_Fra
 }
 \references{
 Greenacre, M. (2019) \emph{Compositional data analysis in practice}. Boca Raton: Chapman and Hall/CRC.

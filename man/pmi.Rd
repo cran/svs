@@ -26,8 +26,8 @@ A function for computing the pointwise mutual information of every entry in a ta
 SndT_Fra <- read.table(system.file("extdata", "SndT_Fra.txt", package = "svs"),
    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8",
    stringsAsFactors = FALSE)
-tab.SndT_Fra <- table(SndT_Fra)
-pmi(tab.SndT_Fra)
+tab_SndT_Fra <- table(SndT_Fra)
+pmi(tab_SndT_Fra)
 }
 \seealso{
 \code{\link{MI}}.

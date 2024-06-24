@@ -42,8 +42,8 @@ From version 1.1.0 of the \pkg{svs} package on, probabilistic latent semantic an
 SndT_Fra <- read.table(system.file("extdata", "SndT_Fra.txt", package = "svs"),
    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8",
    stringsAsFactors = FALSE)
-psa.SndT_Fra <- fast_psa(SndT_Fra, k = 7)
-psa.SndT_Fra
+psa_SndT_Fra <- fast_psa(SndT_Fra, k = 7)
+psa_SndT_Fra
 }
 \references{
 Hofmann, Th. (1999). Probabilistic latent semantic indexing.

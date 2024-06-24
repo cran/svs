@@ -75,6 +75,6 @@ A function for plotting parallel coordinates.
 SndT_Fra <- read.table(system.file("extdata", "SndT_Fra.txt", package = "svs"),
    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8",
    stringsAsFactors = FALSE)
-sca.SndT_Fra <- fast_sca(SndT_Fra)
-pc_plot(sca.SndT_Fra$pos1, las = "vertical")
+sca_SndT_Fra <- fast_sca(SndT_Fra)
+pc_plot(sca_SndT_Fra$pos1, las = "vertical")
 }

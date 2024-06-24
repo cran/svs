@@ -37,80 +37,92 @@ NULL
 #'   some helper functions.  
 #' @section Contents:
 #' This package contains the following raw data files (in the folder \emph{extdata}):
-#' \itemize{
-#'    \item{\code{\link{SndT_Fra.txt}} }{Seventeen Dutch source words and their French translations.}
-#'    \item{\code{\link{SndT_Eng.txt}} }{Seventeen Dutch source words and their English translations.}
-#'    \item{\code{\link{InvT_Fra.txt}} }{Seventeen Dutch target words and their French source words.}
-#'    \item{\code{\link{InvT_Eng.txt}} }{Seventeen Dutch target words and their English source words.}
-#'    \item{\code{\link{Ctxt_Dut.txt}} }{Context words for seventeen Dutch words.}
-#'    \item{\code{\link{Ctxt_Fra.txt}} }{Context words for seventeen Dutch words translated from French.}
-#'    \item{\code{\link{Ctxt_Eng.txt}} }{Context words for seventeen Dutch words translated from English.}
+#' \describe{
+#'    \item{\code{\link{SndT_Fra.txt}}}{Seventeen Dutch source words and their French translations.}
+#'    \item{\code{\link{SndT_Eng.txt}}}{Seventeen Dutch source words and their English translations.}
+#'    \item{\code{\link{InvT_Fra.txt}}}{Seventeen Dutch target words and their French source words.}
+#'    \item{\code{\link{InvT_Eng.txt}}}{Seventeen Dutch target words and their English source words.}
+#'    \item{\code{\link{Ctxt_Dut.txt}}}{Context words for seventeen Dutch words.}
+#'    \item{\code{\link{Ctxt_Fra.txt}}}{Context words for seventeen Dutch words translated from French.}
+#'    \item{\code{\link{Ctxt_Eng.txt}}}{Context words for seventeen Dutch words translated from English.}
 #' }
 #' The (fast procedures for the) techniques in this package are:
-#' \itemize{
-#'   \item{\code{\link{fast_sca}} }{Simple correspondence analysis.}
-#'   \item{\code{\link{fast_mca}} }{Multiple correspondence analysis.}
-#'   \item{\code{\link{fast_dca}} }{Discriminant correspondence analysis.}
-#'   \item{\code{\link{fast_lsa}} }{Latent semantic analysis.}
-#'   \item{\code{\link{fast_psa}} }{Probabilistic latent semantic analysis.}
-#'   \item{\code{\link{fast_nmf}} }{Non-negative matrix factorization.}
-#'   \item{\code{\link{fast_lca}} }{Latent class analysis.}
-#'   \item{\code{\link{fast_E_M}} }{EM clustering.}
-#'   \item{\code{\link{fast_lra}} }{Logratio analysis.}
-#'   \item{\code{\link{fast_lma}} }{Log-multiplicative (association) analysis.}
+#' \describe{
+#'   \item{\code{\link{fast_sca}}}{Simple correspondence analysis.}
+#'   \item{\code{\link{fast_mca}}}{Multiple correspondence analysis.}
+#'   \item{\code{\link{fast_dca}}}{Discriminant correspondence analysis.}
+#'   \item{\code{\link{fast_lsa}}}{Latent semantic analysis.}
+#'   \item{\code{\link{fast_psa}}}{Probabilistic latent semantic analysis.}
+#'   \item{\code{\link{fast_nmf}}}{Non-negative matrix factorization.}
+#'   \item{\code{\link{fast_lca}}}{Latent class analysis.}
+#'   \item{\code{\link{fast_E_M}}}{EM clustering.}
+#'   \item{\code{\link{fast_lra}}}{Logratio analysis.}
+#'   \item{\code{\link{fast_lma}}}{Log-multiplicative (association) analysis.}
 #' }
 #'
 #' The complete overview of local and global weighting functions in this package can be found on \code{\link{weighting_functions}}.
 #'
 #' The specialized distance measures are:
-#' \itemize{
-#'   \item{\code{\link{dist_chisquare}} }{Chi-square distance.}
-#'   \item{\code{\link{dist_cosine}} }{Cosine distance.}
-#'   \item{\code{\link{dist_wrt}} }{Distance with respect to a certain point.}
-#'   \item{\code{\link{dist_wrt_centers}} }{Distance with respect to cluster centers.}
+#' \describe{
+#'   \item{\code{\link{dist_chisquare}}}{Chi-square distance.}
+#'   \item{\code{\link{dist_cosine}}}{Cosine distance.}
+#'   \item{\code{\link{dist_wrt}}}{Distance with respect to a certain point.}
+#'   \item{\code{\link{dist_wrt_centers}}}{Distance with respect to cluster centers.}
 #' }
 #'
 #' The specialized plotting functions are:
-#' \itemize{
-#'   \item{\code{\link{cd_plot}} }{Cumulative distribution plot.}
-#'   \item{\code{\link{pc_plot}} }{Parallel coordinate plot.}
+#' \describe{
+#'   \item{\code{\link{cd_plot}}}{Cumulative distribution plot.}
+#'   \item{\code{\link{pc_plot}}}{Parallel coordinate plot.}
 #' }
 #'
 #' There are two helper functions for correspondence analysis:
-#' \itemize{
-#'   \item{\code{\link{freq_ca}} }{Compute level frequencies (for a factor).}
-#'   \item{\code{\link{centers_ca}} }{Compute coordinates for cluster centers.}
+#' \describe{
+#'   \item{\code{\link{freq_ca}}}{Compute level frequencies (for a factor).}
+#'   \item{\code{\link{centers_ca}}}{Compute coordinates for cluster centers.}
 #' }
 #'
 #' There is one helper function for \pkg{pvclust}:
-#' \itemize{
-#'   \item{\code{\link{complete_pvpick}} }{Complete the output of \code{pvpick}.}
+#' \describe{
+#'   \item{\code{\link{complete_pvpick}}}{Complete the output of \code{pvpick}.}
+#' }
+#'
+#' There is one helper function for \pkg{igraph}:
+#' \describe{
+#'   \item{\code{\link{layout4bipartite}}}{Create a layout matrix for a bipartite graph.}
 #' }
 #'
 #' The remaining helper functions in this package are:
-#' \itemize{
-#'   \item{\code{\link{vec2ind}} }{Transform a vector into an indicator matrix.}
-#'   \item{\code{\link{tab2dat}} }{Transform a table into a data frame.}
-#'   \item{\code{\link{tab2ind}} }{Transform a table into an indicator matrix.}
-#'   \item{\code{\link{outerec}} }{Recursive application of the outer product.}
-#'   \item{\code{\link{pmi}} }{Pointwise mutual information.}
-#'   \item{\code{\link{MI}} }{Mutual information.}
-#'   \item{\code{\link{log_or_0}} }{Logarithmic transform.}
+#' \describe{
+#'   \item{\code{\link{rep4dat}}}{Repeat the rows of a data frame according to a frequency column.}
+#'   \item{\code{\link{vec2ddc}}}{Transform a vector into a double-coded matrix.}
+#'   \item{\code{\link{dat2ddc}}}{Transform a data frame into a double-coded matrix.}
+#'   \item{\code{\link{vec2ind}}}{Transform a vector into an indicator matrix.}
+#'   \item{\code{\link{tab2dat}}}{Transform a table into a data frame.}
+#'   \item{\code{\link{tab2ind}}}{Transform a table into an indicator matrix.}
+#'   \item{\code{\link{dat2ind}}}{Transform a data frame into an indicator matrix.}
+#'   \item{\code{\link{outerec}}}{Recursive application of the outer product.}
+#'   \item{\code{\link{pmi}}}{Pointwise mutual information.}
+#'   \item{\code{\link{MI}}}{Mutual information.}
+#'   \item{\code{\link{log_or_0}}}{Logarithmic transform.}
 #' }
 #' @section Further reference:
 #' \itemize{
-#'   \item{Many packages contain correspondence analysis: \pkg{ca}, \pkg{FactoMineR}, \pkg{MASS} and others.}
-#'   \item{For latent semantic analysis there is also the package \pkg{lsa}.}
-#'   \item{The package \pkg{NMF} provides more flexibility for non-negative matrix factorization.}
-#'   \item{For topic models there are the packages \pkg{lda} and \pkg{topicmodels}.}
-#'   \item{Latent class analysis can also be run in the package \pkg{poLCA}.}
+#'   \item Many packages contain correspondence analysis: \pkg{ca}, \pkg{FactoMineR}, \pkg{MASS} and others.
+#'   \item For latent semantic analysis there is also the package \pkg{lsa}.
+#'   \item The package \pkg{NMF} provides more flexibility for non-negative matrix factorization.
+#'   \item For topic models there are the packages \pkg{lda} and \pkg{topicmodels}.
+#'   \item Latent class analysis can also be run in the package \pkg{poLCA}.
+#'   \item For log-ratio analysis there is also the package \pkg{easyCODA}.
+#'   \item The package \pkg{gnm} offers much flexibility for association analysis, i.e. fitting log-multiplicative or Goodman's RC models.
 #' }
+#' @section Link:
+#' As from 2023, this package is part of \href{https://www.mils.ugent.be/courses/module-10-multivariate-data-analysis-with-r/}{Module 10: Multivariate data analysis with R} of the Summer School \emph{Methods in Language Sciences}.  
 #' @section Author:
 #' Koen Plevoets, \email{koen.plevoets@@ugent.be}  
 #' @section Acknowledgements:
 #' This package has benefited greatly from the helpful comments of Lore Vandevoorde, Pauline De Baets and Gert De Sutter. Thanks to
 #'   Kurt Hornik, Uwe Ligges and Brian Ripley for their valuable recommendations when proofing this package.  
-#' @docType package
 #' @name svs-package
 NULL
 
@@ -118,18 +130,18 @@ NULL
 #'
 #' The occurrences of seventeen Dutch synonyms of \emph{beginnen} ("to begin") and their French translations (from the Dutch Parallel Corpus).  
 #' @format A data frame with 1487 rows and 2 variables.
-#' \itemize{
-#'   \item{\code{source_Dut} }{The Dutch source word.}
-#'   \item{\code{target_Fra} }{The French target word.}
+#' \describe{
+#'   \item{\code{source_Dut}}{The Dutch source word.}
+#'   \item{\code{target_Fra}}{The French target word.}
 #' }
 #' @examples
-#' SndT_Fra <- read.table(system.file("extdata", "SndT_Fra.txt",package = "svs"),
+#' SndT_Fra <- read.table(system.file("extdata", "SndT_Fra.txt", package = "svs"),
 #'    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8",
 #'    stringsAsFactors = FALSE)
-#' sca.SndT_Fra <- fast_sca(SndT_Fra)
-#' sca.SndT_Fra
-#' lsa.SndT_Fra <- fast_lsa(SndT_Fra)
-#' lsa.SndT_Fra
+#' sca_SndT_Fra <- fast_sca(SndT_Fra)
+#' sca_SndT_Fra
+#' lsa_SndT_Fra <- fast_lsa(SndT_Fra)
+#' lsa_SndT_Fra
 #' @docType data
 #' @name SndT_Fra.txt
 NULL
@@ -138,18 +150,18 @@ NULL
 #'
 #' The occurrences of seventeen Dutch synonyms of \emph{beginnen} ("to begin") and their English translations (from the Dutch Parallel Corpus).  
 #' @format A data frame with 1117 rows and 2 variables.
-#' \itemize{
-#'   \item{\code{source_Dut} }{The Dutch source word.}
-#'   \item{\code{target_Eng} }{The English target word.}
+#' \describe{
+#'   \item{\code{source_Dut}}{The Dutch source word.}
+#'   \item{\code{target_Eng}}{The English target word.}
 #' }
 #' @examples
-#' SndT_Eng <- read.table(system.file("extdata", "SndT_Eng.txt",package = "svs"),
+#' SndT_Eng <- read.table(system.file("extdata", "SndT_Eng.txt", package = "svs"),
 #'    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8",
 #'    stringsAsFactors = FALSE)
-#' sca.SndT_Eng <- fast_sca(SndT_Eng)
-#' sca.SndT_Eng
-#' lsa.SndT_Eng <- fast_lsa(SndT_Eng)
-#' lsa.SndT_Eng
+#' sca_SndT_Eng <- fast_sca(SndT_Eng)
+#' sca_SndT_Eng
+#' lsa_SndT_Eng <- fast_lsa(SndT_Eng)
+#' lsa_SndT_Eng
 #' @docType data
 #' @name SndT_Eng.txt
 NULL
@@ -158,18 +170,18 @@ NULL
 #'
 #' The occurrences of seventeen Dutch synonyms of \emph{beginnen} ("to begin") and their French source words (from the Dutch Parallel Corpus).  
 #' @format A data frame with 856 rows and 2 variables.
-#' \itemize{
-#'   \item{\code{source_Fra} }{The French source word.}
-#'   \item{\code{target_Dut} }{The Dutch target word.}
+#' \describe{
+#'   \item{\code{source_Fra}}{The French source word.}
+#'   \item{\code{target_Dut}}{The Dutch target word.}
 #' }
 #' @examples
-#' InvT_Fra <- read.table(system.file("extdata", "InvT_Fra.txt",package = "svs"),
+#' InvT_Fra <- read.table(system.file("extdata", "InvT_Fra.txt", package = "svs"),
 #'    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8",
 #'    stringsAsFactors = FALSE)
-#' sca.InvT_Fra <- fast_sca(InvT_Fra)
-#' sca.InvT_Fra
-#' lsa.InvT_Fra <- fast_lsa(InvT_Fra)
-#' lsa.InvT_Fra
+#' sca_InvT_Fra <- fast_sca(InvT_Fra)
+#' sca_InvT_Fra
+#' lsa_InvT_Fra <- fast_lsa(InvT_Fra)
+#' lsa_InvT_Fra
 #' @docType data
 #' @name InvT_Fra.txt
 NULL
@@ -178,18 +190,18 @@ NULL
 #'
 #' The occurrences of seventeen Dutch synonyms of \emph{beginnen} ("to begin") and their English source words (from the Dutch Parallel Corpus).  
 #' @format A data frame with 782 rows and 2 variables.
-#' \itemize{
-#'   \item{\code{source_Eng} }{The English source word.}
-#'   \item{\code{target_Dut} }{The Dutch target word.}
+#' \describe{
+#'   \item{\code{source_Eng}}{The English source word.}
+#'   \item{\code{target_Dut}}{The Dutch target word.}
 #' }
 #' @examples
-#' InvT_Eng <- read.table(system.file("extdata", "InvT_Eng.txt",package = "svs"),
+#' InvT_Eng <- read.table(system.file("extdata", "InvT_Eng.txt", package = "svs"),
 #'    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8",
 #'    stringsAsFactors = FALSE)
-#' sca.InvT_Eng <- fast_sca(InvT_Eng)
-#' sca.InvT_Eng
-#' lsa.InvT_Eng <- fast_lsa(InvT_Eng)
-#' lsa.InvT_Eng
+#' sca_InvT_Eng <- fast_sca(InvT_Eng)
+#' sca_InvT_Eng
+#' lsa_InvT_Eng <- fast_lsa(InvT_Eng)
+#' lsa_InvT_Eng
 #' @docType data
 #' @name InvT_Eng.txt
 NULL
@@ -201,10 +213,10 @@ NULL
 #' @examples
 #' Ctxt_Dut <- read.table(system.file("extdata", "Ctxt_Dut.txt", package = "svs"),
 #'    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8")
-#' sca.Ctxt_Dut <- fast_sca(data.matrix(Ctxt_Dut))
-#' sca.Ctxt_Dut
-#' lsa.Ctxt_Dut <- fast_lsa(data.matrix(Ctxt_Dut))
-#' lsa.Ctxt_Dut
+#' sca_Ctxt_Dut <- fast_sca(data.matrix(Ctxt_Dut))
+#' sca_Ctxt_Dut
+#' lsa_Ctxt_Dut <- fast_lsa(data.matrix(Ctxt_Dut))
+#' lsa_Ctxt_Dut
 #' @docType data
 #' @name Ctxt_Dut.txt
 NULL
@@ -217,10 +229,10 @@ NULL
 #' @examples
 #' Ctxt_Fra <- read.table(system.file("extdata", "Ctxt_Fra.txt", package = "svs"),
 #'    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8")
-#' sca.Ctxt_Fra <- fast_sca(data.matrix(Ctxt_Fra))
-#' sca.Ctxt_Fra
-#' lsa.Ctxt_Fra <- fast_lsa(data.matrix(Ctxt_Fra))
-#' lsa.Ctxt_Fra
+#' sca_Ctxt_Fra <- fast_sca(data.matrix(Ctxt_Fra))
+#' sca_Ctxt_Fra
+#' lsa_Ctxt_Fra <- fast_lsa(data.matrix(Ctxt_Fra))
+#' lsa_Ctxt_Fra
 #' @docType data
 #' @name Ctxt_Fra.txt
 NULL
@@ -233,10 +245,10 @@ NULL
 #' @examples
 #' Ctxt_Eng <- read.table(system.file("extdata", "Ctxt_Eng.txt", package = "svs"),
 #'    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8")
-#' sca.Ctxt_Eng <- fast_sca(data.matrix(Ctxt_Eng))
-#' sca.Ctxt_Eng
-#' lsa.Ctxt_Eng <- fast_lsa(data.matrix(Ctxt_Eng))
-#' lsa.Ctxt_Eng
+#' sca_Ctxt_Eng <- fast_sca(data.matrix(Ctxt_Eng))
+#' sca_Ctxt_Eng
+#' lsa_Ctxt_Eng <- fast_lsa(data.matrix(Ctxt_Eng))
+#' lsa_Ctxt_Eng
 #' @docType data
 #' @name Ctxt_Eng.txt
 NULL
@@ -251,14 +263,106 @@ NULL
 #' SndT_Fra <- read.table(system.file("extdata", "SndT_Fra.txt", package = "svs"),
 #'    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8",
 #'    stringsAsFactors = FALSE)
-#' tab.SndT_Fra <- table(SndT_Fra)
-#' log_or_0(tab.SndT_Fra)
+#' tab_SndT_Fra <- table(SndT_Fra)
+#' log_or_0(tab_SndT_Fra)
 #' @export
-log_or_0 <- function(x,base=exp(1)) {
-	stopifnot(is.array(x) || methods::is(x,"Matrix"))
-	out <- log(x,base=base)
-	out[!is.finite(out)] <- 0
+log_or_0 <- function(x, base = exp(1)) {
+	stopifnot(is.array(x) || methods::is(x, "Matrix"))
+	out <- log(x, base = base)
+	out[! is.finite(out)] <- 0
 	out
+	}
+
+#' Repeat the Rows of a Data Frame according to a Frequency Column
+#'
+#' A helper function for repeating the rows a data frame according to a frequency column.  
+#' @param dat A data frame.
+#' @param freqName Character specifying the name of the frequency column.
+#' @return A data frame.
+#' @examples
+#' SndT_Fra <- read.table(system.file("extdata", "SndT_Fra.txt", package = "svs"),
+#'    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8",
+#'    stringsAsFactors = FALSE)
+#' tab_SndT_Fra <- table(SndT_Fra)
+#' dat_SndT_Fra <- as.data.frame(tab_SndT_Fra)
+#' rep4dat(dat_SndT_Fra)
+#' @export
+rep4dat <- function(dat, freqName = "Freq") {
+	idx <- match(freqName, table = colnames(dat))
+	data.frame(lapply(dat[, -idx], FUN = rep, times = dat[, idx]))
+	}
+
+#' Transform a Vector into a Double-Coded Matrix
+#'
+#' A helper function for transforming a vector into a double-coded matrix.  
+#' @param x A vector, either numeric or an ordered factor.
+#' @param limits Numeric vector of length two specifying the limits (or "poles") of the underlying ordinal variable. If left unspecified (the default), then the minimum and maximum in \code{x} will be taken.
+#' @details
+#' Double coding, also called data doubling, is a way of indicating how the values of an ordinal variable relate to the lower and upper limits of the variable. Columns \code{-} and \code{+} express how close each (observed) value is to these respective limits.  
+#' @references
+#' Greenacre, M. (2014) Data doubling and fuzzy coding. In: J. Blasius and M. Greenacre (eds.) \emph{Visualization and verbalization of data}. Chapman and Hall/CRC, 239--253.
+#' Greenacre, M. (2017) \emph{Correspondence analysis in practice, Third edition}. Boca Raton: Chapman and Hall/CRC, 201--208.
+#' @return A matrix with column names \code{-} and \code{+}.
+#' @seealso \code{\link{dat2ddc}}.
+#' @export
+vec2ddc <- function(x, limits = c(NA, NA)) {
+	stopifnot(is.numeric(x) || is.ordered(x))
+	if (is.ordered(x)) {
+		x <- unclass(x)
+		}
+	if(any(chk <- is.na(limits[1:2]))) {
+		limits[chk] <- range(x, na.rm = TRUE)[chk]
+		}
+	tmp <- as.vector(x) - limits[1]
+	structure(cbind(limits[2] - limits[1] - tmp, tmp),
+	          dimnames = list(names(x), c("-", "+")))
+	}
+
+#' @rdname vec2ddc
+#' @export
+vec2dc <- function(x, limits = c(NA, NA)) {
+	vec2ddc(x = x, limits = limits)
+	}
+
+#' Transform a Data Frame into a Double-Coded Matrix
+#'
+#' A helper function for transforming all columns of a data frame into a double-coded matrix.  
+#' @param dat A data frame containing only numeric vectors or ordered factors as columns.
+#' @param limits A vector, matrix or list specifying the lower and upper limits for the columns in \code{dat}. A single vector of length two applies the same limits to all columns. The matrix or list must either have the same number of columns/components as the number of the number of columns in \code{dat} or they must have names. The names can be a subset of the column names of \code{dat}. In any case, the limits for each column must be a vector of length two, i.e. the matrix must have two rows or each list component should be a vector of length two. If left unspecified (the default), then the minimum and maximum of each column in \code{dat} will be taken as (separate) limits.
+#' @return A matrix with doubly-coded columns.
+#' @seealso \code{\link{vec2ddc}}.
+#' @export
+dat2ddc <- function(dat, limits = NULL) {
+	stopifnot(is.data.frame(dat) || is.matrix(dat) || methods::is(dat, "Matrix"))
+	ncl <- ncol(dat)
+	lcl <- colnames(dat)
+	if (is.null(limits)) {
+		limits <- matrix(rep(c(NA, NA), times = ncl), nrow = 2)
+		}
+	if (is.list(limits)) {
+		limits <- do.call(cbind, limits)
+		}
+	if ((! is.matrix(limits)) && (length(limits) == 2)) {
+		limits <- matrix(rep(limits, times = ncl), nrow = 2)
+		}
+	llm <- colnames(limits)
+	if (! is.null(llm)) {
+		tmp <- matrix(rep(c(NA, NA), times = ncl), nrow = 2,
+		              dimnames = list(NULL, lcl))
+		tmp[, llm] <- limits
+		limits <- tmp
+		}
+	stopifnot(ncol(limits) == ncol(dat))
+	structure(do.call(cbind, lapply(1:ncl, function(j) {
+		vec2ddc(dat[, j], limits = limits[, j])
+			})), dimnames = list(rownames(dat),
+			                     paste(rep(lcl, each = 2), c("-", "+"), sep = "")))
+	}
+
+#' @rdname dat2ddc
+#' @export
+dat2dc <- function(dat, limits = NULL) {
+	dat2ddc(dat = dat, limits = limits)
 	}
 
 #' Transform a Vector into an Indicator Matrix
@@ -270,8 +374,9 @@ log_or_0 <- function(x,base=exp(1)) {
 #' As of version 2.0.x of the \code{svs} package, this is essentially a wrapper for 
 #' \code{t(fac2sparse())} from the \pkg{Matrix} package.
 #' @return An indicator matrix.
+#' @seealso \code{\link{dat2ind}}.
 #' @export
-vec2ind <- function(x,add_names=TRUE) {
+vec2ind <- function(x, add_names = TRUE) {
 	out <- Matrix::t(Matrix::fac2sparse(x))
 	if (add_names) {
 		rownames(out) <- 1:length(x)
@@ -286,19 +391,41 @@ vec2ind <- function(x,add_names=TRUE) {
 #' @return A data frame.
 #' @export
 tab2dat <- function(tab) {
-	data.frame(lapply(expand.grid(dimnames(tab)),FUN=rep,times=as.vector(tab)))
+	data.frame(lapply(expand.grid(dimnames(tab)), FUN = rep,
+	                              times = as.vector(tab)))
 	}
 
 #' Transform a Table into an Indicator Matrix
 #'
 #' A helper function for transforming a table into an indicator matrix.  
 #' @param tab A table or (sparse) matrix.
-#' @param sep Character specifying the separator string for joining the levels.
-#' @param add_names Logical specifying whether to add dimnames to the resulting indicator matrix.
+#' @param add_names Logical specifying whether to add rownames to the resulting indicator matrix.
 #' @return An indicator matrix.
 #' @export
-tab2ind <- function(tab,sep="_",add_names=TRUE) {
-	Matrix::t(Matrix::fac2sparse(interaction(tab2dat(tab),drop=FALSE,sep=sep,lex.order=FALSE),add_names=add_names))
+tab2ind <- function(tab, add_names = TRUE) {
+	out <- do.call(cbind, lapply(tab2dat(tab), FUN = vec2ind,
+	                             add_names = FALSE))
+	if (add_names) {
+		rownames(out) <- 1:nrow(out)
+		}
+	out
+	}
+
+#' Transform a Data Frame into an Indicator Matrix
+#'
+#' A helper function for transforming a data frame into an indicator matrix.  
+#' @param dat A data frame.
+#' @param add_names Logical specifying whether to add rownames to the resulting indicator matrix.
+#' @return An indicator matrix.
+#' @seealso \code{\link{vec2ind}}.
+#' @export
+dat2ind <- function(dat, add_names = TRUE) {
+	out <- do.call(cbind, lapply(data.frame(dat), FUN = vec2ind,
+	                             add_names = FALSE))
+	if (add_names) {
+		rownames(out) <- rownames(dat)
+		}
+	out
 	}
 
 #' Recursive Application of the Outer Product
@@ -309,13 +436,13 @@ tab2ind <- function(tab,sep="_",add_names=TRUE) {
 #' @export
 outerec <- function(...) {
 	arg <- list(...)
-	if (length(arg)==1 && is.list(arg[[1]])) {
+	if (length(arg) == 1 && is.list(arg[[1]])) {
 		arg <- arg[[1]]
 		}
-	out <- outer(X=arg[[1]],Y=arg[[2]],FUN="*")
-	if (length(arg)>2) {
+	out <- outer(X = arg[[1]], Y = arg[[2]], FUN = "*")
+	if (length(arg) > 2) {
 		for (j in 3:length(arg)) {
-			out <- outer(X=out,Y=arg[[j]],FUN="*")
+			out <- outer(X = out, Y = arg[[j]], FUN = "*")
 			}
 		}
 	out
@@ -336,25 +463,29 @@ outerec <- function(...) {
 #' SndT_Fra <- read.table(system.file("extdata", "SndT_Fra.txt", package = "svs"),
 #'    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8",
 #'    stringsAsFactors = FALSE)
-#' sca.SndT_Fra <- fast_sca(SndT_Fra)
-#' sca.SndT_Fra
+#' sca_SndT_Fra <- fast_sca(SndT_Fra)
+#' sca_SndT_Fra
 #' @export
-fast_sca <- function(dat,transform=1) {
+fast_sca <- function(dat, transform = 1) {
 	if (is.data.frame(dat)) {
-		dat <- xtabs(data=dat,sparse=TRUE)
+		dat <- xtabs(data = dat, sparse = TRUE)
 		}
-	stopifnot(is.matrix(dat) || methods::is(dat,"Matrix"))
-	dat <- dat/sum(dat)
+	stopifnot(is.matrix(dat) || methods::is(dat, "Matrix"))
+	dat <- dat / sum(dat)
 	nrw <- nrow(dat)
 	ncl <- ncol(dat)
-	rwp <- apply(dat,1,sum)
-	clp <- apply(dat,2,sum)
-	dec <- svd(sweep(diag(nrw)-outer(rep(1,nrw),rwp),1,sqrt(rwp),"*")%*%(((dat/outer(rwp,clp))^transform)/transform)%*%sweep(diag(ncl)-outer(clp,rep(1,ncl)),2,sqrt(clp),"*"))
-	rwc <- sweep(dec$u%*%diag(dec$d),1,sqrt(rwp),"/")
-	dimnames(rwc) <- list(rownames(dat),paste("Dim",1:length(dec$d),sep=""))
-	clc <- sweep(dec$v%*%diag(dec$d),1,sqrt(clp),"/")
-	dimnames(clc) <- list(colnames(dat),paste("Dim",1:length(dec$d),sep=""))
-	list(val=(dec$d^2),pos1=rwc,pos2=clc)
+	rwp <- apply(dat, 1, sum)
+	clp <- apply(dat, 2, sum)
+	dec <- svd(sweep(diag(nrw) - outer(rep(1, nrw), rwp), 1, sqrt(rwp), "*") %*%
+	           (((dat / outer(rwp, clp))^transform) / transform) %*%
+			   sweep(diag(ncl) - outer(clp, rep(1, ncl)), 2, sqrt(clp), "*"))
+	rwc <- sweep(dec$u %*% diag(dec$d), 1, sqrt(rwp), "/")
+	dimnames(rwc) <- list(rownames(dat),
+	                      paste("Dim", 1:length(dec$d), sep = ""))
+	clc <- sweep(dec$v %*% diag(dec$d), 1, sqrt(clp), "/")
+	dimnames(clc) <- list(colnames(dat),
+	                      paste("Dim", 1:length(dec$d), sep = ""))
+	list(val = (dec$d^2), pos1 = rwc, pos2 = clc)
 	}
 
 #' Multiple Correspondence Analysis
@@ -372,17 +503,20 @@ fast_sca <- function(dat,transform=1) {
 #' SndT_Fra <- read.table(system.file("extdata", "SndT_Fra.txt", package = "svs"),
 #'    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8",
 #'    stringsAsFactors = FALSE)
-#' mca.SndT_Fra <- fast_mca(SndT_Fra)
-#' mca.SndT_Fra
+#' mca_SndT_Fra <- fast_mca(SndT_Fra)
+#' mca_SndT_Fra
 #' @export
-fast_mca <- function(dat,nfac=FALSE) {
+fast_mca <- function(dat, nfac = FALSE) {
 	stopifnot(is.data.frame(dat))
-	ind <- do.call(what=cbind,args=lapply(dat,FUN=vec2ind,add_names=TRUE))
-	exf <- outer(apply(ind,2,sum),apply(ind,2,sum))/nrow(ind)
-	dec <- eigen((Matrix::crossprod(ind)-exf)/sqrt(exf))
-	pos <- sweep(dec$vectors%*%diag(dec$values),1,sqrt(apply(ind,2,sum)*ifelse(nfac,ncol(dat),1)),"/")
-	dimnames(pos) <- list(colnames(ind),paste("Dim",1:length(dec$values),sep=""))
-	list(val=(dec$values^2)/(nrow(ind)*ifelse(nfac,ncol(dat)^2,1)),pos=pos)
+	ind <- dat2ind(dat, add_names = TRUE)
+	exf <- outer(apply(ind, 2, sum), apply(ind, 2, sum)) / nrow(ind)
+	dec <- eigen((Matrix::crossprod(ind) - exf) / sqrt(exf))
+	pos <- sweep(dec$vectors %*% diag(dec$values),
+	             1, sqrt(apply(ind, 2, sum) * ifelse(nfac, ncol(dat), 1)), "/")
+	dimnames(pos) <- list(colnames(ind),
+	                      paste("Dim", 1:length(dec$values), sep = ""))
+	list(val = (dec$values^2) / (nrow(ind) * ifelse(nfac, ncol(dat)^2, 1)),
+	     pos = pos)
 	}
 
 #' Discriminant Correspondence Analysis
@@ -404,21 +538,25 @@ fast_mca <- function(dat,nfac=FALSE) {
 #' SndT_Fra <- read.table(system.file("extdata", "SndT_Fra.txt", package = "svs"),
 #'    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8",
 #'    stringsAsFactors = FALSE)
-#' sca.SndT_Fra <- fast_sca(SndT_Fra)
-#' kcl.SndT_Fra <- kmeans(sca.SndT_Fra$pos1, centers = 7)
-#' dca.SndT_Fra <- fast_dca(SndT_Fra, clusters1 = kcl.SndT_Fra)
-#' dca.SndT_Fra
+#' sca_SndT_Fra <- fast_sca(SndT_Fra)
+#' kcl_SndT_Fra <- kmeans(sca_SndT_Fra$pos1, centers = 7)
+#' dca_SndT_Fra <- fast_dca(SndT_Fra, clusters1 = kcl_SndT_Fra)
+#' dca_SndT_Fra
 #' @export
-fast_dca <- function(dat,clusters1=NULL,clusters2=NULL,members=FALSE) {
+fast_dca <- function(dat, clusters1 = NULL, clusters2 = NULL, members = FALSE) {
 	if (is.data.frame(dat)) {
-		dat <- xtabs(data=dat,sparse=TRUE)
+		dat <- xtabs(data = dat, sparse = TRUE)
 		}
-	stopifnot(is.matrix(dat) || methods::is(dat,"Matrix"))
-	if (class(clusters1)=="kmeans") {
-		clusters1 <- lapply(sort(unique(clusters1$cluster)),function(x1){names(clusters1$cluster[clusters1$cluster==x1])})
+	stopifnot(is.matrix(dat) || methods::is(dat, "Matrix"))
+	if (inherits(clusters1, "kmeans")) {
+		clusters1 <- lapply(sort(unique(clusters1$cluster)), function(x1) {
+			names(clusters1$cluster[clusters1$cluster == x1])
+			})
 		}
-	if (class(clusters2)=="kmeans") {
-		clusters2 <- lapply(sort(unique(clusters2$cluster)),function(x2){names(clusters2$cluster[clusters2$cluster==x2])})
+	if (inherits(clusters2, "kmeans")) {
+		clusters2 <- lapply(sort(unique(clusters2$cluster)), function(x2) {
+			names(clusters2$cluster[clusters2$cluster == x2])
+			})
 		}
 	if (is.null(clusters1)) {
 		cl1 <- as.list(rownames(dat))
@@ -436,28 +574,40 @@ fast_dca <- function(dat,clusters1=NULL,clusters2=NULL,members=FALSE) {
 		cl2 <- clusters2
 		dn2 <- 1:length(clusters2)
 		}
-	grp <- do.call(what=rbind,args=lapply(cl1,function(y1){apply(rbind(dat[y1,]),2,sum)}))
-	grp <- do.call(what=cbind,args=lapply(cl2,function(y2){apply(cbind(grp[,y2]),1,sum)}))
-	exf <- outer(apply(grp,1,sum),apply(grp,2,sum))/sum(grp)
-	dec <- svd((grp-exf)/sqrt(exf))
-	rwc <- sweep(dec$u%*%diag(dec$d),1,sqrt(apply(grp,1,sum)),"/")
-	dimnames(rwc) <- list(dn1,paste("Dim",1:length(dec$d),sep=""))
-	clc <- sweep(dec$v%*%diag(dec$d),1,sqrt(apply(grp,2,sum)),"/")
-	dimnames(clc) <- list(dn2,paste("Dim",1:length(dec$d),sep=""))
-	out <- list(val=(dec$d^2)/sum(grp),cen1=rwc,cen2=clc)
-	if (!is.null(clusters1) && members) {
-		tmp <- do.call(what=cbind,args=lapply(cl2,function(z1){apply(cbind(dat[,z1]),1,sum)}))
-		txf <- outer(apply(tmp,1,sum),apply(tmp,2,sum))/sum(tmp)
-		rws <- sweep(((tmp-txf)/sqrt(txf))%*%dec$v,1,sqrt(apply(tmp,1,sum)),"/")
-		dimnames(rws) <- list(rownames(dat),paste("Dim",1:length(dec$d),sep=""))
-		out <- c(out,list(mem1=rws))
+	grp <- do.call(rbind, lapply(cl1, function(y1) {
+		apply(rbind(dat[y1, ]), 2, sum)
+		}))
+	grp <- do.call(cbind, lapply(cl2, function(y2) {
+		apply(cbind(grp[, y2]), 1, sum)
+		}))
+	exf <- outer(apply(grp, 1, sum), apply(grp, 2, sum)) / sum(grp)
+	dec <- svd((grp - exf) / sqrt(exf))
+	rwc <- sweep(dec$u %*% diag(dec$d), 1, sqrt(apply(grp, 1, sum)), "/")
+	dimnames(rwc) <- list(dn1, paste("Dim", 1:length(dec$d), sep = ""))
+	clc <- sweep(dec$v %*% diag(dec$d), 1, sqrt(apply(grp, 2, sum)), "/")
+	dimnames(clc) <- list(dn2, paste("Dim", 1:length(dec$d), sep = ""))
+	out <- list(val = (dec$d^2) / sum(grp), cen1 = rwc, cen2 = clc)
+	if ((! is.null(clusters1)) && members) {
+		tmp <- do.call(cbind, lapply(cl2, function(z1) {
+			apply(cbind(dat[, z1]), 1, sum)
+			}))
+		txf <- outer(apply(tmp, 1, sum), apply(tmp, 2, sum)) / sum(tmp)
+		rws <- sweep(((tmp - txf) / sqrt(txf)) %*% dec$v,
+		             1, sqrt(apply(tmp, 1, sum)), "/")
+		dimnames(rws) <- list(rownames(dat),
+		                      paste("Dim", 1:length(dec$d), sep = ""))
+		out <- c(out, list(mem1 = rws))
 		}
-	if (!is.null(clusters2) && members) {
-		tmp <- do.call(what=rbind,args=lapply(cl1,function(z2){apply(rbind(dat[z2,]),2,sum)}))
-		txf <- outer(apply(tmp,1,sum),apply(tmp,2,sum))/sum(tmp)
-		cls <- sweep(t((tmp-txf)/sqrt(txf))%*%dec$u,1,sqrt(apply(tmp,2,sum)),"/")
-		dimnames(cls) <- list(colnames(dat),paste("Dim",1:length(dec$d),sep=""))
-		out <- c(out,list(mem2=cls))
+	if ((! is.null(clusters2)) && members) {
+		tmp <- do.call(rbind, lapply(cl1, function(z2) {
+			apply(rbind(dat[z2, ]), 2, sum)
+			}))
+		txf <- outer(apply(tmp, 1, sum), apply(tmp, 2, sum)) / sum(tmp)
+		cls <- sweep(t((tmp - txf) / sqrt(txf)) %*% dec$u,
+		             1, sqrt(apply(tmp, 2, sum)), "/")
+		dimnames(cls) <- list(colnames(dat),
+		                      paste("Dim", 1:length(dec$d), sep = ""))
+		out <- c(out, list(mem2 = cls))
 		}
 	out
 	}
@@ -484,27 +634,30 @@ fast_dca <- function(dat,clusters1=NULL,clusters2=NULL,members=FALSE) {
 #' SndT_Fra <- read.table(system.file("extdata", "SndT_Fra.txt", package = "svs"),
 #'    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8",
 #'    stringsAsFactors = FALSE)
-#' lsa.SndT_Fra <- fast_lsa(SndT_Fra)
-#' lsa.SndT_Fra
+#' lsa_SndT_Fra <- fast_lsa(SndT_Fra)
+#' lsa_SndT_Fra
 #' @export
-fast_lsa <- function(dat,local_weights="log",global_weights="idf") {
+fast_lsa <- function(dat, local_weights = "log", global_weights = "idf") {
 	if (is.data.frame(dat)) {
-		dat <- xtabs(data=dat,sparse=TRUE)
+		dat <- xtabs(data = dat, sparse = TRUE)
 		}
-	stopifnot(is.matrix(dat) || methods::is(dat,"Matrix"))
-	lwf <- match.fun(paste("lw",tolower(local_weights),sep="_",collapse=NULL))
-	gwf <- match.fun(paste("gw",tolower(global_weights),sep="_",collapse=NULL))
-	out <- svd(sweep(lwf(dat),2,gwf(dat),"*"))
-	dimnames(out$u) <- list(rownames(dat),paste("Dim",1:length(out$d),sep="",collapse=NULL))
-	dimnames(out$v) <- list(colnames(dat),paste("Dim",1:length(out$d),sep="",collapse=NULL))
-	names(out) <- c("val","pos1","pos2")
+	stopifnot(is.matrix(dat) || methods::is(dat, "Matrix"))
+	lwf <- match.fun(paste("lw", tolower(local_weights), sep = "_", collapse = NULL))
+	gwf <- match.fun(paste("gw", tolower(global_weights), sep = "_", collapse = NULL))
+	out <- svd(sweep(lwf(dat), 2, gwf(dat), "*"))
+	dimnames(out$u) <- list(rownames(dat),
+	                        paste("Dim", 1:length(out$d), sep = "", collapse = NULL))
+	dimnames(out$v) <- list(colnames(dat),
+	                        paste("Dim", 1:length(out$d), sep = "", collapse = NULL))
+	names(out) <- c("val", "pos1", "pos2")
 	out
 	}
 
 #' @rdname fast_lsa
 #' @export
-fast_lsi <- function(dat,local_weights="log",global_weights="idf") {
-	fast_lsa(dat=dat,local_weights=local_weights,global_weights=global_weights)
+fast_lsi <- function(dat, local_weights = "log", global_weights = "idf") {
+	fast_lsa(dat = dat, local_weights = local_weights,
+	         global_weights = global_weights)
 	}
 
 #' Non-negative Matrix Factorization
@@ -528,145 +681,164 @@ fast_lsi <- function(dat,local_weights="log",global_weights="idf") {
 #' SndT_Fra <- read.table(system.file("extdata", "SndT_Fra.txt", package = "svs"),
 #'    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8",
 #'    stringsAsFactors = FALSE)
-#' nmf.SndT_Fra <- fast_nmf(SndT_Fra, k = 7)
-#' nmf.SndT_Fra
+#' nmf_SndT_Fra <- fast_nmf(SndT_Fra, k = 7)
+#' nmf_SndT_Fra
 #' @export
-fast_nmf <- function(dat,k,type="KL",tol=1e-8) {
-	typ <- pmatch(x=toupper(type),table=c("KL","FROBENIUS","EUCLIDEAN","ALS"))
-	if (typ==1) {
-		out <- fast_nmf_KL(dat=dat,k=k,tol=tol)
+fast_nmf <- function(dat, k, type = "KL", tol = 1e-8) {
+	typ <- pmatch(x = toupper(type),
+	              table = c("KL", "FROBENIUS", "EUCLIDEAN", "ALS"))
+	if (typ == 1) {
+		out <- fast_nmf_KL(dat = dat, k = k, tol = tol)
 		}
-	if (typ==2||typ==3) {
-		out <- fast_nmf_Fr(dat=dat,k=k,tol=tol)
+	if (typ == 2 || typ == 3) {
+		out <- fast_nmf_Fr(dat = dat, k = k, tol = tol)
 		}
-	if (typ==4) {
-		out <- fast_nmf_Al(dat=dat,k=k,tol=tol)
+	if (typ == 4) {
+		out <- fast_nmf_Al(dat = dat, k = k, tol = tol)
 		}
 	out
 	}
 
 #' @rdname fast_nmf
 #' @export
-fast_nmf_KL <- function(dat,k,tol=1e-8) {
+fast_nmf_KL <- function(dat, k, tol = 1e-8) {
 	if (is.data.frame(dat)) {
-		dat <- xtabs(data=dat,sparse=TRUE)
+		dat <- xtabs(data = dat, sparse = TRUE)
 		}
-	stopifnot(is.matrix(dat) || methods::is(dat,"Matrix"))
-	wmt <- sqrt(sum(dat)/k)*rmultinom(n=k,size=10^(ceiling(log10(nrow(dat)+1))+3),prob=apply(dat,1,sum)/sum(dat))/(10^(ceiling(log10(nrow(dat)+1))+3))
-	hmt <- sqrt(sum(dat)/k)*t(rmultinom(n=k,size=10^(ceiling(log10(ncol(dat)+1))+3),prob=apply(dat,2,sum)/sum(dat))/(10^(ceiling(log10(ncol(dat)+1))+3)))
-	exf <- wmt%*%hmt
-	tmp <- dat*log(dat/exf)-dat+exf
-	tmp[!is.finite(tmp)] <- 0
+	stopifnot(is.matrix(dat) || methods::is(dat, "Matrix"))
+	wmt <- sqrt(sum(dat) / k) * rmultinom(n = k,
+	                                      size = 10^(ceiling(log10(nrow(dat) + 1)) + 3),
+										  prob = apply(dat, 1, sum) / sum(dat)) /
+											(10^(ceiling(log10(nrow(dat) + 1)) + 3))
+	hmt <- sqrt(sum(dat) / k) * t(rmultinom(n = k,
+	                                        size = 10^(ceiling(log10(ncol(dat) + 1)) + 3),
+											prob = apply(dat, 2, sum) / sum(dat)) /
+												(10^(ceiling(log10(ncol(dat) + 1)) + 3)))
+	exf <- wmt %*% hmt
+	tmp <- dat * log(dat / exf) - dat + exf
+	tmp[! is.finite(tmp)] <- 0
 	cst <- sum(tmp)
-	div <- tol*10
+	div <- tol * 10
 	itr <- FALSE
-	while (div>tol) {
-		wup <- t(t(wmt)*(diag(1/apply(hmt,1,sum))%*%hmt%*%t(dat/exf)))
-		wup <- sweep(wup,2,apply(wup,2,sum),"/")
-		hup <- hmt*(diag(1/apply(wmt,2,sum))%*%t(wmt)%*%(dat/exf))
+	while (div > tol) {
+		wup <- t(t(wmt) * (diag(1 / apply(hmt, 1, sum)) %*% hmt %*% t(dat / exf)))
+		wup <- sweep(wup, 2, apply(wup, 2, sum), "/")
+		hup <- hmt * (diag(1 /apply(wmt, 2, sum)) %*% t(wmt) %*% (dat / exf))
 		wmt <- wup
 		hmt <- hup
-		exf <- wmt%*%hmt
-		tmp <- dat*log(dat/exf)-dat+exf
-		tmp[!is.finite(tmp)] <- 0
+		exf <- wmt %*% hmt
+		tmp <- dat * log(dat / exf) - dat + exf
+		tmp[! is.finite(tmp)] <- 0
 		csn <- sum(tmp)
-		div <- cst-ifelse(itr,csn,cst-tol*(10^ceiling(log10(prod(dim(dat))+1))))
+		div <- cst - ifelse(itr, csn, cst - 
+		                    tol * (10^ceiling(log10(prod(dim(dat)) + 1))))
 		if (is.na(div)) {
 			break
 			}
-		if (div>0) {
+		if (div > 0) {
 			wop <- wmt
 			hop <- hmt
 			}
 		cst <- csn
 		itr <- TRUE
 		}
-	wop <- wop[,order(apply(hop,1,sum),decreasing=TRUE)]
-	hop <- hop[order(apply(hop,1,sum),decreasing=TRUE),]
-	dimnames(wop) <- list(rownames(dat),1:k)
-	dimnames(hop) <- list(1:k,colnames(dat))
-	list(pos1=wop,pos2=hop)
+	wop <- as.matrix(wop[, order(apply(hop, 1, sum), decreasing = TRUE)])
+	hop <- as.matrix(hop[order(apply(hop, 1, sum), decreasing = TRUE), ])
+	dimnames(wop) <- list(rownames(dat), 1:k)
+	dimnames(hop) <- list(1:k, colnames(dat))
+	list(pos1 = wop, pos2 = hop)
 	}
 
 #' @rdname fast_nmf
 #' @export
-fast_nmf_Fr <- function(dat,k,tol=1e-8) {
+fast_nmf_Fr <- function(dat, k, tol = 1e-8) {
 	if (is.data.frame(dat)) {
-		dat <- xtabs(data=dat,sparse=TRUE)
+		dat <- xtabs(data = dat, sparse = TRUE)
 		}
-	stopifnot(is.matrix(dat) || methods::is(dat,"Matrix"))
-	wmt <- sqrt(sum(dat)/k)*rmultinom(n=k,size=10^(ceiling(log10(nrow(dat)+1))+3),prob=apply(dat,1,sum)/sum(dat))/(10^(ceiling(log10(nrow(dat)+1))+3))
-	hmt <- sqrt(sum(dat)/k)*t(rmultinom(n=k,size=10^(ceiling(log10(ncol(dat)+1))+3),prob=apply(dat,2,sum)/sum(dat))/(10^(ceiling(log10(ncol(dat)+1))+3)))
-	exf <- wmt%*%hmt
-	cst <- sum((dat-exf)^2)/2
-	div <- tol*10
+	stopifnot(is.matrix(dat) || methods::is(dat, "Matrix"))
+	wmt <- sqrt(sum(dat) / k) * rmultinom(n = k,
+	                                      size = 10^(ceiling(log10(nrow(dat) + 1)) + 3),
+										  prob = apply(dat, 1, sum) / sum(dat)) / 
+											(10^(ceiling(log10(nrow(dat) + 1)) + 3))
+	hmt <- sqrt(sum(dat) / k) * t(rmultinom(n = k,
+	                                        size = 10^(ceiling(log10(ncol(dat) + 1)) + 3),
+											prob = apply(dat, 2, sum) / sum(dat)) /
+												(10^(ceiling(log10(ncol(dat) + 1)) + 3)))
+	exf <- wmt %*% hmt
+	cst <- sum((dat - exf)^2) / 2
+	div <- tol * 10
 	itr <- FALSE
-	while (div>tol) {
-		wup <- wmt*(dat%*%t(hmt))/(wmt%*%hmt%*%t(hmt))
-		wup <- sweep(wup,2,apply(wup,2,sum),"/")
-		hup <- hmt*(t(wmt)%*%dat)/(t(wmt)%*%wmt%*%hmt)
+	while (div > tol) {
+		wup <- wmt * (dat %*% t(hmt)) / (wmt %*% hmt %*% t(hmt))
+		wup <- sweep(wup, 2, apply(wup, 2, sum), "/")
+		hup <- hmt * (t(wmt) %*% dat) / (t(wmt) %*% wmt %*% hmt)
 		wmt <- wup
 		hmt <- hup
-		exf <- wmt%*%hmt
-		csn <- sum((dat-exf)^2)/2
-		div <- cst-ifelse(itr,csn,cst-tol*(10^ceiling(log10(prod(dim(dat))+1))))
+		exf <- wmt %*% hmt
+		csn <- sum((dat - exf)^2) / 2
+		div <- cst - ifelse(itr, csn, cst - 
+		                    tol * (10^ceiling(log10(prod(dim(dat)) + 1))))
 		if (is.na(div)) {
 			break
 			}
-		if (div>0) {
+		if (div > 0) {
 			wop <- wmt
 			hop <- hmt
 			}
 		cst <- csn
 		itr <- TRUE
 		}
-	wop <- wop[,order(apply(hop,1,sum),decreasing=TRUE)]
-	hop <- hop[order(apply(hop,1,sum),decreasing=TRUE),]
-	dimnames(wop) <- list(rownames(dat),1:k)
-	dimnames(hop) <- list(1:k,colnames(dat))
-	list(pos1=wop,pos2=hop)
+	wop <- as.matrix(wop[, order(apply(hop, 1, sum), decreasing = TRUE)])
+	hop <- as.matrix(hop[order(apply(hop, 1, sum), decreasing = TRUE), ])
+	dimnames(wop) <- list(rownames(dat), 1:k)
+	dimnames(hop) <- list(1:k, colnames(dat))
+	list(pos1 = wop, pos2 = hop)
 	}
 
 #' @rdname fast_nmf
 #' @export
-fast_nmf_Al <- function(dat,k,tol=1e-8) {
+fast_nmf_Al <- function(dat, k, tol = 1e-8) {
 	if (is.data.frame(dat)) {
-		dat <- xtabs(data=dat,sparse=TRUE)
+		dat <- xtabs(data = dat, sparse = TRUE)
 		}
-	stopifnot(is.matrix(dat) || methods::is(dat,"Matrix"))
-	wmt <- sqrt(sum(dat)/k)*rmultinom(n=k,size=10^(ceiling(log10(nrow(dat)+1))+3),prob=apply(dat,1,sum)/sum(dat))/(10^(ceiling(log10(nrow(dat)+1))+3))
-	hmt <- solve(t(wmt)%*%wmt,t(wmt)%*%dat)
-	hmt[hmt<0] <- 0
-	exf <- wmt%*%hmt
-	cst <- sum((dat-exf)^2)/2
-	div <- tol*10
+	stopifnot(is.matrix(dat) || methods::is(dat, "Matrix"))
+	wmt <- sqrt(sum(dat) / k) * rmultinom(n = k,
+	                                      size = 10^(ceiling(log10(nrow(dat) + 1)) + 3),
+										  prob = apply(dat, 1, sum) / sum(dat)) /
+											(10^(ceiling(log10(nrow(dat) + 1)) + 3))
+	hmt <- solve(t(wmt) %*% wmt, t(wmt) %*% dat)
+	hmt[hmt < 0] <- 0
+	exf <- wmt %*% hmt
+	cst <- sum((dat - exf)^2) / 2
+	div <- tol * 10
 	itr <- FALSE
-	while (div>tol) {
-		wup <- t(solve(hmt%*%t(hmt),hmt%*%t(dat)))
-		wup[wup<0] <- 0
-		wup <- sweep(wup,2,apply(wup,2,sum),"/")
-		hup <- solve(t(wmt)%*%wmt,t(wmt)%*%dat)
-		hup[hup<0] <- 0
+	while (div > tol) {
+		wup <- t(solve(hmt %*% t(hmt), hmt %*% t(dat)))
+		wup[wup < 0] <- 0
+		wup <- sweep(wup, 2, apply(wup, 2, sum), "/")
+		hup <- solve(t(wmt) %*% wmt, t(wmt) %*% dat)
+		hup[hup < 0] <- 0
 		wmt <- wup
 		hmt <- hup
-		exf <- wmt%*%hmt
-		csn <- sum((dat-exf)^2)/2
-		div <- cst-ifelse(itr,csn,cst-tol*(10^ceiling(log10(prod(dim(dat))+1))))
+		exf <- wmt %*% hmt
+		csn <- sum((dat - exf)^2) / 2
+		div <- cst - ifelse(itr, csn, cst -
+		                    tol * (10^ceiling(log10(prod(dim(dat)) + 1))))
 		if (is.na(div)) {
 			break
 			}
-		if (div>0) {
+		if (div > 0) {
 			wop <- wmt
 			hop <- hmt
 			}
 		cst <- csn
 		itr <- TRUE
 		}
-	wop <- wop[,order(apply(hop,1,sum),decreasing=TRUE)]
-	hop <- hop[order(apply(hop,1,sum),decreasing=TRUE),]
-	dimnames(wop) <- list(rownames(dat),1:k)
-	dimnames(hop) <- list(1:k,colnames(dat))
-	list(pos1=wop,pos2=hop)
+	wop <- as.matrix(wop[, order(apply(hop, 1, sum), decreasing = TRUE)])
+	hop <- as.matrix(hop[order(apply(hop, 1, sum), decreasing = TRUE), ])
+	dimnames(wop) <- list(rownames(dat), 1:k)
+	dimnames(hop) <- list(1:k, colnames(dat))
+	list(pos1 = wop, pos2 = hop)
 	}
 
 #' Latent Class Analysis
@@ -691,54 +863,76 @@ fast_nmf_Al <- function(dat,k,tol=1e-8) {
 #' SndT_Fra <- read.table(system.file("extdata", "SndT_Fra.txt", package = "svs"),
 #'    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8",
 #'    stringsAsFactors = FALSE)
-#' lca.SndT_Fra <- fast_lca(SndT_Fra, k = 7)
-#' lca.SndT_Fra
+#' lca_SndT_Fra <- fast_lca(SndT_Fra, k = 7)
+#' lca_SndT_Fra
 #' @export
-fast_lca <- function(dat,k,tol=1e-8,posterior=FALSE,transform=1,sep="_") {
+fast_lca <- function(dat, k, tol = 1e-8, posterior = FALSE, transform = 1,
+                     sep = "_") {
 	if (is.data.frame(dat)) {
-		if (ncol(dat)==2) {
-			dat <- xtabs(data=dat,sparse=TRUE)
-			}
-		else {
-			dat <- xtabs(data=dat,sparse=FALSE)
+		if (ncol(dat) == 2) {
+			dat <- xtabs(data = dat, sparse = TRUE)
+			} else {
+				dat <- xtabs(data = dat, sparse = FALSE)
 			}
 		}
-	stopifnot(is.array(dat) || methods::is(dat,"Matrix"))
+	stopifnot(is.array(dat) || methods::is(dat, "Matrix"))
 	way <- length(dim(dat))
-	pri <- rep(1/k,k)
-	tht <- lapply(1:way,function(j){gtools::rdirichlet(n=k,alpha=apply(dat,j,sum))})
-	llk <- sum(as.vector(dat)*log(apply(sapply(1:k,function(z){outerec(lapply(1:way,function(j){tht[[j]][z,]}))*pri[z]}),1,sum)))
-	div <- tol*10
-	while (div>tol) {
-		pst <- prop.table(sapply(1:k,function(z){(outerec(lapply(1:way,function(j){tht[[j]][z,]}))^transform)*pri[z]}),1)
-		tmp <- array(as.vector(dat)*pst,dim=c(dim(dat),k))
-		tht <- lapply(1:way,function(j){matrix(prop.table(apply(tmp,c(way+1,j),sum),1),nrow=k)})
-		pri <- prop.table(apply(tmp,way+1,sum))
+	pri <- rep(1 / k, k)
+	tht <- lapply(1:way, function(j) {
+		gtools::rdirichlet(n = k, alpha = apply(dat, j, sum))
+		})
+	llk <- sum(as.vector(dat) * log(apply(sapply(1:k, function(z) {
+		outerec(lapply(1:way, function(j) {
+			tht[[j]][z, ]
+			})) * pri[z]
+		}), 1, sum)))
+	div <- tol * 10
+	while (div > tol) {
+		pst <- prop.table(sapply(1:k, function(z) {
+			(outerec(lapply(1:way, function(j) {
+				tht[[j]][z, ]
+				}))^transform) * pri[z]
+			}), 1)
+		tmp <- array(as.vector(dat) * pst, dim = c(dim(dat), k))
+		tht <- lapply(1:way, function(j) {
+			matrix(prop.table(apply(tmp, c(way + 1, j), sum), 1), nrow = k)
+			})
+		pri <- prop.table(apply(tmp, way + 1, sum))
 		tmp <- 1
-		lln <- sum(as.vector(dat)*log(apply(sapply(1:k,function(z){outerec(lapply(1:way,function(j){tht[[j]][z,]}))*pri[z]}),1,sum)))
-		div <- lln-llk
+		lln <- sum(as.vector(dat) * log(apply(sapply(1:k, function(z) {
+		outerec(lapply(1:way, function(j) {
+			tht[[j]][z, ]
+			})) * pri[z]
+		}), 1, sum)))
+		div <- lln - llk
 		if (is.na(div)) {
 			break
 			}
-		if (div>0) {
+		if (div > 0) {
 			pso <- pst
 			tho <- tht
 			pro <- pri
 			}
 		llk <- lln
 		}
-	tho <- lapply(1:way,function(j){t(matrix(tho[[j]][order(pro,decreasing=TRUE),],nrow=k))})
-	names(tho) <- paste("prob",1:way,sep="",collapse=NULL)
+	tho <- lapply(1:way, function(j) {
+		t(matrix(tho[[j]][order(pro, decreasing = TRUE), ], nrow = k))
+		})
+	names(tho) <- paste("prob", 1:way, sep = "", collapse = NULL)
 	for (j in 1:way) {
-		dimnames(tho[[j]]) <- list(dimnames(dat)[[j]],1:k)
+		dimnames(tho[[j]]) <- list(dimnames(dat)[[j]], 1:k)
 		}
-	out <- c(list(prob0=sort(pro,decreasing=TRUE)),tho)
+	out <- c(list(prob0 = sort(pro, decreasing = TRUE)), tho)
 	if (posterior) {
-		pso <- pso[,order(pro,decreasing=TRUE)]
-		ind <- tab2ind(dat,sep=sep,add_names=TRUE)
-		tmp <- ind%*%pso
-		colnames(tmp) <- 1:k
-		out <- c(out,list(posterior=cbind(ind,tmp)))
+		pso <- pso[, order(pro, decreasing = TRUE)]
+		ind <- Matrix::t(Matrix::fac2sparse(interaction(tab2dat(dat),
+		                                            drop = FALSE,
+                                                    sep = sep,
+                                                    lex.order = FALSE),
+                                        drop.unused.levels = FALSE))
+		pst <- ind %*% pso
+		colnames(pst) <- 1:k
+		out <- c(out, list(posterior = cbind(tab2ind(dat), pst)))
 		}
 	out
 	}
@@ -764,37 +958,41 @@ fast_lca <- function(dat,k,tol=1e-8,posterior=FALSE,transform=1,sep="_") {
 #' SndT_Fra <- read.table(system.file("extdata", "SndT_Fra.txt", package = "svs"),
 #'    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8",
 #'    stringsAsFactors = FALSE)
-#' psa.SndT_Fra <- fast_psa(SndT_Fra, k = 7)
-#' psa.SndT_Fra
+#' psa_SndT_Fra <- fast_psa(SndT_Fra, k = 7)
+#' psa_SndT_Fra
 #' @export
-fast_psa <- function(dat,k,symmetric=FALSE,transform=1,tol=1e-8) {
+fast_psa <- function(dat, k, symmetric = FALSE, transform = 1, tol = 1e-8) {
 	if (is.data.frame(dat)) {
-		dat <- xtabs(data=dat,sparse=TRUE)
+		dat <- xtabs(data = dat, sparse = TRUE)
 		}
-	stopifnot(is.matrix(dat) || methods::is(dat,"Matrix"))
-	out <- fast_lca(dat=dat,k=k,tol=tol,posterior=FALSE,transform=transform)
-	if (!symmetric) {
-		out$prob1 <- prop.table(sweep(out$prob1,2,out$prob0,"*"),1)
+	stopifnot(is.matrix(dat) || methods::is(dat, "Matrix"))
+	out <- fast_lca(dat = dat, k = k, tol = tol, posterior = FALSE,
+	                transform = transform)
+	if (! symmetric) {
+		out$prob1 <- prop.table(sweep(out$prob1, 2, out$prob0, "*"), 1)
 		}
 	out
 	}
 
 #' @rdname fast_psa
 #' @export
-fast_psi <- function(dat,k,symmetric=FALSE,transform=1,tol=1e-8) {
-	fast_psa(dat=dat,k=k,symmetric=symmetric,transform=transform,tol=tol)
+fast_psi <- function(dat, k, symmetric = FALSE, transform = 1, tol = 1e-8) {
+	fast_psa(dat = dat, k = k, symmetric = symmetric, transform = transform,
+	         tol = tol)
 	}
 
 #' @rdname fast_psa
 #' @export
-fast_plsa <- function(dat,k,symmetric=FALSE,transform=1,tol=1e-8) {
-	fast_psa(dat=dat,k=k,symmetric=symmetric,transform=transform,tol=tol)
+fast_plsa <- function(dat, k, symmetric = FALSE, transform = 1, tol = 1e-8) {
+	fast_psa(dat = dat, k = k, symmetric = symmetric, transform = transform,
+	         tol = tol)
 	}
 
 #' @rdname fast_psa
 #' @export
-fast_plsi <- function(dat,k,symmetric=FALSE,transform=1,tol=1e-8) {
-	fast_psa(dat=dat,k=k,symmetric=symmetric,transform=transform,tol=tol)
+fast_plsi <- function(dat, k, symmetric = FALSE, transform = 1, tol = 1e-8) {
+	fast_psa(dat = dat, k = k, symmetric = symmetric, transform = transform,
+	         tol = tol)
 	}
 
 #' EM clustering
@@ -818,47 +1016,62 @@ fast_plsi <- function(dat,k,symmetric=FALSE,transform=1,tol=1e-8) {
 #' SndT_Fra <- read.table(system.file("extdata", "SndT_Fra.txt", package = "svs"),
 #'    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8",
 #'    stringsAsFactors = FALSE)
-#' E_M.SndT_Fra <- fast_E_M(SndT_Fra, k = 7)
-#' E_M.SndT_Fra
+#' E_M_SndT_Fra <- fast_E_M(SndT_Fra, k = 7)
+#' E_M_SndT_Fra
 #' @export
-fast_E_M <- function(dat,k,tol=1e-8) {
+fast_E_M <- function(dat, k, tol = 1e-8) {
 	if (is.data.frame(dat)) {
-		dat <- xtabs(data=dat,sparse=TRUE)
+		dat <- xtabs(data = dat, sparse = TRUE)
 		}
-	stopifnot(is.matrix(dat) || methods::is(dat,"Matrix"))
+	stopifnot(is.matrix(dat) || methods::is(dat, "Matrix"))
 	len <- nrow(dat)
-	pri <- rep(1/k,k)
-	tht <- gtools::rdirichlet(n=k,alpha=apply(dat,2,sum))
-	llk <- sum(log(sapply(1:len,function(i){sum(sapply(1:k,function(z){max(dmultinom(x=dat[i,],size=sum(dat[i,]),prob=tht[z,]),1e-300)*pri[z]}))})))
-	div <- tol*10
-	while (div>tol) {
-		pst <- prop.table(sapply(1:len,function(i){sapply(1:k,function(z){max(dmultinom(x=dat[i,],size=sum(dat[i,]),prob=tht[z,]),1e-300)*pri[z]})}),2)
-		tht <- pst%*%dat
-		tht <- sweep(tht,1,apply(tht,1,sum),"/")
-		pri <- apply(pst,1,sum)/len
-		lln <- sum(log(sapply(1:len,function(i){sum(sapply(1:k,function(z){max(dmultinom(x=dat[i,],size=sum(dat[i,]),prob=tht[z,]),1e-300)*pri[z]}))})))
-		div <- lln-llk
+	pri <- rep(1 / k, k)
+	tht <- gtools::rdirichlet(n = k, alpha = apply(dat, 2, sum))
+	llk <- sum(log(sapply(1:len, function(i) {
+		sum(sapply(1:k, function(z) {
+			max(dmultinom(x = dat[i, ], size = sum(dat[i, ]),
+			              prob = tht[z, ]), 1e-300) * pri[z]
+			}))
+		})))
+	div <- tol * 10
+	while (div > tol) {
+		pst <- prop.table(sapply(1:len, function(i) {
+			sapply(1:k, function(z) {
+				max(dmultinom(x = dat[i, ], size = sum(dat[i, ]),
+				              prob = tht[z, ]), 1e-300) * pri[z]
+				})
+			}), 2)
+		tht <- pst %*% dat
+		tht <- sweep(tht, 1, apply(tht, 1, sum), "/")
+		pri <- apply(pst, 1, sum) / len
+		lln <- sum(log(sapply(1:len, function(i) {
+			sum(sapply(1:k, function(z) {
+				max(dmultinom(x = dat[i, ], size = sum(dat[i, ]),
+				              prob = tht[z, ]), 1e-300) * pri[z]
+				}))
+			})))
+		div <- lln - llk
 		if (is.na(div)) {
 			break
 			}
-		if (div>0) {
+		if (div > 0) {
 			pso <- pst
 			tho <- tht
 			pro <- pri
 			}
 		llk <- lln
 		}
-	pso <- pso[order(pro,decreasing=TRUE),]
-	tho <- tho[order(pro,decreasing=TRUE),]
-	dimnames(pso) <- list(1:k,rownames(dat))
-	dimnames(tho) <- list(1:k,colnames(dat))
-	list(prob0=sort(pro,decreasing=TRUE),prob1=t(pso),prob2=tho)
+	pso <- as.matrix(pso[order(pro, decreasing = TRUE), ])
+	tho <- as.matrix(tho[order(pro, decreasing = TRUE), ])
+	dimnames(pso) <- list(1:k, rownames(dat))
+	dimnames(tho) <- list(1:k, colnames(dat))
+	list(prob0 = sort(pro, decreasing = TRUE), prob1 = t(pso), prob2 = tho)
 	}
 
 #' @rdname fast_E_M
 #' @export
-fast_EM <- function(dat,k,tol=1e-8) {
-	fast_E_M(dat=dat,k=k,tol=tol)
+fast_EM <- function(dat, k, tol = 1e-8) {
+	fast_E_M(dat = dat, k = k, tol = tol)
 	}
 
 #' Logratio Analysis
@@ -878,23 +1091,27 @@ fast_EM <- function(dat,k,tol=1e-8) {
 #' SndT_Fra <- read.table(system.file("extdata", "SndT_Fra.txt", package = "svs"),
 #'    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8",
 #'    stringsAsFactors = FALSE)
-#' lra.SndT_Fra <- fast_lra(SndT_Fra)
-#' lra.SndT_Fra
+#' lra_SndT_Fra <- fast_lra(SndT_Fra)
+#' lra_SndT_Fra
 #' @export
-fast_lra <- function(dat,base=exp(1)) {
+fast_lra <- function(dat, base = exp(1)) {
 	if (is.data.frame(dat)) {
-		dat <- xtabs(data=dat,sparse=TRUE)
+		dat <- xtabs(data = dat, sparse = TRUE)
 		}
-	stopifnot(is.matrix(dat) || methods::is(dat,"Matrix"))
-	rwp <- apply(dat,1,sum)/sum(dat)
-	clp <- apply(dat,2,sum)/sum(dat)
-	ldt <- log_or_0(dat,base=base)
-	dec <- svd(sweep(sweep(ldt-outer(apply(ldt,1,weighted.mean,w=clp),apply(ldt,2,weighted.mean,w=rwp),FUN="+")+sum(ldt*outer(rwp,clp)),1,sqrt(rwp),"*"),2,sqrt(clp),"*"))
-	rwc <- sweep(dec$u%*%diag(dec$d),1,sqrt(rwp),"/")
-	dimnames(rwc) <- list(rownames(dat),paste("Dim",1:length(dec$d),sep=""))
-	clc <- sweep(dec$v%*%diag(dec$d),1,sqrt(clp),"/")
-	dimnames(clc) <- list(colnames(dat),paste("Dim",1:length(dec$d),sep=""))
-	list(val=dec$d^2,pos1=rwc,pos2=clc)
+	stopifnot(is.matrix(dat) || methods::is(dat, "Matrix"))
+	rwp <- apply(dat, 1, sum) / sum(dat)
+	clp <- apply(dat, 2, sum) / sum(dat)
+	ldt <- log_or_0(dat, base = base)
+	dec <- svd(sweep(sweep(ldt - outer(apply(ldt, 1, weighted.mean, w = clp),
+	                                   apply(ldt, 2, weighted.mean, w = rwp),
+									   FUN = "+") +
+						   sum(ldt * outer(rwp, clp)),
+						   1, sqrt(rwp), "*"), 2, sqrt(clp), "*"))
+	rwc <- sweep(dec$u %*% diag(dec$d), 1, sqrt(rwp), "/")
+	dimnames(rwc) <- list(rownames(dat), paste("Dim", 1:length(dec$d), sep = ""))
+	clc <- sweep(dec$v %*% diag(dec$d), 1, sqrt(clp), "/")
+	dimnames(clc) <- list(colnames(dat), paste("Dim", 1:length(dec$d), sep = ""))
+	list(val = dec$d^2, pos1 = rwc, pos2 = clc)
 	}
 
 #' Log-Multiplicative Association Analysis
@@ -926,45 +1143,49 @@ fast_lra <- function(dat,base=exp(1)) {
 #' SndT_Fra <- read.table(system.file("extdata", "SndT_Fra.txt", package = "svs"),
 #'    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8",
 #'    stringsAsFactors = FALSE)
-#' lma.SndT_Fra <- fast_lma(SndT_Fra, k = 7)
-#' lma.SndT_Fra
+#' lma_SndT_Fra <- fast_lma(SndT_Fra, k = 7)
+#' lma_SndT_Fra
 #' @export
-fast_lma <- function(dat,k,weights="marginal",tol=1e-8,base=exp(1),init="marginal") {
+fast_lma <- function(dat, k, weights = "marginal", tol = 1e-8, base = exp(1),
+                     init = "marginal") {
 	if (is.data.frame(dat)) {
-		dat <- xtabs(data=dat,sparse=TRUE)
+		dat <- xtabs(data = dat, sparse = TRUE)
 		}
-	stopifnot(is.matrix(dat) || methods::is(dat,"Matrix"))
-	ldt <- log_or_0(dat,base=base)
-	ini <- pmatch(x=tolower(init),table=c("kateri","marginal"))
-	if (ini==1) {
-		rma <- base^(apply(ldt,1,sum)/ncol(dat)-sum(ldt)/(2*nrow(dat)*ncol(dat)))
-		cma <- base^(apply(ldt,2,sum)/nrow(dat)-sum(ldt)/(2*nrow(dat)*ncol(dat)))
+	stopifnot(is.matrix(dat) || methods::is(dat, "Matrix"))
+	ldt <- log_or_0(dat, base = base)
+	ini <- pmatch(x = tolower(init), table = c("kateri", "marginal"))
+	if (ini == 1) {
+		rma <- base^(apply(ldt, 1, sum) / ncol(dat) - 
+		             sum(ldt) / (2 * nrow(dat) * ncol(dat)))
+		cma <- base^(apply(ldt, 2, sum) / nrow(dat) -
+		             sum(ldt) / (2 * nrow(dat) * ncol(dat)))
 		}
-	if (ini==2) {
-		rma <- apply(dat,1,sum)/sqrt(sum(dat))
-		cma <- apply(dat,2,sum)/sqrt(sum(dat))
+	if (ini == 2) {
+		rma <- apply(dat, 1, sum) / sqrt(sum(dat))
+		cma <- apply(dat, 2, sum) / sqrt(sum(dat))
 		}
-	dec <- svd(sweep(sweep(dat,1,rma,"/"),2,cma,"/"))
+	dec <- svd(sweep(sweep(dat, 1, rma, "/"), 2, cma, "/"))
 	phi <- dec$d[1:k]
-	rwi <- dec$u[,1:k,drop=FALSE]
-	cli <- dec$v[,1:k,drop=FALSE]
-	pre <- outer(rma,cma)*base^(rwi%*%diag(phi,nrow=k)%*%t(cli))
-	llk <- sum(dat*log_or_0(pre,base=base)-pre)
-	div <- tol*10
+	rwi <- dec$u[, 1:k, drop = FALSE]
+	cli <- dec$v[, 1:k, drop = FALSE]
+	pre <- outer(rma, cma) * base^(rwi %*% diag(phi, nrow = k) %*% t(cli))
+	llk <- sum(dat * log_or_0(pre, base = base) - pre)
+	div <- tol * 10
 	while (TRUE) {
-		rmu <- rma*apply(dat,1,sum)/apply(pre,1,sum)
-		pru <- outer(rmu,cma)*base^(rwi%*%diag(phi,nrow=k)%*%t(cli))
-		cmu <- cma*apply(dat,2,sum)/apply(pru,2,sum)
-		pru <- outer(rmu,cmu)*base^(rwi%*%diag(phi,nrow=k)%*%t(cli))
-		rwu <- rwi+((dat-pru)%*%cli/sweep(pru%*%cli^2,2,phi,"*"))
-		pru <- outer(rmu,cmu)*base^(rwu%*%diag(phi,nrow=k)%*%t(cli))
-		clu <- cli+(t(dat-pru)%*%rwi/sweep(t(pru)%*%rwi^2,2,phi,"*"))
-		pru <- outer(rmu,cmu)*base^(rwu%*%diag(phi,nrow=k)%*%t(clu))
-		phu <- phi+diag(t(rwi)%*%(dat-pru)%*%cli)/(diag(t(rwi^2)%*%pru%*%cli^2)*phi)
-		pru <- outer(rmu,cmu)*base^(rwu%*%diag(phu,nrow=k)%*%t(clu))
-		lln <- sum(dat*log_or_0(pru,base=base)-pru)
-		div <- lln-llk
-		if (!is.finite(div)) {
+		rmu <- rma * apply(dat, 1, sum) / apply(pre, 1, sum)
+		pru <- outer(rmu, cma) * base^(rwi %*% diag(phi, nrow = k) %*% t(cli))
+		cmu <- cma * apply(dat, 2, sum) / apply(pru, 2, sum)
+		pru <- outer(rmu, cmu) * base^(rwi %*% diag(phi, nrow = k) %*% t(cli))
+		rwu <- rwi + ((dat - pru) %*% cli / sweep(pru %*% cli^2, 2, phi, "*"))
+		pru <- outer(rmu, cmu) * base^(rwu %*% diag(phi, nrow = k) %*% t(cli))
+		clu <- cli + (t(dat - pru) %*% rwi / sweep(t(pru) %*% rwi^2, 2, phi, "*"))
+		pru <- outer(rmu, cmu) * base^(rwu %*% diag(phi, nrow = k) %*% t(clu))
+		phu <- phi + diag(t(rwi) %*% (dat - pru) %*% cli) /
+				(diag(t(rwi^2) %*% pru %*% cli^2) * phi)
+		pru <- outer(rmu, cmu) * base^(rwu %*% diag(phu, nrow = k) %*% t(clu))
+		lln <- sum(dat * log_or_0(pru, base = base) - pru)
+		div <- lln - llk
+		if (! is.finite(div)) {
 			break
 			}
 		rma <- rmu
@@ -974,41 +1195,61 @@ fast_lma <- function(dat,k,weights="marginal",tol=1e-8,base=exp(1),init="margina
 		cli <- clu
 		pre <- pru
 		llk <- lln
-		if (div<tol) {
+		if (div < tol) {
 			break
 			}
 		}
-	wgt <- pmatch(x=tolower(weights),table=c("marginal","uniform","unit","none"))
-	if (wgt==1) {
-		rwi <- sweep(rwi,2,apply(sweep(rwi,1,apply(dat,1,sum)/sum(dat),"*"),2,sum),"-")
-		rwi <- sweep(rwi,2,sqrt(apply(sweep(rwi^2,1,apply(dat,1,sum)/sum(dat),"*"),2,sum)),"/")
-		cli <- sweep(cli,2,apply(sweep(cli,1,apply(dat,2,sum)/sum(dat),"*"),2,sum),"-")
-		cli <- sweep(cli,2,sqrt(apply(sweep(cli^2,1,apply(dat,2,sum)/sum(dat),"*"),2,sum)),"/")
+	wgt <- pmatch(x = tolower(weights),
+	              table = c("marginal", "uniform", "unit", "none"))
+	if (wgt == 1) {
+		rwi <- sweep(rwi, 2, apply(sweep(rwi, 1,
+		                                 apply(dat, 1, sum) / sum(dat), "*"),
+								   2, sum), "-")
+		rwi <- sweep(rwi, 2, sqrt(apply(sweep(rwi^2, 1,
+		                                      apply(dat, 1, sum) / sum(dat), "*"),
+										2, sum)), "/")
+		cli <- sweep(cli, 2, apply(sweep(cli, 1,
+		                                 apply(dat, 2, sum) / sum(dat), "*"),
+								   2, sum), "-")
+		cli <- sweep(cli, 2, sqrt(apply(sweep(cli^2, 1,
+		                                      apply(dat, 2, sum) / sum(dat), "*"),
+										2, sum)), "/")
 		}
-	if (wgt==2) {
-		rwi <- sweep(rwi,2,apply(sweep(rwi,1,rep(1/nrow(dat),nrow(dat)),"*"),2,sum),"-")
-		rwi <- sweep(rwi,2,sqrt(apply(sweep(rwi^2,1,rep(1/nrow(dat),nrow(dat)),"*"),2,sum)),"/")
-		cli <- sweep(cli,2,apply(sweep(cli,1,rep(1/ncol(dat),ncol(dat)),"*"),2,sum),"-")
-		cli <- sweep(cli,2,sqrt(apply(sweep(cli^2,1,rep(1/ncol(dat),ncol(dat)),"*"),2,sum)),"/")
+	if (wgt == 2) {
+		rwi <- sweep(rwi, 2, apply(sweep(rwi, 1,
+		                                 rep(1 / nrow(dat), nrow(dat)), "*"),
+								   2, sum), "-")
+		rwi <- sweep(rwi, 2, sqrt(apply(sweep(rwi^2, 1,
+		                                      rep(1 / nrow(dat), nrow(dat)), "*"),
+										2, sum)), "/")
+		cli <- sweep(cli, 2, apply(sweep(cli, 1,
+		                                 rep(1 / ncol(dat), ncol(dat)), "*"),
+								   2, sum), "-")
+		cli <- sweep(cli, 2, sqrt(apply(sweep(cli^2, 1,
+		                                      rep(1 / ncol(dat), ncol(dat)), "*"),
+										2, sum)), "/")
 		}
-	if (wgt==3) {
-		rwi <- sweep(rwi,2,apply(rwi,2,mean),"-")
-		rwi <- sweep(rwi,2,sqrt(apply(rwi^2,2,sum)),"/")
-		cli <- sweep(cli,2,apply(cli,2,mean),"-")
-		cli <- sweep(cli,2,sqrt(apply(cli^2,2,sum)),"/")
+	if (wgt == 3) {
+		rwi <- sweep(rwi, 2, apply(rwi, 2, mean), "-")
+		rwi <- sweep(rwi, 2, sqrt(apply(rwi^2, 2, sum)), "/")
+		cli <- sweep(cli, 2, apply(cli, 2, mean), "-")
+		cli <- sweep(cli, 2, sqrt(apply(cli^2, 2, sum)), "/")
 		}
 	names(rma) <- rownames(dat)
 	names(cma) <- colnames(dat)
 	names(phi) <- 1:k
-	dimnames(rwi) <- list(rownames(dat),1:k)
-	dimnames(cli) <- list(colnames(dat),1:k)
-	list(mar=list(mar1=rma,mar2=cma),val=phi,pos1=rwi,pos2=cli,PRD=pre) #####
+	dimnames(rwi) <- list(rownames(dat), 1:k)
+	dimnames(cli) <- list(colnames(dat), 1:k)
+	list(mar = list(mar1 = rma, mar2 = cma), val = phi, pos1 = as.matrix(rwi),
+	     pos2 = as.matrix(cli))
 	}
 
 #' @rdname fast_lma
 #' @export
-fast_rca <- function(dat,k,weights="marginal",tol=1e-8,base=exp(1),init="marginal") {
-	fast_lma(dat=dat,k=k,weights=weights,tol=tol,base=base,init=init)
+fast_rca <- function(dat, k, weights = "marginal", tol = 1e-8, base = exp(1),
+                     init = "marginal") {
+	fast_lma(dat = dat, k = k, weights = weights, tol = tol, base = base,
+	         init = init)
 	}
 
 #' Weighting Functions
@@ -1020,23 +1261,23 @@ fast_rca <- function(dat,k,weights="marginal",tol=1e-8,base=exp(1),init="margina
 #'   global weighting functions with \code{gw_}, so users can define their own weighting functions.  
 #' 
 #' Local weighting functions (i.e. weighting every cell in the matrix):
-#' \itemize{
-#'   \item{\code{lw_tf} }{Term frequency: \emph{f(x) = x}.}
-#'   \item{\code{lw_raw} }{Raw frequency, which is the same as the term frequency: \emph{f(x) = x}.}
-#'   \item{\code{lw_log} }{Logarithm: \emph{f(x) = log(x + 1)}.}
-#'   \item{\code{lw_bin} }{Binary: \emph{f(x) = 1} if \emph{x > 0} and \emph{0} otherwise.}
+#' \describe{
+#'   \item{\code{lw_tf}}{Term frequency: \emph{f(x) = x}.}
+#'   \item{\code{lw_raw}}{Raw frequency, which is the same as the term frequency: \emph{f(x) = x}.}
+#'   \item{\code{lw_log}}{Logarithm: \emph{f(x) = log(x + 1)}.}
+#'   \item{\code{lw_bin}}{Binary: \emph{f(x) = 1} if \emph{x > 0} and \emph{0} otherwise.}
 #' }
 #' 
 #' Global weighting functions, weighting the columns of the matrix (hence, these weighting functions work according to expectation for
 #'   a document-term matrix, i.e. with the documents as the rows and the terms as the columns):
-#' \itemize{
-#'   \item{\code{gw_idf} }{Inverse document frequency: \emph{f(x) = log( nrow(x) / n + 1)} where \emph{n =} the number of rows in which the column \emph{>0}.}
-#'   \item{\code{gw_idf_alt} }{Alternative definition of the inverse document frequency: \emph{f(x) = log( nrow(x) / n) + 1} where \emph{n =} the number of rows in which the column \emph{>0}.}
-#'   \item{\code{gw_gfidf} }{Global frequency multiplied by inverse document frequency: \emph{f(x) = colSums(x) / n} where \emph{n =} the number of rows in which the column \emph{>0}.}
-#'   \item{\code{gw_nor} }{Normal(ized) frequency: \emph{f(x) = x / colSums(x^2)}.}
-#'   \item{\code{gw_ent} }{Entropy: \emph{f(x) = 1 +} the relative Shannon entropy.}
-#'   \item{\code{gw_bin} }{Binary: \emph{f(x) = 1}.}
-#'   \item{\code{gw_raw} }{Raw, which is the same as binary: \emph{f(x) = 1}.}
+#' \describe{
+#'   \item{\code{gw_idf}}{Inverse document frequency: \emph{f(x) = log( nrow(x) / n + 1)} where \emph{n =} the number of rows in which the column \emph{>0}.}
+#'   \item{\code{gw_idf_alt}}{Alternative definition of the inverse document frequency: \emph{f(x) = log( nrow(x) / n) + 1} where \emph{n =} the number of rows in which the column \emph{>0}.}
+#'   \item{\code{gw_gfidf}}{Global frequency multiplied by inverse document frequency: \emph{f(x) = colSums(x) / n} where \emph{n =} the number of rows in which the column \emph{>0}.}
+#'   \item{\code{gw_nor}}{Normal(ized) frequency: \emph{f(x) = x / colSums(x^2)}.}
+#'   \item{\code{gw_ent}}{Entropy: \emph{f(x) = 1 +} the relative Shannon entropy.}
+#'   \item{\code{gw_bin}}{Binary: \emph{f(x) = 1}.}
+#'   \item{\code{gw_raw}}{Raw, which is the same as binary: \emph{f(x) = 1}.}
 #' }
 #' @return A numeric matrix.
 #' @seealso \code{\link{fast_lsa}}.
@@ -1044,9 +1285,9 @@ fast_rca <- function(dat,k,weights="marginal",tol=1e-8,base=exp(1),init="margina
 #' SndT_Fra <- read.table(system.file("extdata", "SndT_Fra.txt", package = "svs"),
 #'    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8",
 #'    stringsAsFactors = FALSE)
-#' tab.SndT_Fra <- table(SndT_Fra)
-#' lw_log(tab.SndT_Fra)
-#' gw_idf(tab.SndT_Fra)
+#' tab_SndT_Fra <- table(SndT_Fra)
+#' lw_log(tab_SndT_Fra)
+#' gw_idf(tab_SndT_Fra)
 #' @name weighting_functions
 NULL
 
@@ -1065,58 +1306,58 @@ lw_raw <- function(x) {
 #' @rdname weighting_functions
 #' @export
 lw_log <- function(x) {
-	log(x+1)
+	log(x + 1)
 	 }
 
 #' @rdname weighting_functions
 #' @export
 lw_bin <- function(x) {
-	(x>0)*1
+	(x > 0) * 1
 	}
 
 #' @rdname weighting_functions
 #' @export
 gw_idf <- function(x) {
-	log2(nrow(x)/(apply(x>0,2,sum)+1))
+	log2(nrow(x) / (apply(x > 0, 2, sum) + 1))
 	}
 
 #' @rdname weighting_functions
 #' @export
 gw_idf_alt <- function(x) {
-	log2(nrow(x)/apply(x>0,2,sum))+1
+	log2(nrow(x) / apply(x > 0, 2, sum)) + 1
 	}
 
 #' @rdname weighting_functions
 #' @export
 gw_gfidf <- function(x) {
-	apply(x,2,sum)/apply(x>0,2,sum)
+	apply(x, 2, sum) / apply(x > 0, 2, sum)
 	}
 
 #' @rdname weighting_functions
 #' @export
 gw_nor <- function(x) {
-	1/sqrt(apply(x^2,2,sum))
+	1 / sqrt(apply(x^2, 2, sum))
 	}
 
 #' @rdname weighting_functions
 #' @export
 gw_ent <- function(x) {
-	tmp <- sweep(x,2,apply(x,2,sum),"/")
-	tmp <- tmp*log(tmp)
-	tmp[!is.finite(tmp)] <- 0
-	1-apply(tmp/log(nrow(x)),2,sum)
+	tmp <- sweep(x, 2, apply(x, 2, sum), "/")
+	tmp <- tmp * log(tmp)
+	tmp[! is.finite(tmp)] <- 0
+	1 - apply(tmp / log(nrow(x)), 2, sum)
 	}
 
 #' @rdname weighting_functions
 #' @export
 gw_bin <- function(x) {
-	rep(1,ncol(x))
+	rep(1, ncol(x))
 	}
 
 #' @rdname weighting_functions
 #' @export
 gw_raw <- function(x) {
-	rep(1,ncol(x))
+	rep(1, ncol(x))
 	}
 
 #' Pointwise Mutual Information
@@ -1131,25 +1372,27 @@ gw_raw <- function(x) {
 #' SndT_Fra <- read.table(system.file("extdata", "SndT_Fra.txt", package = "svs"),
 #'    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8",
 #'    stringsAsFactors = FALSE)
-#' tab.SndT_Fra <- table(SndT_Fra)
-#' pmi(tab.SndT_Fra)
+#' tab_SndT_Fra <- table(SndT_Fra)
+#' pmi(tab_SndT_Fra)
 #' @export
-pmi <- function(x,normalize=FALSE,base=2) {
-	stopifnot(is.array(x) || methods::is(x,"Matrix"))
-	stopifnot(all(x>=0))
-	x <- x/sum(x)
-	out <- log(x/outerec(lapply(1:length(dim(x)),function(j){apply(x,j,sum)})),base=base)
+pmi <- function(x, normalize = FALSE, base = 2) {
+	stopifnot(is.array(x) || methods::is(x, "Matrix"))
+	stopifnot(all(x >= 0))
+	x <- x / sum(x)
+	out <- log(x / outerec(lapply(1:length(dim(x)), function(j) {
+		apply(x, j, sum)
+		})), base = base)
 	if (normalize) {
-		out <- -out/log(x,base=base)
+		out <- -out / log(x, base = base)
 		}
-	out[!is.finite(out)] <- 0
+	out[! is.finite(out)] <- 0
 	out
 	}
 
 #' @rdname pmi
 #' @export
-PMI <- function(x,normalize=FALSE,base=2) {
-	pmi(x=x,normalize=normalize,base=base)
+PMI <- function(x, normalize = FALSE, base = 2) {
+	pmi(x = x, normalize = normalize, base = base)
 	}
 
 #' Mutual Information
@@ -1163,22 +1406,22 @@ PMI <- function(x,normalize=FALSE,base=2) {
 #' SndT_Fra <- read.table(system.file("extdata", "SndT_Fra.txt", package = "svs"),
 #'    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8",
 #'    stringsAsFactors = FALSE)
-#' tab.SndT_Fra <- table(SndT_Fra)
-#' MI(tab.SndT_Fra)
+#' tab_SndT_Fra <- table(SndT_Fra)
+#' MI(tab_SndT_Fra)
 #' @export
-MI <- function(x,base=2) {
-	stopifnot(is.array(x) || methods::is(x,"Matrix"))
-	stopifnot(all(x>=0))
-	x <- x/sum(x)
-	cel <- x*pmi(x,normalize=FALSE,base=base)
-	cel[!is.finite(cel)] <- 0
+MI <- function(x, base = 2) {
+	stopifnot(is.array(x) || methods::is(x, "Matrix"))
+	stopifnot(all(x >= 0))
+	x <- x / sum(x)
+	cel <- x * pmi(x, normalize = FALSE, base = base)
+	cel[! is.finite(cel)] <- 0
 	sum(cel)
 	}
 
 #' @rdname MI
 #' @export
-mi <- function(x,base=2) {
-	MI(x=x,base=base)
+mi <- function(x, base = 2) {
+	MI(x = x, base = base)
 	}
 
 #' Compute Level Frequencies (for a Factor or Vector)
@@ -1194,14 +1437,14 @@ mi <- function(x,base=2) {
 #'    stringsAsFactors = FALSE)
 #' freq_ca(SndT_Fra)
 #' @export
-freq_ca <- function(dat,nfac=FALSE) {
+freq_ca <- function(dat, nfac = FALSE) {
 	if (is.factor(dat) || is.vector(dat)) {
 		dat <- as.data.frame(dat)
 		}
 	stopifnot(is.data.frame(dat))
-	out <- lapply(dat,table)
+	out <- lapply(dat, table)
 	names(out) <- NULL
-	unlist(out)*ifelse(nfac,ncol(dat),1)
+	unlist(out) * ifelse(nfac, ncol(dat), 1)
 	}
 
 #' Compute Coordinates for Cluster Centers
@@ -1216,15 +1459,17 @@ freq_ca <- function(dat,nfac=FALSE) {
 #' SndT_Fra <- read.table(system.file("extdata", "SndT_Fra.txt", package = "svs"),
 #'    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8",
 #'    stringsAsFactors = FALSE)
-#' sca.SndT_Fra <- fast_sca(SndT_Fra)
-#' kcl.SndT_Fra <- kmeans(sca.SndT_Fra$pos1, centers = 7)
-#' centers_ca(sca.SndT_Fra$pos1, clusters = kcl.SndT_Fra, freq = freq_ca(SndT_Fra[, 1]))
+#' sca_SndT_Fra <- fast_sca(SndT_Fra)
+#' kcl_SndT_Fra <- kmeans(sca_SndT_Fra$pos1, centers = 7)
+#' centers_ca(sca_SndT_Fra$pos1, clusters = kcl_SndT_Fra, freq = freq_ca(SndT_Fra[, 1]))
 #' @export
-centers_ca <- function(x,clusters,freq) {
-	stopifnot(is.matrix(x) || methods::is(x,"Matrix"))
-	stopifnot(class(clusters) %in% c("list","kmeans"))
-	if (class(clusters)=="kmeans") {
-		clusters <- lapply(sort(unique(clusters$cluster)),function(y){names(clusters$cluster[clusters$cluster==y])})
+centers_ca <- function(x, clusters, freq) {
+	stopifnot(is.matrix(x) || methods::is(x, "Matrix"))
+	stopifnot(inherits(clusters, "kmeans") || is.list(clusters))
+	if (inherits(clusters, "kmeans")) {
+		clusters <- lapply(sort(unique(clusters$cluster)), function(y) {
+			names(clusters$cluster[clusters$cluster == y])
+			})
 		}
 	if (is.null(names(clusters))) {
 		names(clusters) <- 1:length(clusters)
@@ -1232,7 +1477,9 @@ centers_ca <- function(x,clusters,freq) {
 	if (is.null(names(freq))) {
 		names(freq) <- rownames(x)
 		}
-	do.call(what=rbind,args=lapply(clusters,function(z){apply(sweep(rbind(x[z,]),1,freq[z],"*"),2,sum)/sum(freq[z])}))
+	do.call(rbind, lapply(clusters, function(z) {
+		apply(sweep(rbind(x[z, ]), 1, freq[z], "*"), 2, sum) / sum(freq[z])
+		}))
 	}
 
 #' Compute Chi-square Distances
@@ -1246,19 +1493,21 @@ centers_ca <- function(x,clusters,freq) {
 #' SndT_Fra <- read.table(system.file("extdata", "SndT_Fra.txt", package = "svs"),
 #'    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8",
 #'    stringsAsFactors = FALSE)
-#' tab.SndT_Fra <- table(SndT_Fra)
-#' dist_chisquare(tab.SndT_Fra)
+#' tab_SndT_Fra <- table(SndT_Fra)
+#' dist_chisquare(tab_SndT_Fra)
 #' @export
-dist_chisquare <- function(x,diag=FALSE,upper=FALSE) {
-	stopifnot(is.matrix(x) || methods::is(x,"Matrix"))
-	stopifnot(all(x>=0))
-	dist(sweep(sweep(x,1,apply(x,1,sum),"/"),2,sqrt(apply(x,2,sum)/sum(x)),"/"),method="euclidean",diag=diag,upper=upper)
+dist_chisquare <- function(x, diag = FALSE, upper = FALSE) {
+	stopifnot(is.matrix(x) || methods::is(x, "Matrix"))
+	stopifnot(all(x >= 0))
+	dist(sweep(sweep(x, 1, apply(x, 1, sum), "/"), 2,
+	                 sqrt(apply(x, 2, sum) / sum(x)), "/"),
+	     method = "euclidean", diag = diag, upper = upper)
 	}
 
 #' @rdname dist_chisquare
 #' @export
-dist_chisq <- function(x,diag=FALSE,upper=FALSE) {
-	dist_chisquare(x=x,diag=diag,upper=upper)
+dist_chisq <- function(x, diag = FALSE, upper = FALSE) {
+	dist_chisquare(x = x, diag = diag, upper = upper)
 	}
 
 #' Compute Cosine Distances
@@ -1274,18 +1523,19 @@ dist_chisq <- function(x,diag=FALSE,upper=FALSE) {
 #' SndT_Fra <- read.table(system.file("extdata", "SndT_Fra.txt", package = "svs"),
 #'    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8",
 #'    stringsAsFactors = FALSE)
-#' lsa.SndT_Fra <- fast_lsa(SndT_Fra)
-#' dist_cosine(lsa.SndT_Fra$pos1[, 1:7])
+#' lsa_SndT_Fra <- fast_lsa(SndT_Fra)
+#' dist_cosine(lsa_SndT_Fra$pos1[, 1:7])
 #' @export
-dist_cosine <- function(x,diag=FALSE,upper=FALSE) {
-	stopifnot(is.matrix(x) || methods::is(x,"Matrix"))
-	as.dist(1-x%*%t(x)/sqrt(apply(x^2,1,sum)%o%apply(x^2,1,sum)),diag=diag,upper=upper)
+dist_cosine <- function(x, diag = FALSE, upper = FALSE) {
+	stopifnot(is.matrix(x) || methods::is(x, "Matrix"))
+	as.dist(1 - x %*% t(x) / sqrt(apply(x^2, 1, sum) %o% apply(x^2, 1, sum)),
+	        diag = diag, upper = upper)
 	}
 
 #' @rdname dist_cosine
 #' @export
-dist_cos <- function(x,diag=FALSE,upper=FALSE) {
-	dist_cosine(x=x,diag=diag,upper=upper)
+dist_cos <- function(x, diag = FALSE, upper = FALSE) {
+	dist_cosine(x = x, diag = diag, upper = upper)
 	}
 
 #' Compute Distances with respect to a certain Point
@@ -1300,20 +1550,20 @@ dist_cos <- function(x,diag=FALSE,upper=FALSE) {
 #' SndT_Fra <- read.table(system.file("extdata", "SndT_Fra.txt", package = "svs"),
 #'    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8",
 #'    stringsAsFactors = FALSE)
-#' sca.SndT_Fra <- fast_sca(SndT_Fra)
-#' dist_wrt(sca.SndT_Fra$pos1, wrt = "beginnen")
+#' sca_SndT_Fra <- fast_sca(SndT_Fra)
+#' dist_wrt(sca_SndT_Fra$pos1, wrt = "beginnen")
 #' @export
-dist_wrt <- function(x,wrt=NULL) {
-	stopifnot(is.matrix(x) || methods::is(x,"Matrix"))
+dist_wrt <- function(x, wrt = NULL) {
+	stopifnot(is.matrix(x) || methods::is(x, "Matrix"))
 	if (is.null(wrt) || any(is.na(wrt))) {
-		wrt <- rep(0,times=ncol(x))
+		wrt <- rep(0, times = ncol(x))
 		}
 	if (is.character(wrt)) {
-		stopifnot(length(wrt)==1)
-		wrt <- x[wrt,]
+		stopifnot(length(wrt) == 1)
+		wrt <- x[wrt, ]
 		}
-	stopifnot(length(wrt)==ncol(x))
-	sqrt(apply(sweep(x,2,wrt,"-")^2,1,sum))
+	stopifnot(length(wrt) == ncol(x))
+	sqrt(apply(sweep(x, 2, wrt, "-")^2, 1, sum))
 	}
 
 #' Compute Distances with respect to Cluster Centers
@@ -1330,30 +1580,41 @@ dist_wrt <- function(x,wrt=NULL) {
 #' SndT_Fra <- read.table(system.file("extdata", "SndT_Fra.txt", package = "svs"),
 #'    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8",
 #'    stringsAsFactors = FALSE)
-#' sca.SndT_Fra <- fast_sca(SndT_Fra)
-#' kcl.SndT_Fra <- kmeans(sca.SndT_Fra$pos1, centers = 7)
-#' dist_wrt_centers(sca.SndT_Fra$pos1, clusters = kcl.SndT_Fra, freq = freq_ca(SndT_Fra[, 1]))
+#' sca_SndT_Fra <- fast_sca(SndT_Fra)
+#' kcl_SndT_Fra <- kmeans(sca_SndT_Fra$pos1, centers = 7)
+#' dist_wrt_centers(sca_SndT_Fra$pos1, clusters = kcl_SndT_Fra, freq = freq_ca(SndT_Fra[, 1]))
 #' @export
-dist_wrt_centers <- function(x,clusters,freq=NULL,members_only=TRUE) {
-	stopifnot(is.matrix(x) || methods::is(x,"Matrix"))
-	stopifnot(class(clusters) %in% c("list","kmeans"))
-	if (class(clusters)=="kmeans") {
-		clusters <- lapply(sort(unique(clusters$cluster)),function(y){names(clusters$cluster[clusters$cluster==y])})
+dist_wrt_centers <- function(x, clusters, freq = NULL, members_only = TRUE) {
+	stopifnot(is.matrix(x) || methods::is(x, "Matrix"))
+	stopifnot(inherits(clusters, "kmeans") || is.list(clusters))
+	if (inherits(clusters, "kmeans")) {
+		clusters <- lapply(sort(unique(clusters$cluster)), function(y) {
+			names(clusters$cluster[clusters$cluster == y])
+			})
 		}
 	if (all(is.null(freq))) {
-		cen <- lapply(clusters,function(z){apply(rbind(x[z,]),2,mean)})
+		cen <- lapply(clusters, function(z) {
+			apply(rbind(x[z, ]), 2, mean)
+			})
 		}
 	else {
 		if (is.null(names(freq))) {
 			names(freq) <- rownames(x)
 			}
-		cen <- lapply(clusters,function(z){apply(sweep(rbind(x[z,]),1,freq[z],"*"),2,sum)/sum(freq[z])})
+		cen <- lapply(clusters, function(z) {
+			apply(sweep(rbind(x[z, ]), 1, freq[z], "*"), 2, sum) / sum(freq[z])
+			})
 		}
 	if (members_only) {
-		out <- lapply(1:length(clusters),function(k){dist_wrt(matrix(x[clusters[[k]],],ncol=ncol(x),dimnames=list(clusters[[k]])),cen[[k]])})
+		out <- lapply(1:length(clusters), function(k) {
+			dist_wrt(matrix(x[clusters[[k]], ], ncol = ncol(x),
+			                dimnames = list(clusters[[k]])), cen[[k]])
+			})
 		}
 	else {
-		out <- lapply(1:length(clusters),function(k){dist_wrt(x,cen[[k]])})
+		out <- lapply(1:length(clusters), function(k) {
+			dist_wrt(x, cen[[k]]) 
+			})
 		}
 	out
 	}
@@ -1387,22 +1648,31 @@ dist_wrt_centers <- function(x,clusters,freq=NULL,members_only=TRUE) {
 #' SndT_Fra <- read.table(system.file("extdata", "SndT_Fra.txt", package = "svs"),
 #'    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8",
 #'    stringsAsFactors = FALSE)
-#' sca.SndT_Fra <- fast_sca(SndT_Fra)
-#' dis.SndT_Fra <- dist_wrt(sca.SndT_Fra$pos1)
-#' cd_plot(dis.SndT_Fra)
+#' sca_SndT_Fra <- fast_sca(SndT_Fra)
+#' dis_SndT_Fra <- dist_wrt(sca_SndT_Fra$pos1)
+#' cd_plot(dis_SndT_Fra)
 #' @export
-cd_plot <- function(x,inc=0.01,col="darkgrey",cex=1,font=1,family="",srt=-45,pch=20,pcol="black",pbg="white",pcex=cex,lcol=col,lwd=1,lty=1,xlim=NULL,ylim=NULL,xlab=NULL,ylab=NULL,main=NULL,sub=NULL) {
+cd_plot <- function(x, inc = 0.01, col = "darkgrey", cex = 1, font = 1,
+                    family = "", srt = -45, pch = 20, pcol = "black",
+					pbg = "white", pcex = cex, lcol = col, lwd = 1, lty = 1,
+					xlim = NULL, ylim = NULL, xlab = NULL, ylab = NULL,
+					main = NULL, sub = NULL) {
 	stopifnot(is.numeric(x))
 	s <- sort(x)
-	r <- seq(0,ceiling(max(s)),by=inc)
+	r <- seq(0, ceiling(max(s)), by = inc)
 	if (is.null(ylim) || is.na(ylim)) {
-		ylim <- c(0,length(s)+1)
+		ylim <- c(0, length(s) + 1)
 		}
-	xlab <- ifelse(is.null(xlab),NA,xlab)
-	ylab <- ifelse(is.null(ylab),NA,ylab)
-	plot(x=r,y=sapply(r,function(z){sum(s<z)}),type="l",col=lcol,lwd=lwd,lty=lty,xlim=xlim,ylim=ylim,xlab=xlab,ylab=ylab,main=main,sub=sub)
-	points(x=s,y=1:(length(s)),pch=pch,col=pcol,bg=pbg,cex=pcex)
-	text(x=s,y=1:(length(s)),labels=names(s),xpd=TRUE,adj=c(1.1,0.5),col=col,cex=cex,font=font,family=family,srt=srt)
+	xlab <- ifelse(is.null(xlab), NA, xlab)
+	ylab <- ifelse(is.null(ylab), NA, ylab)
+	plot(x = r, y = sapply(r, function(z) { sum(s < z) }), type = "l",
+	     col = lcol, lwd = lwd, lty = lty, xlim = xlim, ylim = ylim,
+		 xlab = xlab, ylab = ylab, main = main, sub = sub)
+	points(x = s,y = 1:(length(s)), pch = pch, col = pcol, bg = pbg,
+	       cex = pcex)
+	text(x = s, y = 1:(length(s)), labels = names(s), xpd = TRUE,
+	     adj = c(1.1, 0.5), col = col, cex = cex, font = font,
+		 family = family, srt = srt)
 	invisible()
 	}
 
@@ -1435,44 +1705,54 @@ cd_plot <- function(x,inc=0.01,col="darkgrey",cex=1,font=1,family="",srt=-45,pch
 #' SndT_Fra <- read.table(system.file("extdata", "SndT_Fra.txt", package = "svs"),
 #'    header = TRUE, sep = "\t", quote = "\"", encoding = "UTF-8",
 #'    stringsAsFactors = FALSE)
-#' sca.SndT_Fra <- fast_sca(SndT_Fra)
-#' pc_plot(sca.SndT_Fra$pos1, las = "vertical")
+#' sca_SndT_Fra <- fast_sca(SndT_Fra)
+#' pc_plot(sca_SndT_Fra$pos1, las = "vertical")
 #' @export
-pc_plot <- function(x,col="darkgrey",cex=1,font=1,family="",pch=20,pcol=col,pcex=cex,lcol=col,lwd=1,lty=1,acol="black",alwd=1,alty=1,las=1,add_scale=FALSE,main=NULL,sub=NULL) {
-	stopifnot(is.matrix(x) || methods::is(x,"Matrix"))
+pc_plot <- function(x, col = "darkgrey", cex = 1, font = 1, family = "",
+                    pch = 20, pcol = col, pcex = cex, lcol = col, lwd = 1,
+					lty = 1, acol = "black", alwd = 1, alty = 1, las = 1,
+					add_scale = FALSE, main = NULL, sub = NULL) {
+	stopifnot(is.matrix(x) || methods::is(x, "Matrix"))
 	if (is.character(las)) {
-		las <- pmatch(tolower(las),table=c("horizontal","vertical"))
+		las <- pmatch(tolower(las), table = c("horizontal", "vertical"))
 		}
 	len <- ncol(x)
-	ran <- apply(x,2,range,na.rm=TRUE)
-	loc <- sweep(sweep(x,2,ran[1,],"-"),2,(ran[2,]-ran[1,]),"/")
+	ran <- apply(x, 2, range, na.rm = TRUE)
+	loc <- sweep(sweep(x, 2, ran[1, ], "-"), 2, (ran[2, ] - ran[1, ]), "/")
 	mai <- par("mai")
 	nai <- mai
-	nai[2] <- max(strwidth(rownames(x),units="inches",cex=cex,font=font))+0.3
-	if (las>1) {
-		nai[1] <- max(c(mai[1]-0.3,strwidth(colnames(x),units="inches",cex=cex,font=font)))+0.3
-		hdj <- 1.2-ifelse(cex>1,cex/10,0)
+	nai[2] <- max(strwidth(rownames(x), units = "inches", cex = cex,
+	                       font = font)) + 0.3
+	if (las > 1) {
+		nai[1] <- max(c(mai[1] - 0.3, strwidth(colnames(x), units = "inches",
+		                                       cex = cex, font = font))) + 0.3
+		hdj <- 1.2 - ifelse(cex > 1, cex / 10, 0)
 		pdj <- 0.5
 		}
 	else {
 		hdj <- 0.5
 		pdj <- 1.1
 		}
-	par(mai=nai)
-	matplot(t(loc),type="n",xlim=c(1,len),ylim=c(0,1),xlab="",ylab="",main=main,sub=sub,axes=FALSE,add=FALSE)
-	axis(side=1,at=1:len,labels=FALSE)
-	mtext(text=colnames(x),side=1,at=1:len,las=las,adj=hdj,padj=pdj,col=acol,cex=cex,font=font,family=family)
-	mtext(text=rownames(x),side=2,at=loc[,1],las=1,adj=NA,padj=NA,col=col,cex=cex,font=font,family=family)
-	abline(v=1:len,col=acol,lty=alty,lwd=alwd)
-	matlines(t(loc),col=lcol,lty=lty,lwd=lwd)
-	pch <- ifelse(is.null(pch),NA,pch)
-	if (!is.na(pch)) {
-		matpoints(t(loc),pch=pch,col=pcol,cex=pcex)
+	par(mai = nai)
+	matplot(t(loc), type = "n", xlim = c(1, len), ylim = c(0, 1),
+	        xlab = "", ylab = "", main = main, sub = sub, axes = FALSE,
+			add = FALSE)
+	axis(side = 1, at = 1:len, labels = FALSE)
+	mtext(text = colnames(x), side = 1, at = 1:len, las = las, adj = hdj,
+	      padj = pdj, col = acol, cex = cex, font = font, family = family)
+	mtext(text = rownames(x), side = 2, at = loc[, 1], las = 1, adj = NA,
+	      padj = NA, col = col, cex = cex, font = font, family = family)
+	abline(v = 1:len, col = acol, lty = alty, lwd = alwd)
+	matlines(t(loc), col = lcol, lty = lty ,lwd = lwd)
+	pch <- ifelse(is.null(pch), NA, pch)
+	if (! is.na(pch)) {
+		matpoints(t(loc), pch = pch, col = pcol, cex = pcex)
 		}
 	if (add_scale) {
-		axis(side=4,col.axis=acol,cex.axis=cex,font.axis=font,las=1)
+		axis(side = 4, col.axis = acol, cex.axis = cex, font.axis = font,
+		     las = 1)
 		}
-	par(mai=mai)
+	par(mai = mai)
 	invisible()
 	}
 
@@ -1483,9 +1763,32 @@ pc_plot <- function(x,col="darkgrey",cex=1,font=1,family="",pch=20,pcol=col,pcex
 #' @param labels A character vector containing the exhaustive set of levels.
 #' @return A list with the singleton clusters inserted at the end (so that the set of clusters is exhaustive).
 #' @export
-complete_pvpick <- function(clusters,labels) {
-	if (!is.null(names(clusters)) && names(clusters)[1]=="clusters") {
+complete_pvpick <- function(clusters, labels) {
+	if ((! is.null(names(clusters))) && (names(clusters)[1] == "clusters")) {
 		clusters <- clusters$clusters
 		}
-	c(clusters,as.list(labels[!labels %in% unlist(clusters)]))
+	c(clusters, as.list(labels[! labels %in% unlist(clusters)]))
+	}
+
+#' Create a Layout Matrix for a Bipartite Graph
+#'
+#' A helper function for creating a layout matrix for a bipartite graph, based on the dimensions of its biadjacency matrix.  
+#' @param nrow Numeric specifying the number of rows of the biadjacency matrix.
+#' @param ncol Numeric specifying the number of columns of the biadjacency matrix.
+#' @param rowsLeft Logical specifying whether the rows of the biadjacency matrix should appear to the left of the columns.
+#' @details
+#' This is essentially an alternative for \code{layout_as_bipartite()} from the \pkg{igraph} package.
+#' Bipartite graphs are typically represented by a biadjacency matrix, the dimensions of which can be used for constructing the layout.
+#' In addition, the coordinates for the vertices are somewhat different from those in \pkg{igraph}.  
+#' @return A matrix.
+#' @export
+layout4bipartite <- function(nrow, ncol, rowsLeft = TRUE) {
+	rbind(cbind(rep(1 + (! rowsLeft), nrow), ppoints(nrow, 0.5)),
+	      cbind(rep(2 - (! rowsLeft), ncol), ppoints(ncol, 0.5)))
+	}
+
+#' @rdname layout4bipartite
+#' @export
+layout4diagram <- function(nrow, ncol, rowsLeft = TRUE) {
+	layout4bipartite(nrow = nrow, ncol = ncol, rowsLeft = rowsLeft)
 	}
